@@ -1,16 +1,52 @@
-require('dotenv').config();
 const axios = require('axios')
 const { URL_API } = require('../../utils/helpers')
 const { API_KEY } = process.env
+const { Videogame, Genre, Platform } = require('../../db')
+
+//! DATOS LOCALES 
 const { VIDEOS } = require('../../utils/data')
 
 const getVideogame = async (idVideogame) => {
-    const video = VIDEOS.find((v) => v.id === parseInt(idVideogame))
+    //busco local
+    try {
+        //si no es numerico ,es uuid
+        if (isNaN(idVideogame)) {
+            const videogameLocal = await getVideogameLocal(idVideogame)
+            return videogameLocal
+        } else {
+            const videogameApi = await getVideogameApi(idVideogame)
+            return videogameApi
+        }
+    } catch (error) {
+        return ({ error: error.message })
+    }
+}
 
-    return video
+
+const getVideogameLocal = async (idVideogame) => {
+    //busco local
+        let videogame = await Videogame.findByPk(idVideogame)
+        
+        if (typeof videogame ==='object') {
+            videogame.source = 1
+            return videogame
+        }
+        
 
 }
-const getVideogame2 = async (idVideogame) => {
+
+const getVideogameApi = async (idVideogame) => {
+    //busco local
+    let videogame = VIDEOS.results.find((v) => v.id === parseInt(idVideogame))
+    if (typeof videogame==='object') {
+        videogame.source = 2
+        return videogame
+    }
+    
+
+}
+
+const getVideogameApi2 = async (idVideogame) => {
     const url = `${URL_API}/games/${idVideogame}?key=${API_KEY}`
     console.log(url)
     try {

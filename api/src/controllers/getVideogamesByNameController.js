@@ -1,4 +1,4 @@
-const { dataVideogame } = require("../utils/dataVideogame")
+const { normalizeVideogame } = require("../utils/normalizeVideogame")
 const { getVideogamesByName } = require("./videogames/getVideogamesByName")
 
 async function getVideogamesByNameController(req, res) {
@@ -8,11 +8,13 @@ async function getVideogamesByNameController(req, res) {
     try {
         let data = await getVideogamesByName(search)
 
-        if (data.results.length === 0) return res.status(400).json({ error: `No hay videojuegos que contengan el texto ${search}` })
+        if (!data || data.length===0) return res.status(404).json({ error: `No se encontraros datos con el nombre:${search}` })
+        if (data.error) return res.status(404).json({ error: data.error })
 
-        const videos = data.results.map((video) => (dataVideogame(video)))
+        const videogames = data.map((videogame) => (normalizeVideogame(videogame)))
 
-        return res.status(200).json(videos)
+        return res.status(200).json(videogames)
+
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
@@ -12,6 +12,9 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   define: {
     timestamps: false,
   },
+  // query: {
+  //   raw: true, // Establece raw: true globalmente
+  // },
 });
 const basename = path.basename(__filename);
 
@@ -33,12 +36,17 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Videogame,Gender } = sequelize.models;
+const { Videogame, Genre, Platform, Videogame_genre ,Videogame_platform} = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Videogame.belongsToMany(Gender, { through: "videogame_gender" });
-Gender.belongsToMany(Videogame, { through: "videogame_gender" });
+
+Videogame.belongsToMany(Genre, { through: Videogame_genre, foreignKey: 'videogameId'});
+Genre.belongsToMany(Videogame, { through: Videogame_genre, foreignKey: 'genreId'});
+
+Videogame.belongsToMany(Platform, { through: Videogame_platform , foreignKey: 'videogameId'});
+Platform.belongsToMany(Videogame, { through: Videogame_platform , foreignKey: 'platformId'});
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -1,22 +1,55 @@
-require('dotenv').config();
 const axios = require('axios')
 const { URL_API } = require('../../utils/helpers')
 const { API_KEY } = process.env
+const { Videogame, Genre, Platform } = require('../../db')
+const { Op } = require('sequelize')
+
 const { VIDEOS } = require('../../utils/data')
 
+
 const getVideogamesByName = async (search) => {
+    try {
+        const videogamesLocal = await getVideogamesByNameLocal(search)
+        const videogamesApi = await getVideogamesByNameApi(search)
 
-    const results = VIDEOS.results.filter((v) => v.name.toUpperCase().includes(search.toUpperCase()))
-    const data = { results: results }
-    return data
+        return [...videogamesLocal, ...videogamesApi]
 
+    } catch (error) {
+        return ({ error: error.message })
+    }
 }
-const getVideogamesByName2 = async (search) => {
+
+const getVideogamesByNameLocal = async (search) => {
+
+    let videogames = await Videogame.findAll(
+        {
+            where: { name: { [Op.iLike]: `%${search}%` } },
+            raw: true
+        }
+    )
+    if (videogames.length !== 0) {
+        const videogamesSource = videogames.map((video) => ({ ...video, source: 1 }))
+        return videogamesSource
+    }
+    return []
+}
+
+const getVideogamesByNameApi = async (search) => {
+
+    const videogames = VIDEOS.results.filter((v) => v.name.toUpperCase().includes(search.toUpperCase()))
+    if (videogames === null) return []
+
+    const videogamesSource = videogames.map((video) => ({ ...video, source: 2 }))
+    return videogamesSource
+}
+
+const getVideogamesByNameApi2 = async (search) => {
     const url = `${URL_API}/games?key=${API_KEY}&search=${search}`
-    const query = { search: search }
+
     try {
         const { data } = await axios.get(url)
-        return data
+        const videogamesSource = data.results.map((video) => ({ ...video, source: 2}))
+        return videogamesSource
 
     } catch (error) {
         return ({ error: error.message })

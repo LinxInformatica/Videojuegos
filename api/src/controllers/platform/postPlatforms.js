@@ -1,0 +1,17 @@
+const axios = require('axios')
+const { URL_API } = require('../../utils/helpers')
+const { API_KEY } = process.env
+
+const postPlatforms = async () => {
+    const url = `${URL_API}/platforms?key=${API_KEY}`
+    try {
+        const { data } = await axios.get(url)
+        return data
+
+    } catch (error) {
+        return ({ error: error.message })
+    }
+
+}
+
+module.exports = { postPlatforms }

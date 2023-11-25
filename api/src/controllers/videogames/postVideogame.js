@@ -8,7 +8,6 @@ const postVideogame = async (id, name, description, platforms, image, released, 
             defaults: {
                 name,
                 description,
-                platforms,
                 image,
                 released,
                 rating
