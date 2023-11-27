@@ -16,7 +16,6 @@ async function postVideogameController(req, res) {
 
     try {
         const {videogame,created} = await postVideogame(id, name, description, platforms, image, released, rating )
-        console.log(created)
         if (!created) return res.status(409).json({ error: 'Dato ya existente' })
 
         return res.status(201).json(videogame)

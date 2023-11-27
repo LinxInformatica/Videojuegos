@@ -48,7 +48,6 @@ const getVideogameApi = async (idVideogame) => {
 
 const getVideogameApi2 = async (idVideogame) => {
     const url = `${URL_API}/games/${idVideogame}?key=${API_KEY}`
-    console.log(url)
     try {
         const { data } = await axios.get(url)
         return data

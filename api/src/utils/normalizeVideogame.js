@@ -1,6 +1,22 @@
 const normalizeVideogame = (videogame) => {
-    // const genres=videogame.genres.map((genre)=>({id:genre[0],name:genre[1]}))
-    // const platforms=videogame.platforms.map((platform)=>({id:platform.platform.id,name:platform.platform.name}))
+    let genres=[]
+    let platforms=[]
+    if (videogame.source === 1) {
+        //segun formato de sequelize 
+        genres = videogame.genres.map((genre) => {
+            const { id, name } = genre.dataValues
+            return { id, name }
+        })
+
+        platforms = videogame.platforms.map((platform) => {
+            const { id, name } = platform.dataValues;
+            return { id, name }
+        })
+    } else {
+        //segun formato de api
+        genres = videogame.genres.map((genre) => ({ id: genre.id, name: genre.name }))
+        platforms = videogame.platforms.map((platform) => ({ id: platform.platform.id, name: platform.platform.name }))
+    }
     return {
         id: videogame.id,
         name: videogame.name,
@@ -8,9 +24,9 @@ const normalizeVideogame = (videogame) => {
         image: videogame.background_image,
         released: videogame.released,
         rating: videogame.rating,
-        source: videogame.source
-        //        genres: genres,
-        //        platforms: platforms
+        source: videogame.source,
+        genres: genres,
+        platforms: platforms
     }
 }
 

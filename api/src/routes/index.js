@@ -11,7 +11,12 @@ const { getVideogamesController } = require('../controllers/getVideogamesControl
 const { getVideogameController } = require('../controllers/getVideogameController');
 const { getVideogamesByNameController } = require('../controllers/getVideogamesByNameController');
 const { postVideogameController } = require('../controllers/postVideogameController');
+
+//Platforms
+const { getPlatformsController } = require('../controllers/getPlatformsController');
 const { postPlatformsController } = require('../controllers/postPlatformsController');
+
+
 const router = Router();
 
 // Configurar los routers
@@ -28,6 +33,7 @@ router.get('/videogames', getVideogamesController)
 router.post('/videogames', postVideogameController)
 
 //!platforms
+router.get('/platforms', getPlatformsController)
 router.post('/platforms', postPlatformsController)
 
 module.exports = router;

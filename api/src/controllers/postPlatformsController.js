@@ -1,5 +1,5 @@
 const { Platform } = require('../db')
-const { postPlatforms } = require('./platform/postPlatforms')
+const { postPlatforms } = require('./platforms/postPlatforms')
 
 async function postPlatformsController(req, res) {
     const count = await Platform.count()

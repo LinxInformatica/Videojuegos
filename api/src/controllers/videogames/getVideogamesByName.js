@@ -5,6 +5,7 @@ const { Videogame, Genre, Platform } = require('../../db')
 const { Op } = require('sequelize')
 
 const { VIDEOS } = require('../../utils/data')
+const { formatSequelize } = require('../../utils/formatSequelize')
 
 
 const getVideogamesByName = async (search) => {
@@ -24,11 +25,17 @@ const getVideogamesByNameLocal = async (search) => {
     let videogames = await Videogame.findAll(
         {
             where: { name: { [Op.iLike]: `%${search}%` } },
-            raw: true
+            raw: false,
+            include: [
+                { model: Genre, attributes: ["id", "name"] },
+                { model: Platform, attributes: ["id", "name"] }
+            ]
         }
     )
     if (videogames.length !== 0) {
-        const videogamesSource = videogames.map((video) => ({ ...video, source: 1 }))
+        const videogamesFormat = formatSequelize(videogames)
+        console.log(videogamesFormat)
+        const videogamesSource = videogamesFormat.map((video) => ({ ...video, source: 1 }))
         return videogamesSource
     }
     return []
@@ -48,7 +55,7 @@ const getVideogamesByNameApi2 = async (search) => {
 
     try {
         const { data } = await axios.get(url)
-        const videogamesSource = data.results.map((video) => ({ ...video, source: 2}))
+        const videogamesSource = data.results.map((video) => ({ ...video, source: 2 }))
         return videogamesSource
 
     } catch (error) {
