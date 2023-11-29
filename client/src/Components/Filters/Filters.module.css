@@ -1,0 +1,12 @@
+.Filters {
+    width: 80%;
+    height: 100px;
+    margin: 30px;
+    background:rgba(0, 0, 0, 0.753);
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    color: #31572c;
+    border-radius: 15px;
+    /* box-shadow: 20px 20px 0px -5px #31572c; */
+  }

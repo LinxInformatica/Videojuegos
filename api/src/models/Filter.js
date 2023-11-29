@@ -4,20 +4,15 @@ const { DataTypes, INTEGER } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('filter', {
-    startReleased:{
-      type: DataTypes.DATEONLY,
-    },
-    endReleased:{
-      type: DataTypes.DATEONLY,
+    released:{
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
     name: {
-      type: DataTypes.STRING,
-      defaultValue:"",
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull:false
     },
     source:{
-      type:DataTypes.INTEGER,
-      defaultValue:0,
+      type:DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull:false
     },
     genres:{
@@ -26,11 +21,9 @@ module.exports = (sequelize) => {
     platforms:{
       type:DataTypes.ARRAY(DataTypes.INTEGER)
     },
-    minRating:{
-      type:DataTypes.INTEGER
+    rating:{
+      type:DataTypes.ARRAY(DataTypes.INTEGER)
     },
-    maxRating:{
-      type:DataTypes.INTEGER
-    }
+    
   });
 };

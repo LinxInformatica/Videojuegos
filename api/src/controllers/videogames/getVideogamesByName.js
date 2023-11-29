@@ -5,7 +5,7 @@ const { Videogame, Genre, Platform } = require('../../db')
 const { Op } = require('sequelize')
 
 const { VIDEOS } = require('../../utils/data')
-const { formatSequelize } = require('../../utils/formatSequelize')
+const { sequelizeToVideogame } = require('../../utils/sequelizeToVideoGame')
 
 
 const getVideogamesByName = async (search) => {
@@ -25,21 +25,21 @@ const getVideogamesByNameLocal = async (search) => {
     let videogames = await Videogame.findAll(
         {
             where: { name: { [Op.iLike]: `%${search}%` } },
-            raw: false,
+            raw: true,
             include: [
-                { model: Genre, attributes: ["id", "name"] },
-                { model: Platform, attributes: ["id", "name"] }
+                { model: Genre, attributes: ["id", "name"], through: { attributes: [] } },
+                { model: Platform, attributes: ["id", "name"], through: { attributes: [] } }
             ]
         }
     )
     if (videogames.length !== 0) {
-        const videogamesFormat = formatSequelize(videogames)
-        console.log(videogamesFormat)
+        const videogamesFormat = sequelizeToVideogame(videogames)
         const videogamesSource = videogamesFormat.map((video) => ({ ...video, source: 1 }))
         return videogamesSource
     }
     return []
 }
+
 
 const getVideogamesByNameApi = async (search) => {
 

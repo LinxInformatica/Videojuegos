@@ -8,10 +8,9 @@ async function getVideogameController(req, res) {
 
         if (!data) return res.status(404).json({ error: `No se encontraros datos con el id:${idVideogame}` })
         if (data.error) return res.status(404).json({ error: data.error })
-
-        const videogame = normalizeVideogame(data)
-
-        return res.status(200).json(videogame)
+        const videogames = data.map((videogame) => (normalizeVideogame(videogame)))
+        
+        return res.status(200).json(videogames)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

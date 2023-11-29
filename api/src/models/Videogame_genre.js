@@ -11,6 +11,20 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER
     }
   },
-    { tableName: 'videogame_genre' }
+    {
+      indexes: [
+        {
+          fields: ['videogameId']
+        },
+        {
+          fields: ['genreId']
+        },
+        {
+          unique: true,
+          fields: ['videogameId', 'genreId']
+        }
+      ],
+      tableName: 'videogame_genre'
+    }
   )
 };

@@ -1,0 +1,49 @@
+.Filter {
+    overflow: auto;
+    height: 80%;
+  }
+  .title {
+    font-weight: 900;
+    font-size: 1.7em;
+  }
+  
+  .Filter_name {
+    display: inline-block;
+    color: #fff;
+    font-size: 1.1em;
+    background-color: #31572c;
+    padding: 6px 23px 9px;
+    border-radius: 70em;
+    margin: 8px 6px 8px 0;
+    margin-left: 0px;
+    position: relative;
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .Filter_name::before,
+  .Filter_name::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 40%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #90a955;
+  }
+  
+  .Filter_name::before {
+    left: 7px;
+  }
+  
+  .Filter_name::after {
+    right: 7px;
+  }
+  
+  .Filter_name:hover {
+    transform: scale(1.1);
+    background-color: #51572c;
+  }
+  

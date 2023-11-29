@@ -3,13 +3,14 @@ const normalizeVideogame = (videogame) => {
     let platforms=[]
     if (videogame.source === 1) {
         //segun formato de sequelize 
-        genres = videogame.genres.map((genre) => {
-            const { id, name } = genre.dataValues
-            return { id, name }
-        })
+        genres = videogame.genres 
+        // .map((genre) => {
+        //     const { id, name } = genre
+        //     return { id, name }
+        // })
 
         platforms = videogame.platforms.map((platform) => {
-            const { id, name } = platform.dataValues;
+            const { id, name } = platform
             return { id, name }
         })
     } else {
@@ -20,7 +21,7 @@ const normalizeVideogame = (videogame) => {
     return {
         id: videogame.id,
         name: videogame.name,
-        descripcion: videogame.slug,
+        description: videogame.slug,
         image: videogame.background_image,
         released: videogame.released,
         rating: videogame.rating,

@@ -1,4 +1,12 @@
 export const ADD_VIDEOGAMES = 'ADD_VIDEOGAMES';
 export const ADD_GENRES = 'ADD_GENRES';
 export const ADD_PLATFORMS = 'ADD_PLATFORMS';
+
+export const GET_VIDEOGAMES_BY_NAME = 'GET_VIDEOGAMES_BY_NAME';
+
+export const DEL_FILTER_NAME = 'DEL_FILTER_NAME';
+
+export const REGENERATE_FILTERS = 'REGENERATE_FILTERS';
+
 export const LOADING = 'LOADING';
+

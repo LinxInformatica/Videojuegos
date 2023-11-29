@@ -1,5 +1,11 @@
 body {
   margin: 0;
+  /* background-image: url('../src/assets/video-games-gamers-wallpaper-preview.jpg'); Ruta a tu imagen de fondo */
+  background-image: url('../src/assets/desktop-wallpaper-phone-gamer-android-ios-game-iphone-best-gaming-gaming-mobile-gamer-thumbnail.jpg');
+  background-size: 30%;
+  background-position: center;
+  background-attachment: fixed;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
