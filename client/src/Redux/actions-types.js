@@ -10,3 +10,6 @@ export const REGENERATE_FILTERS = 'REGENERATE_FILTERS';
 
 export const LOADING = 'LOADING';
 
+export const CLEAR_ALL = 'CLEAR_ALL';
+
+export const ADD_VIDEOGAME = 'ADD_VIDEOGAME';

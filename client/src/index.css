@@ -1,8 +1,8 @@
 body {
   margin: 0;
-  /* background-image: url('../src/assets/video-games-gamers-wallpaper-preview.jpg'); Ruta a tu imagen de fondo */
-  background-image: url('../src/assets/desktop-wallpaper-phone-gamer-android-ios-game-iphone-best-gaming-gaming-mobile-gamer-thumbnail.jpg');
-  background-size: 30%;
+  background-image: url('../src/assets/gamepad-consola-juegos-sobre-fondo-claro-concepto-juego_164357-2135.avif');
+  /*background-image: url('../src/assets/desktop-wallpaper-phone-gamer-android-ios-game-iphone-best-gaming-gaming-mobile-gamer-thumbnail.jpg');*/
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
 

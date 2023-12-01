@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getVideogamesByName } from '../../Redux/actions'
+import { useNavigate } from 'react-router-dom'
 
 
 const Searchbar = () => {
     const dispatch = useDispatch()
+    const navigate=useNavigate()
 
     const [name,setName]=useState("")
 
@@ -16,6 +18,10 @@ const Searchbar = () => {
         event.preventDefault()
         dispatch(getVideogamesByName(name))
         setName("")
+        navigate('/home')
+    }
+    const handleNewVideogame = () => {
+        
     }
     return (
         <div>
@@ -25,6 +31,7 @@ const Searchbar = () => {
                     onChange={handleChange}
                     value={name}>
                 </input>
+                
             </form>
         </div>
     )

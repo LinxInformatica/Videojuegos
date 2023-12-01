@@ -1,15 +1,14 @@
-import { LOADING } from "../actions-types";
+import { CLEAR_ALL } from "../actions-types";
 
-export const setLoading = (data) => {
-   
+export const clearAll = () => {
    try {
       return async (dispatch) => {
          return dispatch({
-            type: LOADING,
-            payload: data,
+            type: CLEAR_ALL,
          });
       }
    } catch (error) {
       window.alert(error)
    }
-};
+   
+}

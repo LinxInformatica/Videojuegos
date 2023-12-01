@@ -1,13 +1,15 @@
 //import action types
 
 import FILTERTYPES from "../helpers/filterTypes.helper";
-import { ADD_GENRES, ADD_PLATFORMS, ADD_VIDEOGAMES, DEL_FILTER_NAME, GET_VIDEOGAMES_BY_NAME, LOADING, REGENERATE_FILTERS } from "./actions-types";
+import { ADD_GENRES, ADD_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES, CLEAR_ALL, DEL_FILTER_NAME, GET_VIDEOGAMES_BY_NAME, LOADING, REGENERATE_FILTERS } from "./actions-types";
 
 const initialState = {
     allVideogames: [],
     allGenres: [],
     allPlatforms: [],
     allReleased: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    allSources: ['BD Local', 'Api'],
+    allOrders: ['Name Ascending', 'Name Descending', 'Released Ascending', 'Released Descending', 'First Local', 'First Api'],
     loading: true,
     filteredVideogames: [],
     filterNames: [],
@@ -21,10 +23,18 @@ export default (state = initialState, { type, payload }) => {
             return { ...state, allVideogames: payload, filteredVideogames: payload };
 
         case ADD_GENRES:
-            return { ...state, allGenres: payload };
+            const orderedGenres = payload.sort((a, b) => {
+                if (a.name < b.name) return -1;
+                return 1
+            })
+            return { ...state, allGenres: orderedGenres };
 
         case ADD_PLATFORMS:
-            return { ...state, allPlatforms: payload };
+            const orderedPlatforms = payload.sort((a, b) => {
+                if (a.name < b.name) return -1;
+                return 1
+            })
+            return { ...state, allPlatforms: orderedPlatforms };
 
         case LOADING:
             return { ...state, loading: payload };
@@ -35,6 +45,7 @@ export default (state = initialState, { type, payload }) => {
                 filteredVideogames: state.filteredVideogames.filter((video) => video.name.toUpperCase().includes(payload.toUpperCase())),
                 filterNames: [...state.filterNames, { name: payload, type: FILTERTYPES.NAME }]
             };
+
         case DEL_FILTER_NAME:
             const newFilterNames = state.filterNames.filter((name) => name.name !== payload)
             return {
@@ -44,18 +55,33 @@ export default (state = initialState, { type, payload }) => {
 
         case REGENERATE_FILTERS:
 
-            // Función para verificar si el nombre cumple con el filtro
-            const cumpleFiltro = (name, filtro) => name.toUpperCase().includes(filtro.name.toUpperCase());
+            // para verificar si el nombre cumple con el filtro
+            const filtroName = (name, filtro) => name.toUpperCase().includes(filtro.name.toUpperCase());
 
-            // Filtrar los videos segun filter names
+            // filtro los videos segun filter names
             const videosFiltrados = state.allVideogames.filter(video =>
-                state.filterNames.every(filtro => cumpleFiltro(video.name, filtro))
+                state.filterNames.every(filtro => filtroName(video.name, filtro))
             );
 
             return {
                 ...state,
                 filteredVideogames: videosFiltrados
             };
+
+        case CLEAR_ALL:
+            return {
+                ...state,
+                loading: true,
+                filteredVideogames: [],
+                filterNames: [],
+                filterGenres: [],
+                filterPlatforms: []
+            }
+        case ADD_VIDEOGAME:
+            return {
+                ...state,
+                allVideogames: [...allVideogames, payload]
+            }
 
         default:
             return { ...state }

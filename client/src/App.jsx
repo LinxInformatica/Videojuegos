@@ -7,31 +7,35 @@ import Form from "./Views/Form/Form";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Details from "./Views/Details/Details";
-import Loader from "../src/Components/Loader/Loader"
+import AddFilters from "./Views/AddFilters/AddFilters"
+
 import SITEROUTES from "./helpers/siteroutes.helper";
 
 function App() {
   const loading = useSelector((state) => state.loading)
+
   return (
 
     <div className="App">
-
-      <BrowserRouter>
-        {loading
-          ? <Loader />
-          : (<>
+      < BrowserRouter >
+        {loading ? (
+          <Landing />
+        ) : (
+          <>
             <Navbar />
+
             <Routes>
-              <Route path={SITEROUTES.LANDING} Component={Landing} />
-              <Route path={SITEROUTES.HOME} Component={Home} />
-              <Route path={SITEROUTES.FORM} Component={Form} />
-              <Route path={SITEROUTES.DETAILS} Component={Details} />
+              <Route path={SITEROUTES.LANDING} element={<Landing />} />
+              <Route path={SITEROUTES.HOME} element={<Home />} />
+              <Route path={SITEROUTES.FORM} element={<Form />} />
+              <Route path={SITEROUTES.DETAILS} element={<Details />} />
+              <Route path={SITEROUTES.ADD_FILTERS} element={<AddFilters />} />
+
 
             </Routes>
-          </>)
-        }
+          </>)}
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 export default App

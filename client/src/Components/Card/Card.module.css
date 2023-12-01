@@ -2,7 +2,7 @@
   background: rgba(0, 0, 0, 0.753);
   position: relative;
   max-width: 250px;
-  height: 300px;
+  height: 250px;
   border-radius: 5px;
   padding: 1rem;
   overflow: hidden;
@@ -12,7 +12,8 @@
   gap: 7.5px;
   transition: 0.5s ease;
   color: white;
-  margin: 15px
+  margin: 15px;
+  text-decoration:none
 }
 
 .card::after {
@@ -30,20 +31,27 @@
 
 .cardHeader {
   color:rgb(94, 255, 45);
-  -webkit-text-stroke: 0.5px black;
+  /* -webkit-text-stroke: 0.5px black;
   text-transform: uppercase;
-  position: relative;
+  
   width: max-content;
-  font-weight: bold;
   transition: all 0.5s ease;
   justify-content: flex-end;
   opacity: 200;
+  text-decoration:none; */
+ 
+  font-weight: bold;
+  position: absolute;
+  bottom:15px;
+  left:0;
+  width: 80%;
+
 }
 
 .cardHeader::after {
   content: "";
   width: calc(100% + 1rem);
-  height: 2.5px;
+  height: 4.5px;
   transform: translateX(calc(-100% - 1rem));
   background: aqua;
   bottom: -2px;
@@ -57,10 +65,11 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  transform: translateY(95%);
+  transform: translateY(-450%);
   transition: all 0.5s ease;
   opacity: 10;
   background: rgba(0, 0, 0, 0.5); 
+  text-decoration:none
 }
 
 .button {
@@ -72,7 +81,7 @@
 }
 
 .card:hover .details {
-  transform: translateY(-40%);
+  transform: translateY(-50%);
   transition-delay: 0.5s;
 }
 
@@ -92,12 +101,26 @@
   top:10px;
   width: 90%;
   height: 0;
-  padding-bottom: 100%
+  padding-bottom: 50%
 }
 
 .cardImage {
+  border-radius: 5px;
   width: 100%;
-  height: 80%;
+  height:120%;
   object-fit: cover;
   /* Escalar la imagen para cubrir todo el contenedor sin deformarla */
+}
+
+.source {
+  height: 25px;
+  width: 50px;
+  border-radius: 10%;
+  top: 0px;
+  left: 232px;
+  position: absolute;
+  text-align: center;
+  background-color: black;
+  color:white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
 }
