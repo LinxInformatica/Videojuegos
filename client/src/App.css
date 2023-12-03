@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-logo {
@@ -32,7 +34,65 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+input {
+  background-color: #978d8d;
+  max-width: 80%;
+  width: 300px;
+  height: 20px;
+  text-align: center;
+  border: 0 0 2px 2px solid;
+  border-color: rgb(94, 255, 45);
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin:5px;
+}
+
+input:hover {
+  transform: scale(1.1);
+}
+
+input:focus {
+  /* outline-color: aqua; */
+  box-shadow: 1px 1px 1px rgb(0, 255, 255);
+  transition: 0.3s ease;
+  /* transition: .1s; */
+  transition-property: box-shadow;
+}
+
+label {
+  text-align: right;
+  color: rgb(94, 255, 45);
+  font-weight: bold;
+}
+
+button {
+  background-color: #212121;
+  height: 30px;
+  text-align: center;
+  border: 0 0 2px 2px solid;
+  border-color: rgb(94, 255, 45);
+  margin: 15px;
+  border-radius: 5px;
+  color: rgb(94, 255, 45);
+  font-weight: bold;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button:focus {
+  /* background-color: #212121; */
+  /* outline-color: aqua; */
+  box-shadow: 1px 1px 1px rgb(0, 255, 255);
+  transition: 0.3s ease;
+  /* transition: .1s; */
+  transition-property: box-shadow;
 }

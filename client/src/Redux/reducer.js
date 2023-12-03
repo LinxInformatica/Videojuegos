@@ -1,26 +1,44 @@
-//import action types
+import FILTERTYPES from '../helpers/filterTypes.helper'
 
-import FILTERTYPES from "../helpers/filterTypes.helper";
-import { ADD_GENRES, ADD_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES, CLEAR_ALL, DEL_FILTER_NAME, GET_VIDEOGAMES_BY_NAME, LOADING, REGENERATE_FILTERS } from "./actions-types";
+import {
+    ADD_GENRES, ADD_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
+    CLEAR_ALL, DEL_FILTER_NAME, GET_VIDEOGAMES_BY_NAME, LOADING, REGENERATE_FILTERS,
+    GET_SELECTED_GENRES, SET_SELECTED_GENRES,
+    SET_SELECTED_PLATFORMS, GET_SELECTED_PLATFORMS,
+    SET_SELECTED_SOURCES, GET_SELECTED_SOURCES,
+    SET_SELECTED_YEARS, GET_SELECTED_YEARS, PUT_SELECTED_GENRES, PUT_SELECTED_PLATFORMS, PUT_SELECTED_YEARS, PUT_SELECTED_SOURCES
+} from "./actions-types";
 
 const initialState = {
     allVideogames: [],
     allGenres: [],
     allPlatforms: [],
-    allReleased: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
-    allSources: ['BD Local', 'Api'],
+    allYears: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+    allSources: ['Local Database', 'Api'],
     allOrders: ['Name Ascending', 'Name Descending', 'Released Ascending', 'Released Descending', 'First Local', 'First Api'],
     loading: true,
     filteredVideogames: [],
+    // usados para filtrar FilteredVideoGames
     filterNames: [],
+    filterPlatforms: [],
     filterGenres: [],
-    filterPlatforms: []
+    filterYears: [],
+    filterSources: [],
+    //usados en los forms si confirma pasan a filter si no  los limpio
+    selectedPlatforms: [],
+    selectedGenres: [],
+    selectedYears: [],
+    selectedSources: [],
 }
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
         case ADD_VIDEOGAMES:
-            return { ...state, allVideogames: payload, filteredVideogames: payload };
+            return {
+                ...state,
+                allVideogames: payload,
+                filteredVideogames: payload
+            };
 
         case ADD_GENRES:
             const orderedGenres = payload.sort((a, b) => {
@@ -74,7 +92,7 @@ export default (state = initialState, { type, payload }) => {
                 loading: true,
                 filteredVideogames: [],
                 filterNames: [],
-                filterGenres: [],
+                selectedGenres: [],
                 filterPlatforms: []
             }
         case ADD_VIDEOGAME:
@@ -82,6 +100,105 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 allVideogames: [...allVideogames, payload]
             }
+
+        case GET_SELECTED_GENRES:
+            return {
+                ...state,
+                selectedGenres: [...state.filterGenres]
+            }
+        case SET_SELECTED_GENRES:
+            let newSelectedGenres = []
+            if (state.selectedGenres.find((genre) => genre.id === payload.id)) {
+                newSelectedGenres = state.selectedGenres.filter((genre) => genre.id !== payload.id)
+            } else {
+                state.selectedGenres.push({ id: payload.id, name: payload.name })
+                newSelectedGenres = state.selectedGenres
+            }
+            return {
+                ...state,
+                selectedGenres: [...newSelectedGenres]
+            }
+        case PUT_SELECTED_GENRES:
+
+            return {
+                ...state,
+                filterGenres: [...state.selectedGenres]
+            }
+
+
+        case GET_SELECTED_PLATFORMS:
+            return {
+                ...state,
+                selectedPlatforms: [...state.filterPlatforms]
+            }
+
+        case SET_SELECTED_PLATFORMS:
+            let newSelectedPlatforms = []
+            if (state.selectedPlatforms.find((platform) => platform.id === payload.id)) {
+                newSelectedPlatforms = state.selectedPlatforms.filter((platform) => platform.id !== payload.id)
+            } else {
+                state.selectedPlatforms.push({ id: payload.id, name: payload.name })
+                newSelectedPlatforms = state.selectedPlatforms
+            }
+            return {
+                ...state,
+                selectedPlatforms: [...newSelectedPlatforms]
+            }
+        case PUT_SELECTED_PLATFORMS:
+            return {
+                ...state,
+                filterPlatforms: [...state.selectedPlatforms]
+            }
+
+        case GET_SELECTED_YEARS:
+            return {
+                ...state,
+                selectedYears: [...state.filterYears]
+            }
+
+        case SET_SELECTED_YEARS:
+            let newSelectedYears = []
+            if (state.selectedYears.includes(payload)) {
+                newSelectedYears = state.selectedYears.filter((year) => year !== payload)
+            } else {
+                state.selectedYears.push(payload)
+                newSelectedYears = state.selectedYears
+            }
+            return {
+                ...state,
+                selectedYears: [...newSelectedYears]
+            }
+        case PUT_SELECTED_YEARS:
+            return {
+                ...state,
+                filterYears: [...state.selectedYears]
+            }
+
+
+        case GET_SELECTED_SOURCES:
+            return {
+                ...state,
+                selectedSources: [...state.filterSources]
+            }
+
+        case SET_SELECTED_SOURCES:
+            let newSelectedSources = []
+            if (state.selectedSources.includes(payload)) {
+                newSelectedSources = state.selectedSources.filter((source) => source !== payload)
+            } else {
+                state.selectedSources.push(payload)
+                newSelectedSources = state.selectedSources
+            }
+            return {
+                ...state,
+                selectedSources: [...newSelectedSources]
+            }
+        case PUT_SELECTED_SOURCES:
+            return {
+                ...state,
+                filterSources: [...state.selectedSources]
+            }
+
 
         default:
             return { ...state }

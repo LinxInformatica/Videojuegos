@@ -1,0 +1,19 @@
+.SelectFilter {
+    padding: inherit;
+}
+.selected{
+    background-color:#f0f0e1b6;
+    font-size: .7 rem;
+    color:rgb(94, 255, 45);
+    margin:8px;
+}
+.unselected{
+    background-color:green;
+    color:rgb(224, 217, 217);
+    font-size: .9 rem;
+    font-style: normal;
+    margin:8px;
+}
+.text{
+    font-size:large;
+}

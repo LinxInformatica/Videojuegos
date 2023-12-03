@@ -1,6 +1,6 @@
 const FILTERTYPES = {
     NAME: 'Name',
-    RELEASED:'Released',
+    YEAR:'Year',
     GENRE:'Genre',
     PLATFORM:'Platform',
     SOURCE: 'Source',

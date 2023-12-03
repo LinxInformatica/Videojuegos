@@ -12,7 +12,6 @@ const Details = () => {
   const videogame = useSelector((state) => state.allVideogames.find((v) => v.id.toString() === id))
 
   const { name, description, image, released, genres, platforms, source } = videogame
-  console.log(platforms)
   return (
     <div>
       <Link to={SITEROUTES.LANDING} >

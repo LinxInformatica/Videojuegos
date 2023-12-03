@@ -6,7 +6,8 @@ const   SITEROUTES = {
     LANDING: '/',
     HOME: '/home',
     FORM: '/form',
-    ADD_FILTERS:'/filters',
+    SELECT_FILTERS:'/filters/select',
+    
     DETAILS: '/details/:id',
     //LOGO: "../../src/assets/Rick_and_Morty.png" 
 };

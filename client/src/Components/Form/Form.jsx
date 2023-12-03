@@ -8,7 +8,7 @@ import axios from 'axios'
 import { addVideogame, regenerateFilters } from '../../Redux/actions'
 
 const Form = () => {
-  dispatch=useDispatch()
+  const dispatch = useDispatch()
 
   //leo los genres del estado global y los marco como no elegidos
   const allGenres = useSelector((state) => state.allGenres)
@@ -25,7 +25,7 @@ const Form = () => {
     rating: 0,
     genres: [],
     platforms: [],
-    source:1
+    source: 1
   })
   // estados de error
   const [errors, setErrors] = useState({
@@ -43,7 +43,7 @@ const Form = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   //platforms selected
   const [selectedPlatforms, setSelectedPlatforms] = useState([]);
-  
+
 
   //cambios en el form
   const handleChange = (event) => {
@@ -73,11 +73,11 @@ const Form = () => {
       await dispatch(addVideogame(userData))
       //y me fijo si hay que filtralo
       await dispatch(regenerateFilters())
-      
+
       window.alert('The Videogame was added successfully')
     } catch (error) {
       window.alert(error)
-      
+
     }
   }
 
@@ -130,7 +130,7 @@ const Form = () => {
     setSelectedPlatforms(userData.platforms.map((platform) => `${platform.name}`))
 
   }, [userData])
-
+  console.log('form')
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.Form}>
@@ -141,72 +141,79 @@ const Form = () => {
           <label htmlFor="name">{errors.name}</label>
         </div>
         {/* description */}
-        <label htmlFor="description">Description:</label>
-        <input type="text" name="description" value={userData.description} onChange={handleChange} />
-        <label htmlFor="name">{errors.description}</label>
-
-        {/* image */}
-        <input type="file" onChange={handleImageChange} />
-        {userData.image && (
-          <div>
-            <img src={userData.image} alt="Selected" style={{ width: '50px', height: '50px' }} />
-          </div>
-        )}
-
-        {/* released */}
-        <label htmlFor="released">Released:</label>
-        <input type="date" name="released" value={userData.released} onChange={handleChange} />
-        <label htmlFor="released">{errors.released}</label>
-
-        {/* rating */}
-        <label htmlFor="rating">Rating:</label>
-        <input type="number" name="rating" value={userData.rating} onChange={handleChange} />
-        <label htmlFor="rating">{errors.rating}</label>
-
-        {/* genres */}
-        <label htmlFor="genres">Genres:</label>
-        <input type="text" name="genres" value={selectedGenres} disabled={true} />
-        <label htmlFor="genres">{errors.genres}</label>
-        {/* Lista de géneros para seleccionar */}
-        <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
-          {allGenres.map((genre) => (
-            <div key={genre.id}>
-              <input
-                type="checkbox"
-                id={`genre-${genre.id}`}
-                name={`genre-${genre.name}`}
-                onChange={() => handleGenreSelection(genre)}
-                checked={userData.genres.find((g) => g.id === genre.id)}
-
-              />
-              <label htmlFor={`genre-${genre.id}`}>{genre.name}</label>
-            </div>
-          ))
-          }
-
+        <div>
+          <label htmlFor="description">Description:</label>
+          <input type="text" name="description" value={userData.description} onChange={handleChange} />
+          <label htmlFor="name">{errors.description}</label>
         </div>
-
-        {/* platforms */}
-        <label htmlFor="platforms">Platforms:</label>
-        <input type="text" name="platforms" value={selectedPlatforms} disabled={true} />
-        <label htmlFor="platforms">{errors.platforms}</label>
-        {/* Lista de plataformas para seleccionar */}
-        <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
-          {allPlatforms.map((platform) => (
-            <div key={platform.id}>
-              <input
-                type="checkbox"
-                id={`platform-${platform.id}`}
-                name={`platform-${platform.name}`}
-                onChange={() => handlePlatformSelection(platform)}
-                checked={userData.platforms.find((p) => p.id === platform.id)}
-
-              />
-              <label htmlFor={`platform-${platform.id}`}>{platform.name}</label>
+        {/* image */}
+        <div>
+          <input type="file" onChange={handleImageChange} />
+          {userData.image && (
+            <div>
+              <img src={userData.image} alt="Selected" style={{ width: '50px', height: '50px' }} />
             </div>
-          ))
-          }
+          )}
+        </div>
+        <div>
+          {/* released */}
+          <label htmlFor="released">Released:</label>
+          <input type="date" name="released" value={userData.released} onChange={handleChange} />
+          <label htmlFor="released">{errors.released}</label>
+        </div>
+        <div>
+          {/* rating */}
+          <label htmlFor="rating">Rating:</label>
+          <input type="number" name="rating" value={userData.rating} onChange={handleChange} />
+          <label htmlFor="rating">{errors.rating}</label>
+        </div>
+        <div>
+          {/* genres */}
 
+          <label htmlFor="genres">Genres:</label>
+          <input type="text" name="genres" value={selectedGenres} disabled={true} />
+          <label htmlFor="genres">{errors.genres}</label>
+          {/* Lista de géneros para seleccionar */}
+          <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
+            {allGenres.map((genre) => (
+              <div key={genre.id}>
+                <input
+                  type="checkbox"
+                  id={`genre-${genre.id}`}
+                  name={`genre-${genre.name}`}
+                  onChange={() => handleGenreSelection(genre)}
+                  checked={userData.genres.find((g) => g.id === genre.id)}
+
+                />
+                <label htmlFor={`genre-${genre.id}`}>{genre.name}</label>
+              </div>
+            ))
+            }
+
+          </div>
+        </div>
+        <div>
+          {/* platforms */}
+          <label htmlFor="platforms">Platforms:</label>
+          <input type="text" name="platforms" value={selectedPlatforms} disabled={true} />
+          <label htmlFor="platforms">{errors.platforms}</label>
+          {/* Lista de plataformas para seleccionar */}
+          <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
+            {allPlatforms.map((platform) => (
+              <div key={platform.id}>
+                <input
+                  type="checkbox"
+                  id={`platform-${platform.id}`}
+                  name={`platform-${platform.name}`}
+                  onChange={() => handlePlatformSelection(platform)}
+                  checked={userData.platforms.find((p) => p.id === platform.id)}
+
+                />
+                <label htmlFor={`platform-${platform.id}`}>{platform.name}</label>
+              </div>
+            ))
+            }
+          </div>
         </div>
         <button onClick={handleSubmit} disabled={errors.errors}>Save</button>
 

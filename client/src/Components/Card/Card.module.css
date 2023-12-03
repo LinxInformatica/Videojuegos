@@ -65,9 +65,9 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  transform: translateY(-450%);
+  transform: translateY(600%);
   transition: all 0.5s ease;
-  opacity: 10;
+  opacity: 1;
   background: rgba(0, 0, 0, 0.5); 
   text-decoration:none
 }
@@ -81,8 +81,9 @@
 }
 
 .card:hover .details {
-  transform: translateY(-50%);
+  transform: translateY(-80%);
   transition-delay: 0.5s;
+  opacity: 1;
 }
 
 .card:hover .cardHeader::after {

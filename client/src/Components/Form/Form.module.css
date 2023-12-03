@@ -1,32 +1,15 @@
 .Form {
-  box-sizing: border-box;
-  margin: 20px;
-  width: 400px;
-  height: 9000px;
-  background: rgba(217, 217, 217, 0.58);
-  border: 1px solid white;
-  box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.22);
-  -webkit-backdrop-filter: blur(6px);
-          backdrop-filter: blur(6px);
-  border-radius: 17px;
-  text-align: center;
-  transition: all 0.5s;
   display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  font-weight: bolder;
-  color: black;
-  font-size: 0.8em;
-  position: relative;
-  background-image: url("../../assets/login3.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 120%;
+  flex-wrap: wrap; 
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin-top:20px;
+  padding: 5px;
+  height: 500 px;
+  background: rgba(0, 0, 0, 0.753);
+  color: #31572c;
+  border-radius: 15px;
 }
 
 .Form label {
@@ -91,7 +74,7 @@
   width: 95%;
   box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.22);
   -webkit-backdrop-filter: blur(30px);
-          backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -105,4 +88,6 @@
   color: black;
   top: 0px;
   font-size: 1rem;
-}/*# sourceMappingURL=Form.module.css.map */
+}
+
+/*# sourceMappingURL=Form.module.css.map */

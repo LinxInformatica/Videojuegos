@@ -2,14 +2,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 import './App.css'
+
+//!components
 import Landing from "./Views/Landing/Landing";
-import Form from "./Views/Form/Form";
+import Form from "./Components/Form/Form";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Details from "./Views/Details/Details";
-import AddFilters from "./Views/AddFilters/AddFilters"
+
 
 import SITEROUTES from "./helpers/siteroutes.helper";
+
+import SelectFilters from "./Views/SelectFilters/SelectFilters";
 
 function App() {
   const loading = useSelector((state) => state.loading)
@@ -29,9 +33,7 @@ function App() {
               <Route path={SITEROUTES.HOME} element={<Home />} />
               <Route path={SITEROUTES.FORM} element={<Form />} />
               <Route path={SITEROUTES.DETAILS} element={<Details />} />
-              <Route path={SITEROUTES.ADD_FILTERS} element={<AddFilters />} />
-
-
+              <Route path={SITEROUTES.SELECT_FILTERS} element={<SelectFilters />} />
             </Routes>
           </>)}
       </BrowserRouter>
