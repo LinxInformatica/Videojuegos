@@ -20,7 +20,7 @@ const normalizeVideogame = (videogame) => {
     return {
         id: videogame.id,
         name: videogame.name,
-        description: videogame.slug,
+        description: videogame.description,
         image: image,
         released: videogame.released,
         rating: videogame.rating,

@@ -1,0 +1,249 @@
+.navbar {
+  /* margin: 5px; */
+  width: 100%;
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+  color: #31572c;
+  border-radius: 8px;
+  border: 1px solid red;
+  margin-bottom: 5px;
+  /* box-shadow: 2px 2px 0px -5px #31572c; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  /* margin: 5px; */
+  width: 100%;
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+  color: #31572c;
+  border-radius: 8px;
+  border: 1px solid red;
+  /* box-shadow: 2px 2px 0px -5px #31572c; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.body {
+  margin: 0px;
+  margin-bottom: 5px;
+  /* width: 100%;  */
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+  padding: 5px;
+  color: #31572c;
+  border-radius: 8px;
+  border: 1px solid red;
+  /* box-shadow: 2px 2px 0px -5px #31572c; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cards {
+  margin-top: 5px;
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+
+  color: #31572c;
+  border-radius: 8px;
+  border: 1px solid red;
+  /* box-shadow: 2px 2px 0px -5px #31572c; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.options {
+  width: 100%;
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+  color: #31572c;
+  border-radius: 8px;
+  border: 1px solid red;
+  margin-bottom: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.container {
+  /* background: rgba(63, 23, 23, 0.753); */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.label {
+  margin-right: 15px;
+}
+
+.delete{
+  background-color: white;
+  color:white
+}
+.loaderButton {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  height: 100%;
+  margin: 0;
+}
+
+
+.label {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 2px;
+}
+
+.inputReleased {
+  width: 150px;
+}
+
+.inputRating {
+  width: 50px;
+}
+
+
+.selectionItems {
+  max-height: 150px;
+  overflow-y: auto
+}
+
+.unselected {
+  background-color: #524e4eb6;
+  font-size: .7 rem;
+  color: rgb(224, 217, 217);
+  margin: 2px;
+}
+
+.selected {
+  background-color: green;
+  color: rgb(224, 217, 217);
+  font-size: .9 rem;
+  font-style: normal;
+  margin: 2px;
+}
+
+.formItem {
+  margin-bottom: 10px
+}
+
+.formError {
+  color: white;
+  font-size: .7rem;
+}
+.filter{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.filterButton{
+  margin:4px;
+}
+
+.noFound{
+  margin:40px;
+}
+.textPlatform {
+  width: 80%;
+}
+
+.formImage {
+  width: 200px;
+  height: 200px;
+}
+
+.formSelection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+}
+
+.formContainerItem {
+  padding: 10px;
+}
+
+.formBody {
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+  color: #31572c;
+  border-radius: 8px;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.formLabel {
+  text-align: left;
+  margin-left: 5px;
+  width: 5%;
+}
+
+.formData {
+  text-align: left;
+  margin-left: 5px;
+  width: 95%;
+}
+
+
+.formTextarea {
+  background-color: #978d8d;
+  max-width: 80%;
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  border: 0 0 2px 2px solid;
+  border-color: rgb(94, 255, 45);
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  text-align: left;
+}
+
+.formTextarea:hover {
+  transform: scale(1.1);
+}
+
+.formTextarea::placeholder {
+  color: white;
+  /* Puedes cambiar 'red' al color que desees */
+  font-size: .7rem;
+}

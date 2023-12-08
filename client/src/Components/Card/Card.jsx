@@ -4,25 +4,26 @@ import styles from './Card.module.css'
 import formatFecha from "../../utils/formatFecha";
 
 const Card = (props) => {
-  const { id, name, image, released, rating, genres, source } = props
+  const { id, name, image, released, rating, genres, source,platforms } = props
   //para saber si vino de la api o no 
   const api = source === 1 ? false : true
   
   return (
-    <div>
+    <div >
       <Link to={`/details/${id}`} className={styles.card}>
         <div>
           {api
             ? (<label className={styles.source}>API</label>)
             : (<label className={styles.source}>LOCAL</label>)
           }
-          <div className={styles.imageContainer}>
+          <label className={styles.rating}>Rating:{rating}</label>
+          {/* <div className={styles.imageContainer}>
             <img
               src={image}
               alt="Videogame Image"
               className={styles.cardImage}
             />
-          </div>
+          </div> */}
           <img
             src={image}
             alt="Videogame Image"
@@ -35,15 +36,6 @@ const Card = (props) => {
           {genres.map((genre) => (
             <div key={`genre_${genre.name}`}>{genre.name}</div>
           ))}
-          <hr></hr>
-          <div>
-            Released:{formatFecha(released)}
-          </div>
-          <div>
-            Rating:{rating}
-          </div>
-          { }
-          {/* </div> */}
         </div>
       </Link>
     </div>

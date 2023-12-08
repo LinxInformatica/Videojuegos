@@ -1,13 +1,13 @@
 .SelectFilter {
     padding: inherit;
 }
-.selected{
-    background-color:#f0f0e1b6;
+.unselected{
+    background-color:#524e4eb6;
     font-size: .7 rem;
-    color:rgb(94, 255, 45);
+    color:rgb(224, 217, 217);
     margin:8px;
 }
-.unselected{
+.selected{
     background-color:green;
     color:rgb(224, 217, 217);
     font-size: .9 rem;

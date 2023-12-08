@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 import { useDispatch } from 'react-redux'
 import { clearAll } from '../../Redux/actions'
-import styles from './Navbar.module.css'
+import styles from '../../Styles/Styles.module.css'
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -17,7 +17,8 @@ const Navbar = () => {
   
   return (
     <div>
-      <div className={styles.Navbar}>
+      <div className={styles.navbar}>
+
         <Link to={SITEROUTES.HOME}>
           <button>Videogames</button>
         </Link>

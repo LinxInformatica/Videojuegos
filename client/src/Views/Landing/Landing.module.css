@@ -46,3 +46,8 @@
     transform: scale(0);
   }
 }
+
+.loaderButton{
+  height:1500px;
+  width: 1500px;
+}

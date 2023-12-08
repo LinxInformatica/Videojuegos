@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getVideogamesByName } from '../../Redux/actions'
+import { getVideogamesFiltered, setAllFilters  } from '../../Redux/actions'
 import { useNavigate } from 'react-router-dom'
-import styles from './Searchbar.module.css'
-import Filters from '../Filters/Filters'
-import Cards from '../Cards/Cards'
+import styles from '../../Styles/styles.module.css'
+import FILTERTYPES from '../../helpers/filterTypes.helper'
 
 const Searchbar = () => {
     const dispatch = useDispatch()
@@ -19,17 +18,24 @@ const Searchbar = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         if (name) {
-            dispatch(getVideogamesByName(name))
+            //agrego al objeto de filtros el name
+            dispatch(setAllFilters({
+                id: name,
+                name: name,
+                type: FILTERTYPES.NAME,
+                key: `${FILTERTYPES.NAME}${name}`,
+                uniqueId:`${FILTERTYPES.NAME}${name}`
+            }))
+            //rearmo el filtro
+            dispatch(getVideogamesFiltered())
             setName("")
         }
         navigate('/home')
     }
-    const handleNewVideogame = () => {
 
-    }
     return (
         <div>
-            <div className={styles.Searchbar}>
+            <div className={styles.header}>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Search:</label>
@@ -45,7 +51,7 @@ const Searchbar = () => {
                     </div>
                 </form>
             </div>
-            
+
         </div>
 
 

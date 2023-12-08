@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from './Home.module.css'
+import styles from '../../Styles/styles.module.css'
 import Cards from '../../Components/Cards/Cards'
 
 const Home = () => {
   return (
-    <div className={styles.Home}>
+    <div>
       <div><Cards /></div>
     </div>
   )

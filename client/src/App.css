@@ -58,6 +58,11 @@ input:hover {
   transform: scale(1.1);
 }
 
+input::placeholder {
+  color: white; /* Puedes cambiar 'red' al color que desees */
+  font-size: .7rem;
+}
+
 input:focus {
   /* outline-color: aqua; */
   box-shadow: 1px 1px 1px rgb(0, 255, 255);
@@ -78,7 +83,7 @@ button {
   text-align: center;
   border: 0 0 2px 2px solid;
   border-color: rgb(94, 255, 45);
-  margin: 15px;
+  margin: 10px;
   border-radius: 5px;
   color: rgb(94, 255, 45);
   font-weight: bold;
@@ -95,4 +100,19 @@ button:focus {
   transition: 0.3s ease;
   /* transition: .1s; */
   transition-property: box-shadow;
+}
+.header {
+  margin:0px; 
+  width: 100%; 
+  min-width: 150px;
+  background: rgba(63, 23, 23, 0.753);
+  color: #31572c;
+  border-radius: 8px;
+  border:10px solid red;
+  /* box-shadow: 2px 2px 0px -5px #31572c; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }

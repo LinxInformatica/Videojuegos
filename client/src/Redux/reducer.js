@@ -1,34 +1,29 @@
 import FILTERTYPES from '../helpers/filterTypes.helper'
+import YEARS from '../helpers/years.helper';
+import filterFunction from '../utils/filterFunction';
 
 import {
     ADD_GENRES, ADD_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
-    CLEAR_ALL, DEL_FILTER_NAME, GET_VIDEOGAMES_BY_NAME, LOADING, REGENERATE_FILTERS,
-    GET_SELECTED_GENRES, SET_SELECTED_GENRES,
-    SET_SELECTED_PLATFORMS, GET_SELECTED_PLATFORMS,
-    SET_SELECTED_SOURCES, GET_SELECTED_SOURCES,
-    SET_SELECTED_YEARS, GET_SELECTED_YEARS, PUT_SELECTED_GENRES, PUT_SELECTED_PLATFORMS, PUT_SELECTED_YEARS, PUT_SELECTED_SOURCES
+    CLEAR_ALL, DEL_FILTER, LOADING,
+    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS
+
 } from "./actions-types";
 
 const initialState = {
     allVideogames: [],
     allGenres: [],
     allPlatforms: [],
-    allYears: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
-    allSources: ['Local Database', 'Api'],
+    allYears: YEARS,
+    allSources: [{ id: 1, name: 'Local Database' }, { id: 2, name: 'Api' }],
     allOrders: ['Name Ascending', 'Name Descending', 'Released Ascending', 'Released Descending', 'First Local', 'First Api'],
     loading: true,
     filteredVideogames: [],
     // usados para filtrar FilteredVideoGames
-    filterNames: [],
-    filterPlatforms: [],
-    filterGenres: [],
-    filterYears: [],
-    filterSources: [],
-    //usados en los forms si confirma pasan a filter si no  los limpio
-    selectedPlatforms: [],
-    selectedGenres: [],
-    selectedYears: [],
-    selectedSources: [],
+    allFilters: [],
+    //usados en los forms de filters si confirma pasan a filter si no  los limpio
+    selectedFilters: [],
+    //usados en el form para saber que generos y platforms estan selecionados
+
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -57,33 +52,11 @@ export default (state = initialState, { type, payload }) => {
         case LOADING:
             return { ...state, loading: payload };
 
-        case GET_VIDEOGAMES_BY_NAME:
+        case DEL_FILTER:
+            const newFilter = state.allFilters.filter((filter) => filter.uniqueId !== payload)
             return {
                 ...state,
-                filteredVideogames: state.filteredVideogames.filter((video) => video.name.toUpperCase().includes(payload.toUpperCase())),
-                filterNames: [...state.filterNames, { name: payload, type: FILTERTYPES.NAME }]
-            };
-
-        case DEL_FILTER_NAME:
-            const newFilterNames = state.filterNames.filter((name) => name.name !== payload)
-            return {
-                ...state,
-                filterNames: newFilterNames
-            };
-
-        case REGENERATE_FILTERS:
-
-            // para verificar si el nombre cumple con el filtro
-            const filtroName = (name, filtro) => name.toUpperCase().includes(filtro.name.toUpperCase());
-
-            // filtro los videos segun filter names
-            const videosFiltrados = state.allVideogames.filter(video =>
-                state.filterNames.every(filtro => filtroName(video.name, filtro))
-            );
-
-            return {
-                ...state,
-                filteredVideogames: videosFiltrados
+                allFilters: [...newFilter]
             };
 
         case CLEAR_ALL:
@@ -91,113 +64,80 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 loading: true,
                 filteredVideogames: [],
-                filterNames: [],
-                selectedGenres: [],
-                filterPlatforms: []
+                allFilters: []
             }
         case ADD_VIDEOGAME:
             return {
                 ...state,
                 allVideogames: [...allVideogames, payload]
             }
-
-        case GET_SELECTED_GENRES:
+        case CLEAR_ALL_FILTERS:
             return {
                 ...state,
-                selectedGenres: [...state.filterGenres]
+                allFilters: []
             }
-        case SET_SELECTED_GENRES:
-            let newSelectedGenres = []
-            if (state.selectedGenres.find((genre) => genre.id === payload.id)) {
-                newSelectedGenres = state.selectedGenres.filter((genre) => genre.id !== payload.id)
+
+        case GET_SELECTED_FILTERS:
+            return {
+                ...state,
+                selectedFilters: [...state.allFilters]
+            }
+
+        case CLEAR_SELECTED_FILTERS:
+            return {
+                ...state,
+                selectedFilters: []
+            }
+        case SET_SELECTED_FILTERS:
+            let newSelectedFilters = []
+            if (state.selectedFilters.find((selected) => selected.uniqueId === payload.uniqueId)) {
+                newSelectedFilters = state.selectedFilters.filter((selected) => selected.uniqueId !== payload.uniqueId)
             } else {
-                state.selectedGenres.push({ id: payload.id, name: payload.name })
-                newSelectedGenres = state.selectedGenres
+                state.selectedFilters.push({ id: payload.id, name: payload.name, uniqueId: payload.uniqueId, type: payload.type })
+                newSelectedFilters = state.selectedFilters
             }
             return {
                 ...state,
-                selectedGenres: [...newSelectedGenres]
+                selectedFilters: [...newSelectedFilters]
             }
-        case PUT_SELECTED_GENRES:
+
+        case PUT_SELECTED_FILTERS:
 
             return {
                 ...state,
-                filterGenres: [...state.selectedGenres]
+                allFilters: [...state.selectedFilters],
+                selectedFilters: []
             }
 
-
-        case GET_SELECTED_PLATFORMS:
+        case SET_ALL_FILTERS:
             return {
                 ...state,
-                selectedPlatforms: [...state.filterPlatforms]
+                allFilters: [...state.allFilters, payload]
             }
-
-        case SET_SELECTED_PLATFORMS:
-            let newSelectedPlatforms = []
-            if (state.selectedPlatforms.find((platform) => platform.id === payload.id)) {
-                newSelectedPlatforms = state.selectedPlatforms.filter((platform) => platform.id !== payload.id)
-            } else {
-                state.selectedPlatforms.push({ id: payload.id, name: payload.name })
-                newSelectedPlatforms = state.selectedPlatforms
-            }
-            return {
-                ...state,
-                selectedPlatforms: [...newSelectedPlatforms]
-            }
-        case PUT_SELECTED_PLATFORMS:
-            return {
-                ...state,
-                filterPlatforms: [...state.selectedPlatforms]
-            }
-
-        case GET_SELECTED_YEARS:
-            return {
-                ...state,
-                selectedYears: [...state.filterYears]
-            }
-
-        case SET_SELECTED_YEARS:
-            let newSelectedYears = []
-            if (state.selectedYears.includes(payload)) {
-                newSelectedYears = state.selectedYears.filter((year) => year !== payload)
-            } else {
-                state.selectedYears.push(payload)
-                newSelectedYears = state.selectedYears
-            }
-            return {
-                ...state,
-                selectedYears: [...newSelectedYears]
-            }
-        case PUT_SELECTED_YEARS:
-            return {
-                ...state,
-                filterYears: [...state.selectedYears]
-            }
+        case GET_VIDEOGAMES_FILTERED:
+            let newVideogamesFiltered = state.allVideogames
+            if (state.allFilters.length !== 0) {
+                //filtro por name
+                newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.NAME)
 
 
-        case GET_SELECTED_SOURCES:
-            return {
-                ...state,
-                selectedSources: [...state.filterSources]
-            }
+                //filtro por genre
+                newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.GENRE)
 
-        case SET_SELECTED_SOURCES:
-            let newSelectedSources = []
-            if (state.selectedSources.includes(payload)) {
-                newSelectedSources = state.selectedSources.filter((source) => source !== payload)
-            } else {
-                state.selectedSources.push(payload)
-                newSelectedSources = state.selectedSources
+                //filtro por platforms
+                newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.PLATFORM)
+
+                //filtro por year
+                newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.YEAR)
+
+                //filtro por source
+                newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.SOURCE)
             }
+            console.log(newVideogamesFiltered)
             return {
                 ...state,
-                selectedSources: [...newSelectedSources]
-            }
-        case PUT_SELECTED_SOURCES:
-            return {
-                ...state,
-                filterSources: [...state.selectedSources]
-            }
+                filteredVideogames: [...newVideogamesFiltered]
+            };
 
 
         default:

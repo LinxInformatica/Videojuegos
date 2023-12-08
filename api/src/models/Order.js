@@ -4,29 +4,12 @@ const { DataTypes, INTEGER } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('order', {
-    released:{
-      type: DataTypes.STRING(1),
-      defaultValue:'A'
+    pk:{
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      autoIncrement:true,
+      primaryKey:true
     },
-    name: {
-      type: DataTypes.STRING(1),
-      defaultValue:'A'
-    },
-    source:{
-      type: DataTypes.STRING(1),
-      defaultValue:'A'
-    },
-    genres:{
-      type: DataTypes.STRING(1),
-      defaultValue:'A'
-    },
-    platforms:{
-      type: DataTypes.STRING(1),
-      defaultValue:'A'
-    },
-    rating:{
-      type: DataTypes.STRING(1),
-      defaultValue:'A'
-    },
+    
   });
 };

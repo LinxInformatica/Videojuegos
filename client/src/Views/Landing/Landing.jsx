@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styles from './Landing.module.css'
+import styles from '../../Styles/styles.module.css'
 import { getAllGenres, getAllPlatforms, getAllVideogames, setLoading } from '../../Redux/actions'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,8 +24,9 @@ const Landing = () => {
     }
   }
 
-  const handleOnClick = () => {
+  const handleOnClick = (event) => {
     // Navegamos a la página de inicio
+    event.preventDefault();
     loadData()
     navigate('/home');
   };
@@ -33,11 +34,11 @@ const Landing = () => {
   return (
     <div>
       {loading ? (
-        <div className={styles.Landing}>
+        <div className={styles.loaderButton}>
           <button onClick={handleOnClick}>Enjoy VIDEOGAMES!!</button>
         </div>
       )
-        : (<div class={styles.loader}>
+        : (<div className={styles.loader}>
           <span style={{ "--i": 1 }}></span>
           <span style={{ "--i": 2 }}></span>
           <span style={{ "--i": 3 }}></span>

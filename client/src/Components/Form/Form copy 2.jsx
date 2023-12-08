@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 import styles from '../../Styles/styles.module.css'
+
+
 import validation from './validation'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { addVideogame, setSelectedInForm } from '../../Redux/actions'
-import FILTERTYPES from '../../helpers/filterTypes.helper'
-import FormSelection from '../FormSelection/FormSelection'
+import { addVideogame } from '../../Redux/actions'
 
 const Form = () => {
   const dispatch = useDispatch()
@@ -25,6 +25,8 @@ const Form = () => {
     image: "",
     released: "",
     rating: 0,
+    genres: [],
+    platforms: [],
     source: 1
   })
   // estados de error
@@ -38,40 +40,26 @@ const Form = () => {
     platforms: "",
     errors: true
   })
-  //genres y platforms seleccionadas 
-  const selectedInForm = useSelector((state) => state.selectedInForm)
-  const genres = selectedInForm.map((genre) => genre.type === FILTERTYPES.GENRE)
-  const selectedGenres = genres.map((genre) => (genre.name))
-  //boton para activar generos
-  const [showGenres, setShowGenres] = useState(false)
-  // visualizo u oculta genres
-  const handleShowGenres = (event) => {
-    event.preventDefault()
-    setShowGenres(!showGenres)
-  };
-  const platforms = selectedInForm.map((platform) => platform.type === FILTERTYPES.PLATFORM)
-  const selectedPlatforms = platforms.map((platform) => (platform.name))
-  //boton para activar platforms
-  const [showPlafforms, setShowPlatforms] = useState(false)
-  // visualizo u oculta platform
-  const handleShowPlatforms = (event) => {
-    event.preventDefault()
-    setShowPlatforms(!showPlafforms)
-  };
+  //genres selected
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [showGenres, setShowdGenres] = useState(false);
+
+  //platforms selected
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+  const [showPlatforms, setShowdPlatforms] = useState(false);
 
   //cambios en el form
   const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
     setUserData({ ...userData, [property]: value });
-    validation({ ...userData, [property]: value }, genres, platforms, errors, setErrors);
+    validation({ ...userData, [property]: value }, errors, setErrors);
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     //destructiring
-    const { name, description, image, released, rating } = userData
-    console.log(userData)
+    const { name, description, image, released, rating, genres, platforms } = userData
     try {
       const { data, status } = await axios.post(`${SITEROUTES.URL}/videogames`, {
         name: name,
@@ -83,9 +71,9 @@ const Form = () => {
         platforms: platforms
       })
       //agrego el videogame al estdo global
-      //await dispatch(addVideogame(userData))
+      dispatch(addVideogame(userData))
       //y me fijo si hay que filtralo
-      //await dispatch(regenerateFilters())
+      dispatch(regenerateFilters())
 
       window.alert('The Videogame was added successfully')
     } catch (error) {
@@ -107,18 +95,50 @@ const Form = () => {
     }
   };
 
-  // limpiar el estado glogal de selecciones de genero y plataformas
-  useEffect(() => {
-    dispatch(setSelectedInForm())
-  }, [dispatch])
+  const handleGenreSelection = (event, genre) => {
+    event.preventDefault();
+    // Verifica si el género ya está seleccionado
+    const isSelected = userData.genres.find((g) => g.id === genre.id);
+
+    // Actualiza la lista de géneros seleccionados
+    if (isSelected) {
+      setUserData({ ...userData, genres: userData.genres.filter((g) => g.id !== genre.id) })
+
+    } else {
+      setUserData({ ...userData, genres: [...userData.genres, { id: genre.id, name: genre.name }] })
+    }
+  };
+
+  const handleShowGenres = (event) => {
+    event.preventDefault();
+    setShowdGenres(!showGenres)
+  }
+
+  const handlePlatformSelection = (event,platform) => {
+    event.preventDefault();
+    // Verifica si el género ya está seleccionado
+    const isSelected = userData.platforms.find((p) => p.id === platform.id);
+
+    // Actualiza la lista de platforms seleccionados
+    if (isSelected) {
+      setUserData({ ...userData, platforms: userData.platforms.filter((p) => p.id !== platform.id) })
+
+    } else {
+      setUserData({ ...userData, platforms: [...userData.platforms, { id: platform.id, name: platform.name }] })
+    }
+  };
+  const handleShowPlatforms = (event) => {
+    event.preventDefault();
+    setShowdPlatforms(!showPlatforms)
+  }
 
   // para validaciones
   useEffect(() => {
-    validation(userData, genres, platforms, errors, setErrors)
+    validation(userData, errors, setErrors)
+    setSelectedGenres(userData.genres.map((genre) => `${genre.name}`))
+    setSelectedPlatforms(userData.platforms.map((platform) => `${platform.name}`))
 
   }, [userData])
-
-
 
 
   return (
@@ -130,9 +150,9 @@ const Form = () => {
             <button>❌ Cancel</button>
           </Link>
         </div>
-        <div className={styles.formBody}>
-          <div className={styles.containerForm}>
-            <div className={styles.formItem}>
+        <div className={styles.formContainer}>
+          <div className={styles.formsColumn}>
+            <div className={styles.formC}>
               <label htmlFor="name" >Name:</label>
               <input type="text" name="name" value={userData.name} placeholder={errors.name} onChange={handleChange} />
             </div>
@@ -167,55 +187,45 @@ const Form = () => {
               <label htmlFor="rating" className={styles.formError}>{errors.rating}</label>
             </div>
             {/* genres */}
-            <div className={styles.formSelection}>
-              <div className={styles.formItem}>
-                {/* genres */}
-                <label htmlFor="genres" >Genres:</label>
-                {/* <input type="text" name="genres" value={selectedGenres} placeholder={errors.genres} disabled={true} /> */}
-                <label htmlFor="genres" className={styles.formError}>{errors.genres}</label>
-                <button onClick={handleShowGenres}>{showGenres ? "Hide Genres" : "Show Genres"}</button>
-              </div>
-              <div className={styles.formItem}>
+            <div className={styles.formItem}>
+              <label htmlFor="genres">Genres:</label>
+              <input type="text" name="genres" value={selectedGenres} placeholder={errors.genres} disabled={true} />
+              <button onClick={handleShowGenres}>{showGenres ? "Hide Genres" : "Show Genres"}</button>
+            </div>
+            {showGenres &&
+              <div className={styles.formContainer}>
                 {/* Lista de géneros para seleccionar */}
-                {showGenres &&
-                  <div className={styles.container}>
-                    {allGenres.map((genre) => (
-                      <FormSelection
-                        key={`${FILTERTYPES.GENRE}${genre.id}`}
-                        id={genre.id}
-                        name={genre.name}
-                        type={FILTERTYPES.GENRE}
-                        uniqueId={`${FILTERTYPES.GENRE}${genre.id}`}
-                      />))
-                    }
+                {allGenres.map((genre) => (
+                  <div key={genre.id}>
+                    <button
+                      className={userData.genres.find((g) => g.id === genre.id) ? styles.selected : styles.unselected}
+                      onClick={(event) => handleGenreSelection(event, genre)}>
+                      {genre.name}
+                    </button>
                   </div>
-                }
+                ))}
               </div>
-            </div>
-          </div>
-          {/* platforms */}
-          <div className={styles.formSelection}>
+            }
+            {/* platforms */}
             <div className={styles.formItem}>
-              <label htmlFor="plaftorms" >Platforms:</label>
-              <label htmlFor="platforms" className={styles.formError}>{errors.platforms}</label>
-              <button onClick={handleShowPlatforms}>{showPlafforms ? "Hide Platforms" : "Show Platforms"}</button>
+              <label htmlFor="platforms">Plaftorms:</label>
+              <input type="text" name="platforms" value={selectedPlatforms} placeholder={errors.platforms} disabled={true} />
+              <button onClick={handleShowPlatforms}>{showPlatforms ? "Hide Platforms" : "Show Platforms"}</button>
             </div>
-            <div className={styles.formItem}>
-              {/* Lista de platforms para seleccionar */}
-              {showPlafforms &&
-                <div className={styles.container}>
-                  {allPlatforms.map((platform) => (
-                    <FormSelection
-                      key={`${FILTERTYPES.PLATFORM}${platform.id}`}
-                      id={platform.id}
-                      name={platform.name}
-                      type={FILTERTYPES.PLATFORM}
-                      uniqueId={`${FILTERTYPES.PLATFORM}${platform.id}`}
-                    />))
-                  }
-                </div>
-              }
-            </div>
+            {showPlatforms &&
+              <div className={styles.formContainer}>
+                {/* Lista de plataformas para seleccionar */}
+                {allPlatforms.map((platform) => (
+                  <div key={platform.id}>
+                    <button
+                      className={userData.platforms.find((p) => p.id === platform.id) ? styles.selected : styles.unselected}
+                      onClick={(event) => handlePlatformSelection(event, platform)}>
+                      {platform.name}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            }
           </div>
         </div>
       </div>

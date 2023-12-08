@@ -12,7 +12,7 @@
   gap: 7.5px;
   transition: 0.5s ease;
   color: white;
-  margin: 15px;
+  margin: 10px;
   text-decoration:none
 }
 
@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  transform: translateY(600%);
+  transform: translateY(500%);
   transition: all 0.5s ease;
   opacity: 1;
   background: rgba(0, 0, 0, 0.5); 
@@ -81,7 +81,7 @@
 }
 
 .card:hover .details {
-  transform: translateY(-80%);
+  transform: translateY(-150%);
   transition-delay: 0.5s;
   opacity: 1;
 }
@@ -100,28 +100,45 @@
 .imageContainer {
   position: absolute;
   top:10px;
-  width: 90%;
-  height: 0;
+  width: 300px;
+  height: 30px;
   padding-bottom: 50%
 }
 
 .cardImage {
+  margin-top: 15px;
   border-radius: 5px;
-  width: 100%;
-  height:120%;
+  width: 220px;
+  height:150px;
   object-fit: cover;
   /* Escalar la imagen para cubrir todo el contenedor sin deformarla */
 }
 
 .source {
   height: 25px;
-  width: 50px;
+  width: 90px;
   border-radius: 10%;
-  top: 0px;
-  left: 232px;
+  top: 5px;
+  left: 185px;
   position: absolute;
   text-align: center;
   background-color: black;
   color:white;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+  font-size: .6rem;
 }
+
+.rating {
+  height: 25px;
+  width: 90px;
+  border-radius: 10%;
+  top: 5px;
+  left: 0px;
+  position: absolute;
+  text-align: center;
+  background-color: black;
+  color:white;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
+  font-size: .7rem;
+}
+

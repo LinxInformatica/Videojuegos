@@ -1,33 +1,44 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Filter from '../Filter/Filter'
-import styles from './Filters.module.css'
-import { v4 as uuidv4 } from 'uuid';
-
-
+import styles from '../../Styles/styles.module.css'
+import { clearAllFilters, getVideogamesFiltered } from '../../Redux/actions'
+import SITEROUTES from '../../helpers/siteroutes.helper'
 
 const Filters = () => {
-    const filterNames = useSelector((state) => state.filterNames)
-    const filterPlatforms = useSelector((state) => state.filterPlatforms)
-    const filterYears = useSelector((state) => state.filterYears)
-    const filterSources = useSelector((state) => state.filterSources)
+    const filters = useSelector((state) => state.allFilters)
+    const videogames = useSelector((state) => state.filteredVideogames)
+    const dispatch=useDispatch()
 
-    const showFilters = filterNames.length === 0 ? (false) : (true)
+
+    const clearFilters=()=>{
+        dispatch(clearAllFilters())
+    }
+
+    useEffect(()=>{
+        dispatch(getVideogamesFiltered())            
+    },[filters])
+
+    const showFilters = filters.length === 0 ? (false) : (true)
     return (
         <div>
             {showFilters &&
-                <div className={styles.Filters}>
+                <div className={styles.body}>
                     <div className={styles.title}>
                         <label>Filters:</label>
+                        <button onClick={clearFilters}>Clear All</button>
                     </div>
-                    <div className={styles.container}>
-                        {filterNames.map((filter) => (
-                            <Filter key={uuidv4()}
+                    <div className={styles.filter}>
+                        {filters.map((filter) => (
+                            <Filter key={`${filter.type}${filter.id}`}
                                 name={filter.name}
                                 type={filter.type}
+                                uniqueId={`${filter.type}${filter.id}`}
                             />))
                         }
                     </div>
+
+
                 </div>
             }
         </div>

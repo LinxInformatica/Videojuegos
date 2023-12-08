@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
-import styles from './Form.module.css'
+import styles from '../../Styles/styles.module.css'
+
+
 import validation from './validation'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { addVideogame, regenerateFilters } from '../../Redux/actions'
+import { addVideogame } from '../../Redux/actions'
 
 const Form = () => {
   const dispatch = useDispatch()
@@ -38,18 +40,18 @@ const Form = () => {
     platforms: "",
     errors: true
   })
-
   //genres selected
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [showGenres, setShowdGenres] = useState(false);
+
   //platforms selected
   const [selectedPlatforms, setSelectedPlatforms] = useState([]);
-
+  const [showPlatforms, setShowdPlatforms] = useState(false);
 
   //cambios en el form
   const handleChange = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
     setUserData({ ...userData, [property]: value });
     validation({ ...userData, [property]: value }, errors, setErrors);
   }
@@ -58,7 +60,6 @@ const Form = () => {
     event.preventDefault();
     //destructiring
     const { name, description, image, released, rating, genres, platforms } = userData
-
     try {
       const { data, status } = await axios.post(`${SITEROUTES.URL}/videogames`, {
         name: name,
@@ -69,14 +70,16 @@ const Form = () => {
         genres: genres,
         platforms: platforms
       })
-      //agrego el videogame al estdo global
-      await dispatch(addVideogame(userData))
-      //y me fijo si hay que filtralo
-      await dispatch(regenerateFilters())
-
       window.alert('The Videogame was added successfully')
+      
+      //agrego el videogame al estdo global
+      dispatch(addVideogame(userData))
+      //y me fijo si hay que filtralo
+      dispatch(regenerateFilters())
+
+      
     } catch (error) {
-      window.alert(error)
+      window.alert(error.message)
 
     }
   }
@@ -94,9 +97,8 @@ const Form = () => {
     }
   };
 
-  //cambio en el genero
-  const handleGenreSelection = (genre) => {
-
+  const handleGenreSelection = (event, genre) => {
+    event.preventDefault();
     // Verifica si el género ya está seleccionado
     const isSelected = userData.genres.find((g) => g.id === genre.id);
 
@@ -109,8 +111,8 @@ const Form = () => {
     }
   };
 
-  const handlePlatformSelection = (platform) => {
-
+  const handlePlatformSelection = (event, platform) => {
+    event.preventDefault();
     // Verifica si el género ya está seleccionado
     const isSelected = userData.platforms.find((p) => p.id === platform.id);
 
@@ -123,104 +125,133 @@ const Form = () => {
     }
   };
 
+  // para validaciones
   useEffect(() => {
-
     validation(userData, errors, setErrors)
     setSelectedGenres(userData.genres.map((genre) => `${genre.name}`))
     setSelectedPlatforms(userData.platforms.map((platform) => `${platform.name}`))
 
   }, [userData])
-  console.log('form')
+
+
   return (
     <form onSubmit={handleSubmit}>
-      <div className={styles.Form}>
-        {/* name */}
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input type="text" name="name" value={userData.name} onChange={handleChange} />
-          <label htmlFor="name">{errors.name}</label>
+      <div >
+        <div className={styles.options}>
+          <button onClick={handleSubmit} disabled={errors.errors}>✅ Save</button>
+          <Link to={SITEROUTES.HOME}>
+            <button>❌ Cancel</button>
+          </Link>
         </div>
-        {/* description */}
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input type="text" name="description" value={userData.description} onChange={handleChange} />
-          <label htmlFor="name">{errors.description}</label>
-        </div>
-        {/* image */}
-        <div>
-          <input type="file" onChange={handleImageChange} />
-          {userData.image && (
-            <div>
-              <img src={userData.image} alt="Selected" style={{ width: '50px', height: '50px' }} />
-            </div>
-          )}
-        </div>
-        <div>
-          {/* released */}
-          <label htmlFor="released">Released:</label>
-          <input type="date" name="released" value={userData.released} onChange={handleChange} />
-          <label htmlFor="released">{errors.released}</label>
-        </div>
-        <div>
-          {/* rating */}
-          <label htmlFor="rating">Rating:</label>
-          <input type="number" name="rating" value={userData.rating} onChange={handleChange} />
-          <label htmlFor="rating">{errors.rating}</label>
-        </div>
-        <div>
-          {/* genres */}
+        <div className={styles.formBody}>
+          <table>
+            <tbody>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="name" >Name:</label>
+                </td>
+                <td className={styles.formData}>
+                  <input type="text" name="name" value={userData.name} placeholder={errors.name} onChange={handleChange} />
+                </td>
+              </tr>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="description" >Description:</label>
+                </td>
+                <td className={styles.formData}>
+                  <textarea name="description" className={styles.formTextarea} value={userData.description} placeholder={errors.description} onChange={handleChange} rows="4" cols="50" />
+                </td>
+              </tr>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="image" >Image:</label>
+                </td>
+                <td className={styles.formData}>
+                  <input name="image" type="file"  onChange={handleImageChange} />
+                  {userData.image && (
+                    <div>
+                      <img src={userData.image} className={styles.formImage} alt="Selected" />
+                    </div>
+                  )}
+                </td>
 
-          <label htmlFor="genres">Genres:</label>
-          <input type="text" name="genres" value={selectedGenres} disabled={true} />
-          <label htmlFor="genres">{errors.genres}</label>
-          {/* Lista de géneros para seleccionar */}
-          <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
-            {allGenres.map((genre) => (
-              <div key={genre.id}>
-                <input
-                  type="checkbox"
-                  id={`genre-${genre.id}`}
-                  name={`genre-${genre.name}`}
-                  onChange={() => handleGenreSelection(genre)}
-                  checked={userData.genres.find((g) => g.id === genre.id)}
+              </tr>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="released">Released:</label>
+                </td>
+                <td className={styles.formData}>
+                  <input type="date" name="released" className={styles.inputReleased} value={userData.released} placeholder={errors.released} onChange={handleChange} />
+                  <label htmlFor="released" className={styles.formError}>{errors.released}</label>
+                </td>
+              </tr>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="rating" >Rating:</label>
+                </td>
+                <td className={styles.formData}>
+                  <input type="number" name="rating" className={styles.inputRating} value={userData.rating} placeholder={errors.rating} onChange={handleChange} />
+                  <label htmlFor="rating" className={styles.formError}>{errors.rating}</label>
+                </td>
+              </tr>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="genres" >Genres:</label>
+                </td>
+                <td className={styles.formData}>
+                  <input type="text" name="genres" value={selectedGenres} className={styles.textPlatform} placeholder={errors.genres} disabled={true} />
+                </td>
+              </tr>
+              <tr>
+                <td>
 
-                />
-                <label htmlFor={`genre-${genre.id}`}>{genre.name}</label>
-              </div>
-            ))
-            }
-
-          </div>
+                </td>
+                <td>
+                  <div className={styles.formContainer}>
+                    <div className={styles.formContainer}>
+                      {/* Lista de géneros para seleccionar */}
+                      {allGenres.map((genre) => (
+                        <div className={styles.formContainer} key={genre.id}>
+                          <button
+                            className={userData.genres.find((g) => g.id === genre.id) ? styles.selected : styles.unselected}
+                            onClick={(event) => handleGenreSelection(event, genre)}>
+                            {genre.name}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td className={styles.formLabel}>
+                  <label htmlFor="platforms" >Platforms:</label>
+                </td>
+                <td className={styles.formData}>
+                  <input type="text" name="platforms" className={styles.textPlatform} value={selectedPlatforms} placeholder={errors.platforms} disabled={true} />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                </td>
+                <td>
+                  <div className={styles.formContainer}>
+                    {/* Lista de plataformas para seleccionar */}
+                    {allPlatforms.map((platform) => (
+                      <div key={platform.id}>
+                        <button
+                          className={userData.platforms.find((p) => p.id === platform.id) ? styles.selected : styles.unselected}
+                          onClick={(event) => handlePlatformSelection(event, platform)}>
+                          {platform.name}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div>
-          {/* platforms */}
-          <label htmlFor="platforms">Platforms:</label>
-          <input type="text" name="platforms" value={selectedPlatforms} disabled={true} />
-          <label htmlFor="platforms">{errors.platforms}</label>
-          {/* Lista de plataformas para seleccionar */}
-          <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
-            {allPlatforms.map((platform) => (
-              <div key={platform.id}>
-                <input
-                  type="checkbox"
-                  id={`platform-${platform.id}`}
-                  name={`platform-${platform.name}`}
-                  onChange={() => handlePlatformSelection(platform)}
-                  checked={userData.platforms.find((p) => p.id === platform.id)}
-
-                />
-                <label htmlFor={`platform-${platform.id}`}>{platform.name}</label>
-              </div>
-            ))
-            }
-          </div>
-        </div>
-        <button onClick={handleSubmit} disabled={errors.errors}>Save</button>
-
-        <Link to={SITEROUTES.HOME}>
-          <button>Cancel</button>
-        </Link>
-        <div>Form</div>
       </div>
     </form >
   )

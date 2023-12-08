@@ -1,104 +1,128 @@
-import styles from "./SelectFilters.module.css"
+import styles from "../../Styles/styles.module.css"
 
 import SelectFilter from '../../Components/SelectFilter/SelectFilter'
 import { useDispatch, useSelector } from "react-redux"
-import { getSelectedGenres, getSelectedPlatforms, getSelectedSources, getSelectedYears, putSelectedGenres, putSelectedPlatforms, putSelectedSources, putSelectedYears } from "../../Redux/actions"
+import { getSelectedFilters, getVideogamesFiltered, putSelectedFilters } from "../../Redux/actions"
 import FILTERTYPES from "../../helpers/filterTypes.helper"
 import { Link, useNavigate } from "react-router-dom"
 import SITEROUTES from "../../helpers/siteroutes.helper"
+import { useEffect, useState } from "react"
+import { clearSelectedFilters } from "../../Redux/actions/clearSelectedFilters"
 
 const SelectFilters = () => {
   const dispatch = useDispatch()
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
-  //paso los filtered a selected
-  dispatch(getSelectedGenres())
-  dispatch(getSelectedPlatforms())
-  dispatch(getSelectedYears())
-  dispatch(getSelectedSources())
 
   const genres = useSelector((state) => state.allGenres)
   const platforms = useSelector((state) => state.allPlatforms)
   const years = useSelector((state) => state.allYears)
   const sources = useSelector((state) => state.allSources)
 
-  const handleOnClick=()=>{
-    dispatch(putSelectedGenres())
-    dispatch(putSelectedPlatforms())
-    dispatch(putSelectedYears())
-    dispatch(putSelectedSources())
+  const selectedFilters = useSelector((state) => state.selectedFilters)
+
+  const handleOk = (event) => {
+    event.preventDefault();
+    //grabo los selected filters en allfilters
+    dispatch(putSelectedFilters())
+    //fitro los videogames
+    dispatch(getVideogamesFiltered())
+    //vuelvo a home
+    navigate(SITEROUTES.HOME)
+  }
+  const handleCancel = (event) => {
+    event.preventDefault();
+    //limpio los selected filters 
+    dispatch(clearSelectedFilters())
+    //vuelvo a home
     navigate(SITEROUTES.HOME)
   }
 
+  // useEffect(() => {
+  //   const genresSelected=selectedFilters.filter((genre)=> genre.type===FILTERTYPES.GENRE)
+
+  // }, [selectedFilters])
+  useEffect(() => {
+    //paso los filtered a selected
+    dispatch(getSelectedFilters())
+
+  }, [dispatch])
+
+
   return (
     <div>
-      <div className={styles.SelectOptions}>
-        <button onClick={handleOnClick}>Ok</button>
-        
-        <Link to={SITEROUTES.HOME}>
-          <button>Cancel</button>
-        </Link>
-        </div>
+      <div className={styles.options}>
+        <button onClick={handleOk}>✅ Ok</button>
+        <button onClick={handleCancel}> ❌ Cancel</button>
+      </div>
 
       {/* //genres */}
-      <div className={styles.SelectFilters}>
+      <div className={styles.body}>
         <div className={styles.title}>
-          <label>Select Genres</label>
+          <label>Genres selected :</label>
         </div>
         <div className={styles.container}>
           {genres.map((genre) => (
-            <SelectFilter key={`genre_${genre.id}`}
+            <SelectFilter
+              key={`${FILTERTYPES.GENRE}${genre.id}`}
               id={genre.id}
               name={genre.name}
               type={FILTERTYPES.GENRE}
+              uniqueId={`${FILTERTYPES.GENRE}${genre.id}`}
             />))
           }
         </div>
       </div >
 
       {/* platforms */}
-      <div className={styles.SelectFilters}>
+      <div className={styles.body}>
         <div className={styles.title}>
           <label>Select Platforms</label>
         </div>
         <div className={styles.container}>
           {platforms.map((platform) => (
-            <SelectFilter key={`plaftorm_${platform.id}`}
+            <SelectFilter
+              key={`${FILTERTYPES.PLATFORM}${platform.id}`}
               id={platform.id}
               name={platform.name}
               type={FILTERTYPES.PLATFORM}
+              uniqueId={`${FILTERTYPES.PLATFORM}${platform.id}`}
             />))
           }
         </div>
       </div >
 
       {/* YEARS */}
-      <div className={styles.SelectFilters}>
+      <div className={styles.body}>
         <div className={styles.title}>
           <label>Select the Year of Released</label>
         </div>
         <div className={styles.container}>
           {years.map((year) => (
-            <SelectFilter key={`year_${year}`}
-              id={year}
-              name={year}
+            <SelectFilter key={`${FILTERTYPES.YEAR}${year.id}`}
+              id={year.id}
+              name={year.name}
               type={FILTERTYPES.YEAR}
+              uniqueId={`${FILTERTYPES.YEAR}${year.id}`}
+
             />))
           }
         </div>
       </div>
 
       {/* SOURCES */}
-      <div className={styles.SelectFilters}>
+      <div className={styles.body}>
         <div className={styles.title}>
-          <label>Select the Source </label>
+          <label>Select the Source of Data </label>
         </div>
         <div className={styles.container}>
           {sources.map((source) => (
-            <SelectFilter key={`source_${source}`}
-              id={source}
-              name={source}
+            <SelectFilter key={`${FILTERTYPES.SOURCE}${source.id}`}
+              id={source.id}
+              name={source.name}
               type={FILTERTYPES.SOURCE}
+              uniqueId={`${FILTERTYPES.SOURCE}${source.id}`}
+
             />))
           }
         </div>
@@ -110,4 +134,4 @@ const SelectFilters = () => {
   )
 }
 
-export default SelectFilters
+export default SelectFilters 
