@@ -134,7 +134,7 @@
   background-color: #524e4eb6;
   font-size: .7 rem;
   color: rgb(224, 217, 217);
-  margin: 2px;
+  margin: 3px;
 }
 
 .selected {
@@ -142,7 +142,7 @@
   color: rgb(224, 217, 217);
   font-size: .9 rem;
   font-style: normal;
-  margin: 2px;
+  margin: 3px;
 }
 
 .formItem {
@@ -173,8 +173,11 @@
 }
 
 .formImage {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
+  border-radius: 8px;
+  border: 1px solid red;
+  
 }
 
 .formSelection {
@@ -225,8 +228,8 @@
 
 .formTextarea {
   background-color: #978d8d;
-  max-width: 80%;
-  width: 300px;
+  /* max-width: 80%; */
+  width: 90%;
   height: 100px;
   text-align: center;
   border: 0 0 2px 2px solid;

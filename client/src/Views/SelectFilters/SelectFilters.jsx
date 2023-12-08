@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getSelectedFilters, getVideogamesFiltered, putSelectedFilters } from "../../Redux/actions"
 import FILTERTYPES from "../../helpers/filterTypes.helper"
 import { Link, useNavigate } from "react-router-dom"
+import ICONS from "../../helpers/icons.helper"
 import SITEROUTES from "../../helpers/siteroutes.helper"
 import { useEffect, useState } from "react"
 import { clearSelectedFilters } from "../../Redux/actions/clearSelectedFilters"
@@ -38,10 +39,15 @@ const SelectFilters = () => {
     navigate(SITEROUTES.HOME)
   }
 
-  // useEffect(() => {
-  //   const genresSelected=selectedFilters.filter((genre)=> genre.type===FILTERTYPES.GENRE)
+  const handleSelectAll = (event) => {
+    event.preventDefault();
+    window.alert(event.target.type)
+  }
+  const handleClearAll = (event) => {
+    event.preventDefault();
+    console.log(event.target.id)
+  }
 
-  // }, [selectedFilters])
   useEffect(() => {
     //paso los filtered a selected
     dispatch(getSelectedFilters())
@@ -52,16 +58,17 @@ const SelectFilters = () => {
   return (
     <div>
       <div className={styles.options}>
-        <button onClick={handleOk}>✅ Ok</button>
-        <button onClick={handleCancel}> ❌ Cancel</button>
+        <button onClick={handleOk}>{ICONS.OK}Ok</button>
+        <button onClick={handleCancel}> {ICONS.CANCEL}Cancel</button>
       </div>
-
       {/* //genres */}
       <div className={styles.body}>
         <div className={styles.title}>
-          <label>Genres selected :</label>
+          <label>Select Genres:</label>
         </div>
         <div className={styles.container}>
+          <button id={FILTERTYPES.GENRE} onClick={handleSelectAll} className={styles.unselected}>{ICONS.OK}Select All</button>
+          <button id={FILTERTYPES.GENRE} onClick={handleClearAll} className={styles.unselected}>{ICONS.CANCEL}Clear All </button>
           {genres.map((genre) => (
             <SelectFilter
               key={`${FILTERTYPES.GENRE}${genre.id}`}

@@ -1,9 +1,10 @@
 import FILTERTYPES from '../helpers/filterTypes.helper'
+import SOURCES from '../helpers/sources.helper';
 import YEARS from '../helpers/years.helper';
 import filterFunction from '../utils/filterFunction';
 
 import {
-    ADD_GENRES, ADD_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
+    GET_ALL_GENRES, GET_ALL_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
     CLEAR_ALL, DEL_FILTER, LOADING,
     GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS
 
@@ -14,7 +15,7 @@ const initialState = {
     allGenres: [],
     allPlatforms: [],
     allYears: YEARS,
-    allSources: [{ id: 1, name: 'Local Database' }, { id: 2, name: 'Api' }],
+    allSources: SOURCES,
     allOrders: ['Name Ascending', 'Name Descending', 'Released Ascending', 'Released Descending', 'First Local', 'First Api'],
     loading: true,
     filteredVideogames: [],
@@ -35,14 +36,14 @@ export default (state = initialState, { type, payload }) => {
                 filteredVideogames: payload
             };
 
-        case ADD_GENRES:
+        case GET_ALL_GENRES:
             const orderedGenres = payload.sort((a, b) => {
                 if (a.name < b.name) return -1;
                 return 1
             })
             return { ...state, allGenres: orderedGenres };
 
-        case ADD_PLATFORMS:
+        case GET_ALL_PLATFORMS:
             const orderedPlatforms = payload.sort((a, b) => {
                 if (a.name < b.name) return -1;
                 return 1
@@ -114,6 +115,7 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 allFilters: [...state.allFilters, payload]
             }
+            
         case GET_VIDEOGAMES_FILTERED:
             let newVideogamesFiltered = state.allVideogames
             if (state.allFilters.length !== 0) {

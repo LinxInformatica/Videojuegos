@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from 'react'
 import styles from './Card.module.css'
-import formatFecha from "../../utils/formatFecha";
+import formatDate from "../../utils/formatDate";
 
 const Card = (props) => {
   const { id, name, image, released, rating, genres, source,platforms } = props

@@ -1,4 +1,4 @@
-const formatFecha = (fechaRecibida) => {
+const formatDate = (fechaRecibida) => {
     const fecha = new Date(fechaRecibida+'T00:00:00');
 
     const dia = fecha.getDate();
@@ -9,4 +9,4 @@ const formatFecha = (fechaRecibida) => {
     return `${dia < 10 ? '0' : ''}${dia}-${mes < 10 ? '0' : ''}${mes}-${año}`;
 
 }
-export default formatFecha
+export default formatDate

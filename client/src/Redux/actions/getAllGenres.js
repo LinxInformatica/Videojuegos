@@ -1,6 +1,6 @@
 import axios from 'axios'
 import SITEROUTES from "../../helpers/siteroutes.helper";
-import { ADD_GENRES } from "../actions-types";
+import { GET_ALL_GENRES } from "../actions-types";
 
 export const getAllGenres = () => {
    const endpoint = `${SITEROUTES.GENRES}`;
@@ -8,7 +8,7 @@ export const getAllGenres = () => {
       return async (dispatch) => {
          const { data } = await axios.get(endpoint)
          return dispatch({
-            type: ADD_GENRES,
+            type: GET_ALL_GENRES,
             payload: data,
          });
       }

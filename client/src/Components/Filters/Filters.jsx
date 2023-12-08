@@ -24,11 +24,11 @@ const Filters = () => {
         <div>
             {showFilters &&
                 <div className={styles.body}>
-                    <div className={styles.title}>
+                    <div className={styles.filter}>
                         <label>Filters:</label>
                         <button onClick={clearFilters}>Clear All</button>
-                    </div>
-                    <div className={styles.filter}>
+                    {/* </div> */}
+                    {/* <div className={styles.filter}> */}
                         {filters.map((filter) => (
                             <Filter key={`${filter.type}${filter.id}`}
                                 name={filter.name}

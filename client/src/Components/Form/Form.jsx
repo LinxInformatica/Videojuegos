@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 import styles from '../../Styles/styles.module.css'
-
+import ICONS from '../../helpers/icons.helper'
 
 import validation from './validation'
 import { useDispatch, useSelector } from 'react-redux'
@@ -138,9 +138,9 @@ const Form = () => {
     <form onSubmit={handleSubmit}>
       <div >
         <div className={styles.options}>
-          <button onClick={handleSubmit} disabled={errors.errors}>✅ Save</button>
+          <button onClick={handleSubmit} disabled={errors.errors}>{ICONS.OK}Save</button>
           <Link to={SITEROUTES.HOME}>
-            <button>❌ Cancel</button>
+            <button>{ICONS.CANCEL} Cancel</button>
           </Link>
         </div>
         <div className={styles.formBody}>
