@@ -1,12 +1,14 @@
 import FILTERTYPES from '../helpers/filterTypes.helper'
+import ORDERS from '../helpers/orders.helper';
 import SOURCES from '../helpers/sources.helper';
 import YEARS from '../helpers/years.helper';
 import filterFunction from '../utils/filterFunction';
+import orderFunction from '../utils/orderFunction';
 
 import {
     GET_ALL_GENRES, GET_ALL_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
     CLEAR_ALL, DEL_FILTER, LOADING,
-    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS
+    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME
 
 } from "./actions-types";
 
@@ -16,14 +18,13 @@ const initialState = {
     allPlatforms: [],
     allYears: YEARS,
     allSources: SOURCES,
-    allOrders: ['Name Ascending', 'Name Descending', 'Released Ascending', 'Released Descending', 'First Local', 'First Api'],
+    posibleOrders: ORDERS,
     loading: true,
-    filteredVideogames: [],
-    // usados para filtrar FilteredVideoGames
-    allFilters: [],
-    //usados en los forms de filters si confirma pasan a filter si no  los limpio
-    selectedFilters: [],
-    //usados en el form para saber que generos y platforms estan selecionados
+    filteredVideogames: [],     // usados para filtrar FilteredVideoGames
+    allFilters: [],  //usados en los forms de filters si confirma pasan a filter si no  los limpio
+    allOrders: [],  //usados en los forms de orders si confirma pasan a filter si no  los limpio
+    selectedFilters: [],   //usados en el form para saber que generos y platforms estan selecionados
+    selectedOrders: []
 
 }
 
@@ -70,25 +71,66 @@ export default (state = initialState, { type, payload }) => {
         case ADD_VIDEOGAME:
             return {
                 ...state,
-                allVideogames: [...allVideogames, payload]
+                allVideogames: [...state.allVideogames, payload]
             }
+
+        case DEL_VIDEOGAME:
+            return {
+                ...state,
+                allVideogames: [...state.allVideogames.filter((videogame)=>videogame.id!==payload)]
+            }
+
+
         case CLEAR_ALL_FILTERS:
             return {
                 ...state,
                 allFilters: []
             }
 
+
+        case CLEAR_SELECTED_FILTERS:
+            let newClearSelectedFilters = []
+            if (payload) {
+                newClearSelectedFilters = state.selectedFilters.filter((filter) => filter.type !== payload)
+            }
+            return {
+                ...state,
+                selectedFilters: [...newClearSelectedFilters]
+            }
+        case SELECT_ALL_SELECTED_FILTERS:
+            // filtro los selecterdfiltered con ese type
+            const seletedFiltered = state.selectedFilters.filter((sel) => sel.type !== payload);
+            //funcion para devolver formateado el objeto
+            const formatFilter = (filter) => {
+                return {
+                    id: filter.id,
+                    name: filter.name,
+                    type: payload,
+                    uniqueId: `${payload}${filter.id}`
+                }
+            }
+            let newFilterType = []
+            if (payload === FILTERTYPES.GENRE) {
+                newFilterType = state.allGenres.map((filter) => formatFilter(filter))
+            } else if (payload === FILTERTYPES.PLATFORM) {
+                newFilterType = state.allPlatforms.map((filter) => formatFilter(filter))
+            } else if (payload === FILTERTYPES.SOURCE) {
+                newFilterType = state.allSources.map((filter) => formatFilter(filter))
+            } else if (payload === FILTERTYPES.YEAR) {
+                newFilterType = state.allYears.map((filter) => formatFilter(filter))
+            }
+            return {
+                ...state,
+                selectedFilters: [...seletedFiltered, ...newFilterType]
+            }
+
         case GET_SELECTED_FILTERS:
+
             return {
                 ...state,
                 selectedFilters: [...state.allFilters]
             }
 
-        case CLEAR_SELECTED_FILTERS:
-            return {
-                ...state,
-                selectedFilters: []
-            }
         case SET_SELECTED_FILTERS:
             let newSelectedFilters = []
             if (state.selectedFilters.find((selected) => selected.uniqueId === payload.uniqueId)) {
@@ -115,7 +157,7 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 allFilters: [...state.allFilters, payload]
             }
-            
+
         case GET_VIDEOGAMES_FILTERED:
             let newVideogamesFiltered = state.allVideogames
             if (state.allFilters.length !== 0) {
@@ -135,11 +177,54 @@ export default (state = initialState, { type, payload }) => {
                 //filtro por source
                 newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.SOURCE)
             }
-            console.log(newVideogamesFiltered)
+            
+            //ordeno 
+            const newVideogamesOrdered=orderFunction(newVideogamesFiltered,state.allOrders)
+
             return {
                 ...state,
-                filteredVideogames: [...newVideogamesFiltered]
-            };
+                filteredVideogames: [...newVideogamesOrdered]
+            }
+
+        case GET_SELECTED_ORDERS:
+
+            return {
+                ...state,
+                selectedOrders: [...state.allOrders]
+            }
+
+        case SET_SELECTED_ORDERS:
+
+            let newSelectedOrders = []
+            //busco el id
+            let orderExists = state.selectedOrders.find((selected) => selected.id === payload.id)
+            if (orderExists) {
+                //si encuento el id lo borro
+                newSelectedOrders = state.selectedOrders.filter((selected) => selected.id !== payload.id)
+            } else {
+                //busco un order con el mismno field
+                orderExists = state.selectedOrders.find((selected) => selected.field === payload.field)
+                if (orderExists) {
+                    //si encuento con el mismo filed lo remplazo
+                    newSelectedOrders = state.selectedOrders.map((order) => order.id === orderExists.id ? payload : order)
+                } else {
+                    //si no lo encuentro al id ni al field lo agrego
+                    state.selectedOrders.push(payload)
+                    newSelectedOrders = state.selectedOrders
+                }
+            }
+            return {
+                ...state,
+                selectedOrders: [...newSelectedOrders]
+            }
+
+        case PUT_SELECTED_ORDERS:
+
+            return {
+                ...state,
+                allOrders: [...state.selectedOrders],
+                selectedOrders: []
+            }
 
 
         default:

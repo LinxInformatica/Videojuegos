@@ -18,7 +18,7 @@ const Landing = () => {
         dispatch(getAllVideogames())])
 
     } catch (error) {
-      console.error(error)
+      window.alert(error)
     } finally {
       dispatch(setLoading(false))
     }

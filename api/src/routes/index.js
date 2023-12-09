@@ -13,6 +13,8 @@ const { postVideogameController } = require('../controllers/postVideogameControl
 
 //Platforms
 const { getPlatformsController } = require('../controllers/getPlatformsController');
+const { deleteVideogame } = require('../controllers/videogames/deleteVideogame');
+const { deleteVideogameController } = require('../controllers/deleteVideogameController');
 
 
 const router = Router();
@@ -29,6 +31,7 @@ router.get('/videogames/name', getVideogamesByNameController)
 router.get('/videogames/:idVideogame', getVideogameController)
 router.get('/videogames', getVideogamesController)
 router.post('/videogames', postVideogameController)
+router.delete('/videogames/:idVideogame', deleteVideogameController)
 
 //!platforms
 router.get('/platforms', getPlatformsController)

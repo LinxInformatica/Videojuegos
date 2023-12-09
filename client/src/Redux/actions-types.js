@@ -18,9 +18,17 @@ export const CLEAR_ALL = 'CLEAR_ALL';
 
 //agrega el videogame grabado en allvideogames
 export const ADD_VIDEOGAME = 'ADD_VIDEOGAME';
+//BORRO EL VIDEOGAME despues de borrar
+export const DEL_VIDEOGAME = 'DEL_VIDEOGAME';
 
-//limpia selectedfitlers cuando saldo sinselecioand nada en selectedfilters
+
+//limpia selectedfitlers cuando salgo sin selecionar nada en selectedfilters
+//o cuando hago click en selectedfilter ClearAll lo paso con payload
+//para que filtre solo los que tienen ese type
 export const CLEAR_SELECTED_FILTERS = 'CLEAR_SELECTED_FILTERS';
+//cuando hago click en selectedfilter SelectAll lo paso con payload
+//para que agregoe a selected filters los de ese type
+export const SELECT_ALL_SELECTED_FILTERS = 'SELECT_ALL_SELECTED_FILTERS';
 
 //
 export const CLEAR_ALL_FILTERS = 'CLEAR_ALL_FILTERS';
@@ -37,4 +45,11 @@ export const SET_ALL_FILTERS = 'SET_ALL_FILTERS';
 
 //armo el filtro general
 export const GET_VIDEOGAMES_FILTERED = 'GET_VIDEOGAMES_FILTERED';
+
+//cuando ingreso a selectedORDERS que me traiga los ORDERS
+export const GET_SELECTED_ORDERS = 'GET_SELECTED_ORDERS';
+//activo o desactivo selectedORDERS
+export const SET_SELECTED_ORDERS = 'SET_SELECTED_ORDERS';
+//si doy ok en selectedfilters que agregue lo selcionado a ORDERS
+export const PUT_SELECTED_ORDERS = 'PUT_SELECTED_ORDERS';
 

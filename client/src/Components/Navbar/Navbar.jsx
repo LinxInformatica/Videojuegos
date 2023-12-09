@@ -26,10 +26,13 @@ const Navbar = () => {
         <Link to={SITEROUTES.FORM}>
           <button>New Videogame</button>
         </Link>
+        <Link to={SITEROUTES.SELECT_ORDERS}>
+          <button>Select Orders</button>
+        </Link>
         <Link to={SITEROUTES.SELECT_FILTERS}>
           <button>Select Filters</button>
         </Link>
-
+        
         <button onClick={handleOnClick}>Exit!</button>
 
       </div>

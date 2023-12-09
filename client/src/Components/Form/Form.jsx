@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 import styles from '../../Styles/styles.module.css'
 import ICONS from '../../helpers/icons.helper'
@@ -9,8 +9,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { addVideogame } from '../../Redux/actions'
 
+import {v4 as uuidv4} from 'uuid'
+
 const Form = () => {
   const dispatch = useDispatch()
+  const navigate=useNavigate()
 
   //leo los genres del estado global y los marco como no elegidos
   const allGenres = useSelector((state) => state.allGenres)
@@ -18,8 +21,7 @@ const Form = () => {
 
 
   //Estados locales
-  //datos cargados
-  const [userData, setUserData] = useState({
+  const initialState={
     name: "",
     description: "",
     image: "",
@@ -28,7 +30,10 @@ const Form = () => {
     genres: [],
     platforms: [],
     source: 1
-  })
+  }
+  //datos cargados
+  const [userData, setUserData] = useState({...initialState,id:uuidv4()})
+  
   // estados de error
   const [errors, setErrors] = useState({
     name: "",
@@ -42,11 +47,9 @@ const Form = () => {
   })
   //genres selected
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [showGenres, setShowdGenres] = useState(false);
 
   //platforms selected
   const [selectedPlatforms, setSelectedPlatforms] = useState([]);
-  const [showPlatforms, setShowdPlatforms] = useState(false);
 
   //cambios en el form
   const handleChange = (event) => {
@@ -59,9 +62,10 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     //destructiring
-    const { name, description, image, released, rating, genres, platforms } = userData
+    const { id,name, description, image, released, rating, genres, platforms } = userData
     try {
       const { data, status } = await axios.post(`${SITEROUTES.URL}/videogames`, {
+        id:id,
         name: name,
         description: description,
         image: image,
@@ -74,11 +78,12 @@ const Form = () => {
       
       //agrego el videogame al estdo global
       dispatch(addVideogame(userData))
-      //y me fijo si hay que filtralo
-      dispatch(regenerateFilters())
+      //limpio para seguir cargando
+      setUserData(initialState)
 
-      
+            
     } catch (error) {
+      console.log(error)
       window.alert(error.message)
 
     }
@@ -87,14 +92,18 @@ const Form = () => {
   //cambio en la imagen
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setUserData({ ...userData, image: e.target.result });
-      };
-      reader.readAsDataURL(file);
+    if(file) {
+      const imageURL = URL.createObjectURL(file );
+      setUserData({ ...userData, image: imageURL });
     }
+    console.log(userData)
+    // if (file) {
+    //   const reader = new FileReader();
+    //   reader.onload = (e) => {
+    //     setUserData({ ...userData, image: e.target.result });
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
   };
 
   const handleGenreSelection = (event, genre) => {
@@ -167,7 +176,7 @@ const Form = () => {
                   <label htmlFor="image" >Image:</label>
                 </td>
                 <td className={styles.formData}>
-                  <input name="image" type="file"  onChange={handleImageChange} />
+                  <input name="image" type="file" id="imageInput" accept="image/*" onChange={handleImageChange} />
                   {userData.image && (
                     <div>
                       <img src={userData.image} className={styles.formImage} alt="Selected" />

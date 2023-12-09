@@ -26,8 +26,6 @@ const Searchbar = () => {
                 key: `${FILTERTYPES.NAME}${name}`,
                 uniqueId:`${FILTERTYPES.NAME}${name}`
             }))
-            //rearmo el filtro
-            dispatch(getVideogamesFiltered())
             setName("")
         }
         navigate('/home')
@@ -39,8 +37,6 @@ const Searchbar = () => {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Search:</label>
-                    </div>
-                    <div>
                         {/* <div></div> */}
                         <input className={styles.input} name='search'
                             type='text'

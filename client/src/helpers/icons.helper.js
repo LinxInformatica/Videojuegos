@@ -1,5 +1,6 @@
 const ICONS = {
     OK: '✅',
-    CANCEL:'❌'
+    CANCEL:'❌',
+    DELETE:'🗑️'
 };
 export default ICONS

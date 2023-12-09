@@ -9,11 +9,11 @@ import Form from "./Components/Form/Form";
 import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Views/Home/Home";
 import Details from "./Views/Details/Details";
+import SelectFilters from "./Views/SelectFilters/SelectFilters";
+import SelectOrders from "./Views/SelectOrders/SelectOrders";
 
 
 import SITEROUTES from "./helpers/siteroutes.helper";
-
-import SelectFilters from "./Views/SelectFilters/SelectFilters";
 
 function App() {
   const loading = useSelector((state) => state.loading)
@@ -34,6 +34,7 @@ function App() {
               <Route path={SITEROUTES.FORM} element={<Form />} />
               <Route path={SITEROUTES.DETAILS} element={<Details />} />
               <Route path={SITEROUTES.SELECT_FILTERS} element={<SelectFilters />} />
+              <Route path={SITEROUTES.SELECT_ORDERS} element={<SelectOrders />} />
             </Routes>
           </>)}
       </BrowserRouter>

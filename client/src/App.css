@@ -52,10 +52,12 @@ input {
   color: white;
   font-weight: bold;
   margin:5px;
+  transition: transform 0.3s ease;
 }
 
 input:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
+  transform-origin: center;
 }
 
 input::placeholder {
@@ -87,10 +89,13 @@ button {
   border-radius: 5px;
   color: rgb(94, 255, 45);
   font-weight: bold;
+  transition: transform 0.3s ease;
 }
 
 button:hover {
   transform: scale(1.1);
+  transform-origin: center;
+
 }
 
 button:focus {

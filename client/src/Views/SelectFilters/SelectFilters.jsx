@@ -2,7 +2,7 @@ import styles from "../../Styles/styles.module.css"
 
 import SelectFilter from '../../Components/SelectFilter/SelectFilter'
 import { useDispatch, useSelector } from "react-redux"
-import { getSelectedFilters, getVideogamesFiltered, putSelectedFilters } from "../../Redux/actions"
+import { getSelectedFilters, putSelectedFilters, selectAllSelectedFilters } from "../../Redux/actions"
 import FILTERTYPES from "../../helpers/filterTypes.helper"
 import { Link, useNavigate } from "react-router-dom"
 import ICONS from "../../helpers/icons.helper"
@@ -26,8 +26,6 @@ const SelectFilters = () => {
     event.preventDefault();
     //grabo los selected filters en allfilters
     dispatch(putSelectedFilters())
-    //fitro los videogames
-    dispatch(getVideogamesFiltered())
     //vuelvo a home
     navigate(SITEROUTES.HOME)
   }
@@ -41,11 +39,14 @@ const SelectFilters = () => {
 
   const handleSelectAll = (event) => {
     event.preventDefault();
-    window.alert(event.target.type)
+    //agrego  los selected filters por type
+    dispatch(selectAllSelectedFilters(event.target.id))
+
   }
   const handleClearAll = (event) => {
     event.preventDefault();
-    console.log(event.target.id)
+    //limpio los selected filters por type
+    dispatch(clearSelectedFilters(event.target.id))
   }
 
   useEffect(() => {
@@ -87,6 +88,9 @@ const SelectFilters = () => {
           <label>Select Platforms</label>
         </div>
         <div className={styles.container}>
+          <button id={FILTERTYPES.PLATFORM} onClick={handleSelectAll} className={styles.unselected}>{ICONS.OK}Select All</button>
+          <button id={FILTERTYPES.PLATFORM} onClick={handleClearAll} className={styles.unselected}>{ICONS.CANCEL}Clear All </button>
+
           {platforms.map((platform) => (
             <SelectFilter
               key={`${FILTERTYPES.PLATFORM}${platform.id}`}
@@ -105,6 +109,8 @@ const SelectFilters = () => {
           <label>Select the Year of Released</label>
         </div>
         <div className={styles.container}>
+          <button id={FILTERTYPES.YEAR} onClick={handleSelectAll} className={styles.unselected}>{ICONS.OK}Select All</button>
+          <button id={FILTERTYPES.YEAR} onClick={handleClearAll} className={styles.unselected}>{ICONS.CANCEL}Clear All </button>
           {years.map((year) => (
             <SelectFilter key={`${FILTERTYPES.YEAR}${year.id}`}
               id={year.id}
@@ -123,6 +129,9 @@ const SelectFilters = () => {
           <label>Select the Source of Data </label>
         </div>
         <div className={styles.container}>
+          <button id={FILTERTYPES.SOURCE} onClick={handleSelectAll} className={styles.unselected}>{ICONS.OK}Select All</button>
+          <button id={FILTERTYPES.SOURCE} onClick={handleClearAll} className={styles.unselected}>{ICONS.CANCEL}Clear All </button>
+
           {sources.map((source) => (
             <SelectFilter key={`${FILTERTYPES.SOURCE}${source.id}`}
               id={source.id}

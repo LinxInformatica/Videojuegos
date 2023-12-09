@@ -17,16 +17,9 @@ const Card = (props) => {
             : (<label className={styles.source}>LOCAL</label>)
           }
           <label className={styles.rating}>Rating:{rating}</label>
-          {/* <div className={styles.imageContainer}>
-            <img
-              src={image}
-              alt="Videogame Image"
-              className={styles.cardImage}
-            />
-          </div> */}
           <img
             src={image}
-            alt="Videogame Image"
+            alt={image}
             className={styles.cardImage}
           />
         </div>

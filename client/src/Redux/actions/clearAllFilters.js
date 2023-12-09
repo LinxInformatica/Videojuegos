@@ -1,7 +1,9 @@
 import { CLEAR_ALL_FILTERS } from "../actions-types";
 
 export const clearAllFilters = () => {
-   return {
-      type: CLEAR_ALL_FILTERS
+   return async (dispatch) => {
+      return dispatch({
+         type: CLEAR_ALL_FILTERS,
+      });
    }
 }

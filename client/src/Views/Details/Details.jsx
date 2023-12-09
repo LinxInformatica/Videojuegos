@@ -1,16 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 import styles from '../../Styles/styles.module.css'
 import axios from 'axios'
 import SOURCES from '../../helpers/sources.helper'
 import formatDate from '../../utils/formatDate'
+import ICONS from '../../helpers/icons.helper'
+import { useDispatch } from 'react-redux'
+import { delVideogame } from '../../Redux/actions'
 
 const Details = () => {
   const { id } = useParams()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [videogame, setVideogame] = useState({})
+
+  const deleteVideogame = async (id) => {
+    try {
+      await axios.delete(`${SITEROUTES.VIDEOGAMES}/${id}`)
+        .then(response => {
+          window.alert('Videogame delete successfully!!!')
+        })
+      //lo borro del estado global  
+      dispatch(delVideogame(id))
+      navigate(SITEROUTES.HOME)
+
+    } catch (error) {
+      window.alert(error);
+    }
+  }
+  const handleOnClick = () => {
+    deleteVideogame(id)
+  }
 
   useEffect(() => {
     const fetchVideogame = async () => {
@@ -41,8 +63,12 @@ const Details = () => {
       {name &&
         <div>
           <div className={styles.options}>
+            {source === 1
+              ? <button onClick={handleOnClick}> {ICONS.DELETE} Delete Videogame</button>
+              : <></>
+            }
             <Link to={SITEROUTES.HOME} >
-              <button> ❌ Close</button>
+              <button> {ICONS.CANCEL} Close</button>
             </Link>
           </div>
 

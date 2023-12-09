@@ -4,8 +4,6 @@ import { ADD_VIDEOGAMES } from "../actions-types";
 
 export const getAllVideogames = (name) => {
     const endpoint = `${SITEROUTES.VIDEOGAMES}`;
-    
- 
     try {
        return async (dispatch) => {
           const { data } = await axios.get(endpoint)
