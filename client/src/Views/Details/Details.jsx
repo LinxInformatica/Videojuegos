@@ -39,6 +39,7 @@ const Details = () => {
       try {
         const response = await axios(`${SITEROUTES.VIDEOGAMES}/${id}`)
         const { data } = response
+        console.log(data)
         if (data[0].name) {
           setVideogame(data[0])
         } else {

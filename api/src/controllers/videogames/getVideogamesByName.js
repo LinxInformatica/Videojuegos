@@ -40,8 +40,26 @@ const getVideogamesByNameLocal = async (search) => {
     return []
 }
 
-
 const getVideogamesByNameApi = async (search) => {
+    const url = `${URL_API}/games?key=${API_KEY}&search=${search}`
+
+    try {
+        await axios.get(url)
+        .then(response=>{
+            const {results} = data
+            const videogamesSource = results.map((video) => ({ ...video, source: 2 }))
+            return videogamesSource
+        })
+        
+
+    } catch (error) {
+        return ({ error: error.message })
+    }
+
+}
+
+
+const getVideogamesByNameData = async (search) => {
 
     const videogames = VIDEOS.results.filter((v) => v.name.toUpperCase().includes(search.toUpperCase()))
     if (videogames === null) return []
@@ -50,18 +68,5 @@ const getVideogamesByNameApi = async (search) => {
     return videogamesSource
 }
 
-const getVideogamesByNameApi2 = async (search) => {
-    const url = `${URL_API}/games?key=${API_KEY}&search=${search}`
-
-    try {
-        const { data } = await axios.get(url)
-        const videogamesSource = data.results.map((video) => ({ ...video, source: 2 }))
-        return videogamesSource
-
-    } catch (error) {
-        return ({ error: error.message })
-    }
-
-}
 
 module.exports = { getVideogamesByName }

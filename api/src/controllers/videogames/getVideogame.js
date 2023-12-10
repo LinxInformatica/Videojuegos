@@ -14,7 +14,7 @@ const getVideogame = async (idVideogame) => {
         if (REGEXP.UUID.test(idVideogame)) {
             const videogameLocal = await getVideogameLocal(idVideogame)
             return videogameLocal
-        } else if(!isNaN(idVideogame)) {
+        } else if (!isNaN(idVideogame)) {
             const videogameApi = await getVideogameApi(idVideogame)
             return videogameApi
         }
@@ -50,7 +50,7 @@ const getVideogameLocal = async (idVideogame) => {
     }
 }
 
-const getVideogameApi = async (idVideogame) => {
+const getVideogameData = async (idVideogame) => {
     //busco local
     let videogame = VIDEOS.results.find((v) => v.id === parseInt(idVideogame))
     if (typeof videogame === 'object') {
@@ -61,11 +61,14 @@ const getVideogameApi = async (idVideogame) => {
 
 }
 
-const getVideogameApi2 = async (idVideogame) => {
+const getVideogameApi = async (idVideogame) => {
     const url = `${URL_API}/games/${idVideogame}?key=${API_KEY}`
     try {
-        const { data } = await axios.get(url)
-        return data
+        const response = await axios.get(url)
+        let { data } = response
+        //agrego el source
+        data.source=2
+        return [data]
 
     } catch (error) {
         return ({ error: error.message })
