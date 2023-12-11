@@ -15,7 +15,7 @@ const SelectOrders = () => {
   const orders = useSelector((state) => state.posibleOrders)
 
   const selectedOrders = useSelector((state) => state.selectedOrders)
-
+  
   const handleOk = (event) => {
     event.preventDefault();
     //grabo los selected filters en allfilters

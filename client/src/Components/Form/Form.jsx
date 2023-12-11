@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import SITEROUTES from '../../helpers/siteroutes.helper'
 import styles from '../../Styles/styles.module.css'
 import ICONS from '../../helpers/icons.helper'
 
@@ -10,6 +9,7 @@ import axios from 'axios'
 import { addVideogame } from '../../Redux/actions'
 
 import {v4 as uuidv4} from 'uuid'
+import SITEROUTES from '../../helpers/siteroutes.helper'
 
 const Form = () => {
   const dispatch = useDispatch()

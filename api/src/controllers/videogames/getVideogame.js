@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { URL_API, REGEXP } = require('../../utils/helpers')
+const { URL_API, REGEXP } = require('../../utils//config.helper')
 const { API_KEY } = process.env
 const { Videogame, Genre, Platform } = require('../../db')
 

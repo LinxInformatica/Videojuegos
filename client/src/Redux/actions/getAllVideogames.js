@@ -1,8 +1,8 @@
 import axios from 'axios'
-import SITEROUTES from "../../helpers/siteroutes.helper";
+import SITEROUTES from"../../helpers/siteroutes.helper";
 import { ADD_VIDEOGAMES } from "../actions-types";
 
-export const getAllVideogames = (name) => {
+export const getAllVideogames = () => {
     const endpoint = `${SITEROUTES.VIDEOGAMES}`;
     try {
        return async (dispatch) => {

@@ -8,8 +8,8 @@ import styles from '../../Styles/Styles.module.css'
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation()
-
+  const {pathname} = useLocation()
+  
   const handleOnClick = () => {
     dispatch(clearAll())
     navigate('/')
@@ -20,17 +20,20 @@ const Navbar = () => {
       <div className={styles.navbar}>
 
         <Link to={SITEROUTES.HOME}>
-          <button>Videogames</button>
+          <button className={pathname===SITEROUTES.HOME? styles.selected: styles.unselected}>Videogames</button>
         </Link>
 
         <Link to={SITEROUTES.FORM}>
-          <button>New Videogame</button>
+          <button className={pathname===SITEROUTES.FORM? styles.selected: styles.unselected}>New Videogame</button>
         </Link>
         <Link to={SITEROUTES.SELECT_ORDERS}>
-          <button>Select Orders</button>
+          <button className={pathname===SITEROUTES.SELECT_ORDERS? styles.selected: styles.unselected}>Select Orders</button>
         </Link>
         <Link to={SITEROUTES.SELECT_FILTERS}>
-          <button>Select Filters</button>
+          <button className={pathname===SITEROUTES.SELECT_FILTERS? styles.selected: styles.unselected}>Select Filters</button>
+        </Link>
+        <Link to={SITEROUTES.FORMSETUP}>
+          <button className={pathname===SITEROUTES.FORMSETUP? styles.selected: styles.unselected}>Setup</button>
         </Link>
         
         <button onClick={handleOnClick}>Exit!</button>

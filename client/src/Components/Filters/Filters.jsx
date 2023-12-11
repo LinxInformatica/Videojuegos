@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Filter from '../Filter/Filter'
 import styles from '../../Styles/styles.module.css'
 import { clearAllFilters} from '../../Redux/actions'
-import SITEROUTES from '../../helpers/siteroutes.helper'
+
 
 const Filters = () => {
     const filters = useSelector((state) => state.allFilters)

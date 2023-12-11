@@ -1,5 +1,6 @@
 import FILTERTYPES from '../helpers/filterTypes.helper'
 import ORDERS from '../helpers/orders.helper';
+import PAGINATOR from '../helpers/paginator.helper';
 import SOURCES from '../helpers/sources.helper';
 import YEARS from '../helpers/years.helper';
 import filterFunction from '../utils/filterFunction';
@@ -8,7 +9,7 @@ import orderFunction from '../utils/orderFunction';
 import {
     GET_ALL_GENRES, GET_ALL_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
     CLEAR_ALL, DEL_FILTER, LOADING,
-    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME
+    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME, SET_CURRENT_PAGE, SET_TOTAL_OF_PAGES, GET_SETUP
 
 } from "./actions-types";
 
@@ -24,8 +25,10 @@ const initialState = {
     allFilters: [],  //usados en los forms de filters si confirma pasan a filter si no  los limpio
     allOrders: [],  //usados en los forms de orders si confirma pasan a filter si no  los limpio
     selectedFilters: [],   //usados en el form para saber que generos y platforms estan selecionados
-    selectedOrders: []
-
+    selectedOrders: [],
+    totalOfPages: 0,
+    currentPage: 1,
+    page_size: 0
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -77,7 +80,7 @@ export default (state = initialState, { type, payload }) => {
         case DEL_VIDEOGAME:
             return {
                 ...state,
-                allVideogames: [...state.allVideogames.filter((videogame)=>videogame.id!==payload)]
+                allVideogames: [...state.allVideogames.filter((videogame) => videogame.id !== payload)]
             }
 
 
@@ -177,9 +180,9 @@ export default (state = initialState, { type, payload }) => {
                 //filtro por source
                 newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.SOURCE)
             }
-            
+
             //ordeno 
-            const newVideogamesOrdered=orderFunction(newVideogamesFiltered,state.allOrders)
+            const newVideogamesOrdered = orderFunction(newVideogamesFiltered, state.allOrders)
 
             return {
                 ...state,
@@ -226,6 +229,54 @@ export default (state = initialState, { type, payload }) => {
                 selectedOrders: []
             }
 
+        case SET_TOTAL_OF_PAGES:
+            //por si viene =0 uso helper de paginator
+            const page_items = state.page_size <= 0 ? PAGINATOR.PAGE_SIZE : state.page_size
+            const totalOfPages = Math.ceil(payload / page_items)
+            return {
+                ...state,
+                totalOfPages: totalOfPages,
+            }
+
+        case SET_CURRENT_PAGE:
+            let page = payload
+            if (isNaN(page)) {
+                // si no es numero
+                switch (page) {
+                    case PAGINATOR.FIRST:
+                        page = 1
+                        break;
+                    case PAGINATOR.PREV:
+                        page = state.currentPage - 1
+                        break;
+                    case PAGINATOR.NEXT:
+                        page = state.currentPage + 1
+                        break;
+                    case PAGINATOR.LAST:
+                        page = state.totalOfPages
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (page <= 0) page = 1
+            if (page > state.totalOfPages) page = state.totalOfPages
+            return {
+                ...state,
+                currentPage: parseInt(page)
+            }
+
+        case GET_SETUP:
+            const { page_size, filters, orders } = payload
+            //convierte de texto a array de obj
+            const allFilters = JSON.parse(filters)
+            const allOrders = JSON.parse(orders)
+            return {
+                ...state,
+                page_size:page_size,
+                allFilters: allFilters,
+                allOrders: allOrders
+            }
 
         default:
             return { ...state }

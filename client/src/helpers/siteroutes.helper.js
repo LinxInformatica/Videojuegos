@@ -3,13 +3,14 @@ const   SITEROUTES = {
     VIDEOGAMES:'http://localhost:3001/videogames',
     GENRES:'http://localhost:3001/genres',
     PLATFORMS:'http://localhost:3001/platforms',
+    SETUP:'http://localhost:3001/setup',
     LANDING: '/',
     HOME: '/home',
     FORM: '/form',
     SELECT_FILTERS:'/filters/select',
     SELECT_ORDERS:'/orders/select',
-    
     DETAILS: '/details/:id',
-    //LOGO: "../../src/assets/Rick_and_Morty.png" 
+    FORMSETUP: '/setup'
+    
 };
 export default SITEROUTES

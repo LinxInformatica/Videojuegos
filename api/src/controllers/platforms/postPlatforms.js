@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { URL_API } = require('../../utils/helpers')
+const { URL_API } = require('../../utils//config.helper')
 const { API_KEY } = process.env
 
 const postPlatforms = async () => {

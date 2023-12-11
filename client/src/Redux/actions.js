@@ -21,3 +21,7 @@ export { getSelectedOrders } from "./actions/getSelectedOrders"
 export { setSelectedOrders } from "./actions/setSelectedOrders"
 export { putSelectedOrders } from "./actions/putSelectedOrders"
 
+export { setCurrentPage } from "./actions/setCurrentPage"
+export { setTotalOfPages } from "./actions/setTotalOfPages"
+
+export { getSetup } from "./actions/getSetup"

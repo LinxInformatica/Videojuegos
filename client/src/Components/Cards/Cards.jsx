@@ -6,15 +6,26 @@ import Filters from '../Filters/Filters'
 import Searchbar from '../Searchbar/Searchbar'
 import Orders from '../Orders/Orders'
 import { getVideogamesFiltered } from '../../Redux/actions'
+import Paginator from '../Paginator/Paginator'
+import PAGINATOR from '../../helpers/paginator.helper'
 
 const Cards = () => {
     const allVideogames= useSelector((state) => state.allVideogames)
-    const videogames = useSelector((state) => state.filteredVideogames)
     const allFilters=useSelector((state) => state.allFilters)
     const allOrders=useSelector((state) => state.allOrders)
+    const currentPage=useSelector((state) => state.currentPage)
+    const page_size=useSelector((state)=> state.page_size)
+    const fisrtItem=(currentPage-1)*page_size
+    const lastItem=fisrtItem+page_size
+
+    const dispatch=useDispatch()
+
+    const filteredVideogames = useSelector((state) => state.filteredVideogames)
+    const videogames=filteredVideogames.slice(fisrtItem,lastItem)
 
     const noVideogames = videogames.length === 0
-    const dispatch=useDispatch()
+    console.log(videogames.length)
+    console.log(noVideogames)
 
     useEffect(()=>{
         dispatch(getVideogamesFiltered());
@@ -24,6 +35,9 @@ const Cards = () => {
         <div >
             <div>
                 <Searchbar />
+            </div>
+            <div>
+                <Paginator />
             </div>
             <div>
                 <Orders />

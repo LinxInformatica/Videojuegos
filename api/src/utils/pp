@@ -1,0 +1,1095 @@
+[
+	{
+		"id": "0b11f46d-ef39-4657-945e-9b2b10ecf2d7",
+		"name": "qqqq",
+		"description": "qawqweq",
+		"image": "blob:http://localhost:5173/1ce38751-8a35-4a7d-81f5-5cf44d1bdb07",
+		"released": "2023-11-28",
+		"rating": "0",
+		"source": 1,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			}
+		],
+		"platforms": [
+			{
+				"id": 43,
+				"name": "Game Boy Color"
+			}
+		]
+	},
+	{
+		"id": 3498,
+		"name": "Grand Theft Auto V",
+		"image": "https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg",
+		"released": "2013-09-17",
+		"rating": 4.47,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			}
+		],
+		"platforms": [
+			{
+				"id": 187,
+				"name": "PlayStation 5"
+			},
+			{
+				"id": 186,
+				"name": "Xbox Series S/X"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 3328,
+		"name": "The Witcher 3: Wild Hunt",
+		"image": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+		"released": "2015-05-18",
+		"rating": 4.66,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 4200,
+		"name": "Portal 2",
+		"image": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
+		"released": "2011-04-18",
+		"rating": 4.61,
+		"source": 2,
+		"genres": [
+			{
+				"id": 2,
+				"name": "Shooter"
+			},
+			{
+				"id": 7,
+				"name": "Puzzle"
+			}
+		],
+		"platforms": [
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 4291,
+		"name": "Counter-Strike: Global Offensive",
+		"image": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+		"released": "2012-08-21",
+		"rating": 3.57,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			}
+		]
+	},
+	{
+		"id": 5286,
+		"name": "Tomb Raider (2013)",
+		"image": "https://media.rawg.io/media/games/021/021c4e21a1824d2526f925eff6324653.jpg",
+		"released": "2013-03-05",
+		"rating": 4.05,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			}
+		],
+		"platforms": [
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			}
+		]
+	},
+	{
+		"id": 13536,
+		"name": "Portal",
+		"image": "https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg",
+		"released": "2007-10-09",
+		"rating": 4.51,
+		"source": 2,
+		"genres": [
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 7,
+				"name": "Puzzle"
+			}
+		],
+		"platforms": [
+			{
+				"id": 21,
+				"name": "Android"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			}
+		]
+	},
+	{
+		"id": 12020,
+		"name": "Left 4 Dead 2",
+		"image": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg",
+		"released": "2009-11-17",
+		"rating": 4.09,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			}
+		]
+	},
+	{
+		"id": 5679,
+		"name": "The Elder Scrolls V: Skyrim",
+		"image": "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg",
+		"released": "2011-11-11",
+		"rating": 4.42,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			}
+		]
+	},
+	{
+		"id": 4062,
+		"name": "BioShock Infinite",
+		"image": "https://media.rawg.io/media/games/fc1/fc1307a2774506b5bd65d7e8424664a7.jpg",
+		"released": "2013-03-26",
+		"rating": 4.38,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 28,
+		"name": "Red Dead Redemption 2",
+		"image": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
+		"released": "2018-10-26",
+		"rating": 4.59,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 802,
+		"name": "Borderlands 2",
+		"image": "https://media.rawg.io/media/games/49c/49c3dfa4ce2f6f140cc4825868e858cb.jpg",
+		"released": "2012-09-18",
+		"rating": 4.01,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 21,
+				"name": "Android"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 19,
+				"name": "PS Vita"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			}
+		]
+	},
+	{
+		"id": 3439,
+		"name": "Life is Strange",
+		"image": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+		"released": "2015-01-29",
+		"rating": 4.11,
+		"source": 2,
+		"genres": [
+			{
+				"id": 3,
+				"name": "Adventure"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 3,
+				"name": "iOS"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 21,
+				"name": "Android"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 13537,
+		"name": "Half-Life 2",
+		"image": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg",
+		"released": "2004-11-16",
+		"rating": 4.49,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 80,
+				"name": "Xbox"
+			},
+			{
+				"id": 21,
+				"name": "Android"
+			}
+		]
+	},
+	{
+		"id": 4286,
+		"name": "BioShock",
+		"image": "https://media.rawg.io/media/games/bc0/bc06a29ceac58652b684deefe7d56099.jpg",
+		"released": "2007-08-21",
+		"rating": 4.36,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			}
+		]
+	},
+	{
+		"id": 32,
+		"name": "Destiny 2",
+		"image": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg",
+		"released": "2017-09-06",
+		"rating": 3.54,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 59,
+				"name": "Massively Multiplayer"
+			}
+		],
+		"platforms": [
+			{
+				"id": 1,
+				"name": "Xbox One"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 171,
+				"name": "Web"
+			},
+			{
+				"id": 186,
+				"name": "Xbox Series S/X"
+			},
+			{
+				"id": 187,
+				"name": "PlayStation 5"
+			}
+		]
+	},
+	{
+		"id": 1030,
+		"name": "Limbo",
+		"image": "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
+		"released": "2010-07-21",
+		"rating": 4.15,
+		"source": 2,
+		"genres": [
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 51,
+				"name": "Indie"
+			},
+			{
+				"id": 7,
+				"name": "Puzzle"
+			},
+			{
+				"id": 83,
+				"name": "Platformer"
+			}
+		],
+		"platforms": [
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 19,
+				"name": "PS Vita"
+			},
+			{
+				"id": 21,
+				"name": "Android"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			},
+			{
+				"id": 3,
+				"name": "iOS"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			}
+		]
+	},
+	{
+		"id": 58175,
+		"name": "God of War (2018)",
+		"image": "https://media.rawg.io/media/games/4be/4be6a6ad0364751a96229c56bf69be59.jpg",
+		"released": "2018-04-20",
+		"rating": 4.57,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			}
+		]
+	},
+	{
+		"id": 3070,
+		"name": "Fallout 4",
+		"image": "https://media.rawg.io/media/games/d82/d82990b9c67ba0d2d09d4e6fa88885a7.jpg",
+		"released": "2015-11-09",
+		"rating": 3.8,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 1,
+				"name": "Xbox One"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			}
+		]
+	},
+	{
+		"id": 2454,
+		"name": "DOOM (2016)",
+		"image": "https://media.rawg.io/media/games/587/587588c64afbff80e6f444eb2e46f9da.jpg",
+		"released": "2016-05-13",
+		"rating": 4.38,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 3939,
+		"name": "PAYDAY 2",
+		"image": "https://media.rawg.io/media/games/73e/73eecb8909e0c39fb246f457b5d6cbbe.jpg",
+		"released": "2013-08-13",
+		"rating": 3.51,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 11859,
+		"name": "Team Fortress 2",
+		"image": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg",
+		"released": "2007-10-10",
+		"rating": 3.68,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 2,
+				"name": "Shooter"
+			}
+		],
+		"platforms": [
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			}
+		]
+	},
+	{
+		"id": 278,
+		"name": "Horizon Zero Dawn",
+		"image": "https://media.rawg.io/media/games/b7d/b7d3f1715fa8381a4e780173a197a615.jpg",
+		"released": "2017-02-28",
+		"rating": 4.29,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			}
+		]
+	},
+	{
+		"id": 41494,
+		"name": "Cyberpunk 2077",
+		"image": "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg",
+		"released": "2020-12-10",
+		"rating": 4.14,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			},
+			{
+				"id": 5,
+				"name": "RPG"
+			}
+		],
+		"platforms": [
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 186,
+				"name": "Xbox Series S/X"
+			},
+			{
+				"id": 187,
+				"name": "PlayStation 5"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			}
+		]
+	},
+	{
+		"id": 4459,
+		"name": "Grand Theft Auto IV",
+		"image": "https://media.rawg.io/media/games/4a0/4a0a1316102366260e6f38fd2a9cfdce.jpg",
+		"released": "2008-04-29",
+		"rating": 4.26,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 3,
+				"name": "Adventure"
+			}
+		],
+		"platforms": [
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			}
+		]
+	},
+	{
+		"id": 422,
+		"name": "Terraria",
+		"image": "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg",
+		"released": "2011-05-16",
+		"rating": 4.06,
+		"source": 2,
+		"genres": [
+			{
+				"id": 4,
+				"name": "Action"
+			},
+			{
+				"id": 51,
+				"name": "Indie"
+			},
+			{
+				"id": 83,
+				"name": "Platformer"
+			}
+		],
+		"platforms": [
+			{
+				"id": 14,
+				"name": "Xbox 360"
+			},
+			{
+				"id": 10,
+				"name": "Wii U"
+			},
+			{
+				"id": 8,
+				"name": "Nintendo 3DS"
+			},
+			{
+				"id": 1,
+				"name": "Xbox One"
+			},
+			{
+				"id": 18,
+				"name": "PlayStation 4"
+			},
+			{
+				"id": 3,
+				"name": "iOS"
+			},
+			{
+				"id": 4,
+				"name": "PC"
+			},
+			{
+				"id": 5,
+				"name": "macOS"
+			},
+			{
+				"id": 6,
+				"name": "Linux"
+			},
+			{
+				"id": 7,
+				"name": "Nintendo Switch"
+			},
+			{
+				"id": 16,
+				"name": "PlayStation 3"
+			},
+			{
+				"id": 19,
+				"name": "PS Vita"
+			},
+			{
+				"id": 21,
+				"name": "Android"
+			}
+		]
+	}
+]

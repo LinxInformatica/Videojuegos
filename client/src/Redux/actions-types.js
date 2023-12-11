@@ -53,3 +53,11 @@ export const SET_SELECTED_ORDERS = 'SET_SELECTED_ORDERS';
 //si doy ok en selectedfilters que agregue lo selcionado a ORDERS
 export const PUT_SELECTED_ORDERS = 'PUT_SELECTED_ORDERS';
 
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_TOTAL_OF_PAGES = 'SET_TOTAL_OF_PAGES'
+
+export const GET_SETUP = 'GET_SETUP';
+export const POST_SETUP = 'POST_SETUP'
+
+
+

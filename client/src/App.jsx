@@ -14,6 +14,8 @@ import SelectOrders from "./Views/SelectOrders/SelectOrders";
 
 
 import SITEROUTES from "./helpers/siteroutes.helper";
+import FormSetup from "./Components/FormSetup/FormSetup";
+
 
 function App() {
   const loading = useSelector((state) => state.loading)
@@ -35,6 +37,7 @@ function App() {
               <Route path={SITEROUTES.DETAILS} element={<Details />} />
               <Route path={SITEROUTES.SELECT_FILTERS} element={<SelectFilters />} />
               <Route path={SITEROUTES.SELECT_ORDERS} element={<SelectOrders />} />
+              <Route path={SITEROUTES.FORMSETUP} element={<FormSetup />} />
             </Routes>
           </>)}
       </BrowserRouter>

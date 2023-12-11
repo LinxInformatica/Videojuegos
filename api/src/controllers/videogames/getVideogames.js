@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { URL_API, PAGE_SIZE } = require('../../utils/helpers')
+const { URL_API, PAGE_SIZE } = require('../../utils//config.helper')
 const { API_KEY } = process.env
 const { Videogame, Genre, Platform, Videogame_genre } = require('../../db')
 
@@ -12,9 +12,13 @@ const getVideogames = async () => {
     //datos de la BD
     try {
         const videogamesLocal = await getVideogamesLocal()
-        const videogamesApi = await getVideogamesApi()
 
-        return [...videogamesLocal,...videogamesApi]
+        const videogamesApi1 = await getVideogamesApi(1,25)
+        const videogamesApi2 = await getVideogamesApi(2,25)
+        const videogamesApi3 = await getVideogamesApi(3,25)
+        const videogamesApi4 = await getVideogamesApi(4,25)
+
+        return [...videogamesLocal,...videogamesApi1,...videogamesApi2,...videogamesApi3,...videogamesApi4]
     } catch (error) {
         return ({ error: error.message })
     }
@@ -43,8 +47,8 @@ const getVideogamesLocal = async () => {
         return { error: error.message }
     }
 }
-const getVideogamesApi = async () => {
-    const url = `${URL_API}/games?key=${API_KEY}&page_size=${PAGE_SIZE}`
+const getVideogamesApi = async (page,page_size) => {
+    const url = `${URL_API}/games?key=${API_KEY}&page=${page}&page_size=${page_size}`
     let videogamesSource = []
     try {
         const response=await axios.get(url)

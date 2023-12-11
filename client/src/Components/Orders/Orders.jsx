@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from '../../Styles/styles.module.css'
 import { clearAllFilters, getVideogamesFiltered } from '../../Redux/actions'
-import SITEROUTES from '../../helpers/siteroutes.helper'
 import Order from '../Order/Order'
 
 const Orders = () => {
