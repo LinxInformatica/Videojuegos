@@ -1,75 +1,45 @@
 import React, { useEffect } from 'react'
 import styles from '../../Styles/styles.module.css'
-import { getAllGenres, getAllPlatforms, getAllVideogames, getSetup, setLoading } from '../../Redux/actions'
+import { getAllGenres, getAllPlatforms, getAllVideogames, getSetup, setLanding, setLoading } from '../../Redux/actions'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Spinner from '../../Components/Spinner/Spinner'
 
 const Landing = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const loading = useSelector((state) => state.loading);
 
-  const loadData = async () => {
+
+  const handleOnClick = async (event) => {
+    event.preventDefault();
+    dispatch(setLoading(true));
+
     try {
-      dispatch(setLoading(true)),
-        //configuro setup,leo genres,paltformsy allvideogames
-        await Promise.all(
-          [
-            dispatch(getSetup()),
-            dispatch(getAllGenres()),
-            dispatch(getAllPlatforms()),
-            dispatch(getAllVideogames()),
-            
-          ])
+      // Configurar setup, leer genres, platforms y allvideogames
+      await Promise.all([
+        dispatch(getSetup()),
+        dispatch(getAllGenres()),
+        dispatch(getAllPlatforms()),
+        dispatch(getAllVideogames()),
+      ]);
+
 
     } catch (error) {
-      window.alert(error)
+      window.alert(error);
     } finally {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
+      navigate('/home');
+      dispatch(setLanding(false));
     }
-  }
 
-  const handleOnClick = (event) => {
-    // Navegamos a la página de inicio
-    event.preventDefault();
-    loadData()
-    navigate('/home');
   };
 
   return (
-    <div>
-      {loading ? (
-        <div >
-          <button className={styles.loaderButton} onClick={handleOnClick}>Enjoy VIDEOGAMES!!</button>
-        </div>
-      )
-        : (<div className={styles.loader}>
-          <span style={{ "--i": 1 }}></span>
-          <span style={{ "--i": 2 }}></span>
-          <span style={{ "--i": 3 }}></span>
-          <span style={{ "--i": 4 }}></span>
-          <span style={{ "--i": 5 }}></span>
-          <span style={{ "--i": 6 }}></span>
-          <span style={{ "--i": 7 }}></span>
-          <span style={{ "--i": 8 }}></span>
-          <span style={{ "--i": 9 }}></span>
-          <span style={{ "--i": 10 }}></span>
-          <span style={{ "--i": 11 }}></span>
-          <span style={{ "--i": 12 }}></span>
-          <span style={{ "--i": 13 }}></span>
-          <span style={{ "--i": 14 }}></span>
-          <span style={{ "--i": 15 }}></span>
-          <span style={{ "--i": 16 }}></span>
-          <span style={{ "--i": 17 }}></span>
-          <span style={{ "--i": 18 }}></span>
-          <span style={{ "--i": 19 }}></span>
-          <span style={{ "--i": 20 }}></span>
+    <div >
+      <button className={styles.loaderButton} onClick={handleOnClick}>Click Here to Enjoy VIDEOGAMES!!</button>
+      <Spinner />
 
-
-        </div>
-
-        )
-      }
     </div>
   )
 }

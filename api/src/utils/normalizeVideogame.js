@@ -10,6 +10,7 @@ const normalizeVideogame = (videogame) => {
             const { id, name } = platform
             return { id, name }
         })
+        
         image=videogame.image
     } else {
         //segun formato de api

@@ -12,13 +12,15 @@ const getVideogames = async () => {
     //datos de la BD
     try {
         const videogamesLocal = await getVideogamesLocal()
-
+        return [...videogamesLocal]
+        
         const videogamesApi1 = await getVideogamesApi(1,25)
         const videogamesApi2 = await getVideogamesApi(2,25)
         const videogamesApi3 = await getVideogamesApi(3,25)
         const videogamesApi4 = await getVideogamesApi(4,25)
-
+        
         return [...videogamesLocal,...videogamesApi1,...videogamesApi2,...videogamesApi3,...videogamesApi4]
+
     } catch (error) {
         return ({ error: error.message })
     }

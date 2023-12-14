@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from '../../Styles/styles.module.css'
 import { useDispatch } from 'react-redux'
-import { delFilter } from '../../Redux/actions'
+import { delOrder } from '../../Redux/actions'
+import { changeOrder } from '../../Redux/actions/changeOrder'
 
 const Order = (props) => {
   const { id, name, type, field } = props
@@ -9,13 +10,16 @@ const Order = (props) => {
   const dispatch = useDispatch()
 
   const onDelete = () => {
-    dispatch(delFilter(uniqueId))
+    dispatch(delOrder(id))
+  }
+  const onClick = () => {
+    dispatch(changeOrder(id))
   }
   
   return (
     <div className={styles.filter}>
       <button className={styles.filterButton} >
-        <span>{name}</span>
+        <span onClick={onClick}>{name}</span>
         <span onClick={onDelete}>❌</span>
       </button>
     </div >

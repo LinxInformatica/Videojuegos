@@ -9,7 +9,7 @@ import orderFunction from '../utils/orderFunction';
 import {
     GET_ALL_GENRES, GET_ALL_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
     CLEAR_ALL, DEL_FILTER, LOADING,
-    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME, SET_CURRENT_PAGE, SET_TOTAL_OF_PAGES, GET_SETUP
+    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME, SET_CURRENT_PAGE, SET_TOTAL_OF_PAGES, GET_SETUP, SET_PAGE_SIZE, DEL_ORDER, LANDING, CHANGE_ORDER
 
 } from "./actions-types";
 
@@ -20,7 +20,8 @@ const initialState = {
     allYears: YEARS,
     allSources: SOURCES,
     posibleOrders: ORDERS,
-    loading: true,
+    loading: false,
+    landing: false,
     filteredVideogames: [],     // usados para filtrar FilteredVideoGames
     allFilters: [],  //usados en los forms de filters si confirma pasan a filter si no  los limpio
     allOrders: [],  //usados en los forms de orders si confirma pasan a filter si no  los limpio
@@ -57,6 +58,9 @@ export default (state = initialState, { type, payload }) => {
         case LOADING:
             return { ...state, loading: payload };
 
+        case LANDING:
+            return { ...state, landing: payload };
+
         case DEL_FILTER:
             const newFilter = state.allFilters.filter((filter) => filter.uniqueId !== payload)
             return {
@@ -64,12 +68,30 @@ export default (state = initialState, { type, payload }) => {
                 allFilters: [...newFilter]
             };
 
+        case DEL_ORDER:
+            const delOrder = state.allOrders.filter((order) => order.id !== payload)
+            return {
+                ...state,
+                allOrders: [...delOrder]
+            };
+
+        case CHANGE_ORDER:
+            //busco por payload el order a cambiar
+            const orderActual= ORDERS.find((order)=>order.id===payload)
+            //busco el objeto next
+            const nextOrder=ORDERS.find((order)=>order.id===orderActual.nextId)
+            //cambio el objeto viejo pro el nuevo
+            const newOrder = state.allOrders.map((order) => order.id === payload?nextOrder:order)
+            return {
+                ...state,
+                allOrders: [...newOrder]
+            };
+
         case CLEAR_ALL:
             return {
                 ...state,
-                loading: true,
-                filteredVideogames: [],
-                allFilters: []
+                landing: true,
+                loading: false,
             }
         case ADD_VIDEOGAME:
             return {
@@ -273,9 +295,14 @@ export default (state = initialState, { type, payload }) => {
             const allOrders = JSON.parse(orders)
             return {
                 ...state,
-                page_size:page_size,
+                page_size: page_size,
                 allFilters: allFilters,
                 allOrders: allOrders
+            }
+        case SET_PAGE_SIZE:
+            return {
+                ...state,
+                page_size: payload
             }
 
         default:

@@ -39,7 +39,6 @@ const Details = () => {
       try {
         const response = await axios(`${SITEROUTES.VIDEOGAMES}/${id}`)
         const { data } = response
-        console.log(data)
         if (data[0].name) {
           setVideogame(data[0])
         } else {
@@ -58,6 +57,7 @@ const Details = () => {
   const { name, description, image, released, genres, platforms, source, rating } = videogame
   const sourceName = SOURCES.find((s) => s.id === source)
   const releasedDate = formatDate(released)
+  const imageUrl= source===1 ? SITEROUTES.IMAGES+image : image
   return (
     <div>
 
@@ -97,9 +97,9 @@ const Details = () => {
                     <label htmlFor="image" >Image:</label>
                   </td>
                   <td className={styles.formData}>
-                    {image && (
+                    {imageUrl && (
                       <div>
-                        <img src={image} className={styles.formImage} alt="Selected" />
+                        <img src={imageUrl} className={styles.formImage} alt="Selected" />
                       </div>
                     )}
                   </td>

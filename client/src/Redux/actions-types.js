@@ -10,8 +10,9 @@ export const DEL_FILTER = 'DEL_FILTER';
 //quita todos los filters en filters
 export const DEL_ALL_FILTERS = 'DEL_ALL_FILTERS';
 
-
 export const LOADING = 'LOADING';
+export const LANDING = 'LANDING';
+
 
 //
 export const CLEAR_ALL = 'CLEAR_ALL';
@@ -59,5 +60,10 @@ export const SET_TOTAL_OF_PAGES = 'SET_TOTAL_OF_PAGES'
 export const GET_SETUP = 'GET_SETUP';
 export const POST_SETUP = 'POST_SETUP'
 
+export const SET_PAGE_SIZE = 'SET_PAGE_SIZE'
 
+//quita el order seleciconado en filters
+export const DEL_ORDER = 'DEL_ORDER';
+//quita todos los filters en filters
+export const CHANGE_ORDER = 'CHANGE_ORDER';
 

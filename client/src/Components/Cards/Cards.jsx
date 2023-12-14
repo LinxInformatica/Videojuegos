@@ -24,12 +24,10 @@ const Cards = () => {
     const videogames=filteredVideogames.slice(fisrtItem,lastItem)
 
     const noVideogames = videogames.length === 0
-    console.log(videogames.length)
-    console.log(noVideogames)
-
+ 
     useEffect(()=>{
         dispatch(getVideogamesFiltered());
-    },[allFilters,allOrders,allVideogames])
+    },[allFilters,allOrders,allVideogames,page_size])
 
     return (
         <div >

@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { addVideogame } from '../../Redux/actions'
 
-import {v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 
 const Form = () => {
   const dispatch = useDispatch()
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   //leo los genres del estado global y los marco como no elegidos
   const allGenres = useSelector((state) => state.allGenres)
@@ -21,10 +21,11 @@ const Form = () => {
 
 
   //Estados locales
-  const initialState={
+  const initialState = {
     name: "",
     description: "",
     image: "",
+    imageBase64:"",
     released: "",
     rating: 0,
     genres: [],
@@ -32,13 +33,14 @@ const Form = () => {
     source: 1
   }
   //datos cargados
-  const [userData, setUserData] = useState({...initialState,id:uuidv4()})
-  
+  const [userData, setUserData] = useState({ ...initialState, id: uuidv4() })
+
   // estados de error
   const [errors, setErrors] = useState({
     name: "",
     description: "",
     image: "",
+    imageBase64: "",
     released: "",
     rating: 0,
     genres: "",
@@ -62,48 +64,51 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     //destructiring
-    const { id,name, description, image, released, rating, genres, platforms } = userData
     try {
-      const { data, status } = await axios.post(`${SITEROUTES.URL}/videogames`, {
-        id:id,
-        name: name,
-        description: description,
-        image: image,
-        released: released,
-        rating: rating,
-        genres: genres,
-        platforms: platforms
-      })
-      window.alert('The Videogame was added successfully')
+      //subo la image 
       
+      const formData={
+        name:userData.name,
+        description:userData.description,
+        platforms:userData.platforms,
+        genres:userData.genres,
+        rating:userData.rating,
+        image:userData.image,
+        imageBase64:userData.imageBase64,
+        released:userData.released
+      }
+      const { data, status } = await axios.post(`${SITEROUTES.VIDEOGAMES}`, formData)
+
+      if (status === 200) window.alert('The Videogame was added successfully')
+
       //agrego el videogame al estdo global
-      dispatch(addVideogame(userData))
+      const newVideogame={
+        ...userData,
+        id:data.id,
+        image:data.image,
+      }
+      dispatch(addVideogame(newVideogame))
       //limpio para seguir cargando
       setUserData(initialState)
 
-            
-    } catch (error) {
-      console.log(error)
-      window.alert(error.message)
 
+    } catch (error) {
+      window.alert(error.response.data.error)
     }
   }
+
 
   //cambio en la imagen
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    if(file) {
-      const imageURL = URL.createObjectURL(file );
-      setUserData({ ...userData, image: imageURL });
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUserData({ ...userData, image: file.name, imageBase64: reader.result })
+      };
+
+      reader.readAsDataURL(file);
     }
-    console.log(userData)
-    // if (file) {
-    //   const reader = new FileReader();
-    //   reader.onload = (e) => {
-    //     setUserData({ ...userData, image: e.target.result });
-    //   };
-    //   reader.readAsDataURL(file);
-    // }
   };
 
   const handleGenreSelection = (event, genre) => {
@@ -144,12 +149,13 @@ const Form = () => {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       <div >
         <div className={styles.options}>
-          <button onClick={handleSubmit} disabled={errors.errors}>{ICONS.OK}Save</button>
+          {errors.errors && <label className={styles.formError} >Please insert all the data required !! </label>}
+          {!errors.errors && <button onClick={handleSubmit} className={errors.errors ? styles.unselected : styles.selected} disabled={errors.errors}>{ICONS.OK}Save</button>}
           <Link to={SITEROUTES.HOME}>
-            <button>{ICONS.CANCEL} Cancel</button>
+            <button>{ICONS.CANCEL} Close</button>
           </Link>
         </div>
         <div className={styles.formBody}>
@@ -176,12 +182,12 @@ const Form = () => {
                   <label htmlFor="image" >Image:</label>
                 </td>
                 <td className={styles.formData}>
-                  <input name="image" type="file" id="imageInput" accept="image/*" onChange={handleImageChange} />
                   {userData.image && (
                     <div>
-                      <img src={userData.image} className={styles.formImage} alt="Selected" />
+                      <img src={userData.imageBase64} className={styles.formImage} alt="Selected" />
                     </div>
                   )}
+                  <input name="image" type="file" id="imageInput" accept="image/*" onChange={handleImageChange} />
                 </td>
 
               </tr>

@@ -1,7 +1,10 @@
 export { getAllGenres } from "./actions/getAllGenres";
 export { getAllPlatforms } from "./actions/getAllPlatforms"
 export { getAllVideogames } from "./actions/getAllVideogames"
+
 export { setLoading } from "./actions/setLoading"
+export { setLanding } from "./actions/setLanding"
+
 export { delFilter } from "./actions/delFilter"
 export { clearAll } from "./actions/clearAll"
 export { addVideogame } from "./actions/addVideogame"
@@ -25,3 +28,8 @@ export { setCurrentPage } from "./actions/setCurrentPage"
 export { setTotalOfPages } from "./actions/setTotalOfPages"
 
 export { getSetup } from "./actions/getSetup"
+
+export { setPageSize } from "./actions/setPageSize"
+
+export { delOrder } from "./actions/delOrder"
+export { changeOrder } from "./actions/changeOrder"

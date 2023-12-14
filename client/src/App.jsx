@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import './App.css'
 
@@ -15,23 +15,31 @@ import SelectOrders from "./Views/SelectOrders/SelectOrders";
 
 import SITEROUTES from "./helpers/siteroutes.helper";
 import FormSetup from "./Components/FormSetup/FormSetup";
+import Image from "./Components/Image/Image";
+import { useEffect } from "react";
+import { setLanding } from "./Redux/actions";
 
 
 function App() {
-  const loading = useSelector((state) => state.loading)
+  const landing = useSelector((state) => state.landing)
+  const dispatch=useDispatch()
+
+  useEffect(()=>{
+    dispatch(setLanding(true))
+  },[dispatch])
 
   return (
 
     <div className="App">
       < BrowserRouter >
-        {loading ? (
+        {landing ? (
           <Landing />
         ) : (
           <>
             <Navbar />
 
             <Routes>
-              <Route path={SITEROUTES.LANDING} element={<Landing />} />
+              {/* <Route path={SITEROUTES.LANDING} element={<Landing />} /> */}
               <Route path={SITEROUTES.HOME} element={<Home />} />
               <Route path={SITEROUTES.FORM} element={<Form />} />
               <Route path={SITEROUTES.DETAILS} element={<Details />} />

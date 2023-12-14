@@ -2,34 +2,16 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import styles from './Card.module.css'
 import formatDate from "../../utils/formatDate";
+import SITEROUTES from "../../helpers/siteroutes.helper";
+
 
 const Card = (props) => {
   const { id, name, image, released, rating, genres, source, platforms } = props
   //para saber si vino de la api o no 
   const api = source === 1 ? false : true
   const date = formatDate(released)
-
-  const [blogImage, setBlogImage] = useState(null)
-
-  //por si la image es blob y hay que convertir 
-  useEffect(() => {
-    if (!api) {
-      console.log(image)
-      fetch(image)
-        .then(response => response.blob())
-        .then(data => {
-          const objectURL = URL.createObjectURL(data)
-          console.log(objectURL)
-          setBlogImage(objectURL)
-        })
-        .catch(error => {
-          console.log('Error loading image')
-        })
-    } else {
-      setBlogImage(image)
-    }
-  }, [])
-
+  
+  const imageURL = api ? image : `${SITEROUTES.IMAGES}${image}`
   return (
     <div >
       <Link to={`/details/${id}`} className={styles.card}>
@@ -38,8 +20,8 @@ const Card = (props) => {
           <label className={styles.released}>{date}</label>
           <label className={styles.source}>{api ? 'API' : 'LOCAL'}</label>
           <img
-            src={blogImage}
-            alt={blogImage}
+            src={imageURL}
+            alt={imageURL}
             className={styles.cardImage}
           />
         </div>

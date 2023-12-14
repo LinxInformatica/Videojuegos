@@ -17,9 +17,11 @@ const Orders = () => {
                         <label>Orders:</label>
                         {orders.map((order) => (
                             <Order key={order.id}
+                                id={order.id}
                                 name={order.name}
                                 type={order.type}
                                 field={order.field}
+                                nextId={order.nextId}
                             />))
                         }
                     </div>

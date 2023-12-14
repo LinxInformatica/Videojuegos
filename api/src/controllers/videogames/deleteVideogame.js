@@ -9,7 +9,6 @@ const deleteVideogame = async (id) => {
         id: id
       }
     })
-    console.log(result)
     return ({result:result})
 
   } catch (error) {

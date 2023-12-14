@@ -1,4 +1,10 @@
 const { Router } = require('express');
+
+//multer para subir archivos
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' })
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -16,7 +22,6 @@ const { getPlatformsController } = require('../controllers/getPlatformsControlle
 const { deleteVideogameController } = require('../controllers/deleteVideogameController');
 const { postSetupController } = require('../controllers/postSetupController');
 const { getSetupController } = require('../controllers/getSetupController');
-
 
 const router = Router();
 
@@ -38,7 +43,7 @@ router.delete('/videogames/:idVideogame', deleteVideogameController)
 router.get('/platforms', getPlatformsController)
 
 //setup
-router.get('/setup',getSetupController)
-router.post('/setup',postSetupController)
+router.get('/setup', getSetupController)
+router.post('/setup', postSetupController)
 
 module.exports = router;

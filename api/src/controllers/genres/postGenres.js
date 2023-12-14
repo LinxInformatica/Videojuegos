@@ -4,7 +4,6 @@ const { API_KEY } = process.env
 
 const postGenres = async () => {
     const url = `${URL_API}/genres?key=${API_KEY}`
-    console.log('Loading Genres from API')
     try {
         const { data } = await axios.get(url)
         return data
