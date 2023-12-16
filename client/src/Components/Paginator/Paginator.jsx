@@ -7,25 +7,27 @@ import ICONS from '../../helpers/icons.helper'
 
 const Paginator = () => {
     const totalItems = useSelector((state) => state.filteredVideogames.length)
-    const currentPage= useSelector((state) => state.currentPage)
+    const currentPage = useSelector((state) => state.currentPage)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
+        dispatch(setCurrentPage(1))
         dispatch(setTotalOfPages(totalItems));
     }, [totalItems])
+
     const totalOfPages = useSelector((state) => state.totalOfPages)
     const pagesToShow = []
     for (let i = 1; i <= totalOfPages; i++) {
-        pagesToShow.push(i)
+        pagesToShow.push({id:i,enable:true})
     }
 
-    const handleChangePage=(event)=>{
+    const handleChangePage = (event) => {
         dispatch(setCurrentPage(event.target.id))
     }
     return (
         <div className={styles.cards}>
-            {pagesToShow && (
+            {totalItems>0 && (
                 <div>
                     <button onClick={handleChangePage}
                         key={PAGINATOR.FIRST}
@@ -39,11 +41,12 @@ const Paginator = () => {
                     </button>
                     {pagesToShow.map((page) => (
                         <button onClick={handleChangePage}
-                            key={page}
-                            id={page}
-                            className={page===currentPage? styles.selected : null }>                                    
-                            {page}
+                            key={page.id}
+                            id={page.id}
+                            className={page.id === currentPage ? styles.selected : null}>
+                            {page.id}
                         </button>
+
                     ))}
                     <button onClick={handleChangePage}
                         key={PAGINATOR.NEXT}
@@ -55,7 +58,7 @@ const Paginator = () => {
                         id={PAGINATOR.LAST}>
                         {ICONS.LAST}
                     </button>
-                    
+
                 </div>
             )}
         </div >

@@ -7,7 +7,8 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement:false
     },
     name: {
       type: DataTypes.STRING,
@@ -34,7 +35,7 @@ module.exports = (sequelize) => {
       indexes: [
         {
           unique: true,
-          fields: ['name','released']
+          fields: ['name']
         },
       ]
     });

@@ -19,7 +19,7 @@ const postSetup = async (page_size, filters,orders) => {
             setup.orders=ordersToText
             await setup.save()
         }
-        return { setup }
+        return { setup}
 
     } catch (error) {
         return ({ error: error.message })

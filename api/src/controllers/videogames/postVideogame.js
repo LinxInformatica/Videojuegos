@@ -4,6 +4,7 @@ const fs = require('fs')
 
 const postVideogame = async (id, name, description, platforms, image, imageBase64, released, rating, genres) => {
     // Decodificar la cadena base64 de la imagen
+    
     const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
     const dataBuffer = Buffer.from(base64Data, 'base64');
 
@@ -15,11 +16,13 @@ const postVideogame = async (id, name, description, platforms, image, imageBase6
 
 
     try {
+
         fs.writeFile(filePath, dataBuffer, (error) => {
             if (error) {
                 return ({ error: error.message })
             }
         })
+
         const [videogame, created] = await Videogame.findOrCreate({
             where: { id: id },
             defaults: {
@@ -55,6 +58,7 @@ const postVideogame = async (id, name, description, platforms, image, imageBase6
 
         return { videogame, created, genres: genreResults, platforms: platformResults }
     } catch (error) {
+        console.log(error)
         return ({ error: error.message })
     }
 }

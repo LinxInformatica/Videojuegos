@@ -36,7 +36,7 @@ const Navbar = () => {
           <button className={pathname===SITEROUTES.FORMSETUP? styles.selected: styles.unselected}>Setup</button>
         </Link>
         
-        <button onClick={handleOnClick}>Exit!</button>
+        <button className={styles.unselected} onClick={handleOnClick}>Exit!</button>
 
       </div>
       

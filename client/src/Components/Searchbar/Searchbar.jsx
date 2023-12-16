@@ -4,6 +4,7 @@ import { getVideogamesFiltered, setAllFilters  } from '../../Redux/actions'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../Styles/styles.module.css'
 import FILTERTYPES from '../../helpers/filterTypes.helper'
+import ORDERTYPES from '../../helpers/orderFilter.helper'
 
 const Searchbar = () => {
     const dispatch = useDispatch()
@@ -21,10 +22,11 @@ const Searchbar = () => {
             //agrego al objeto de filtros el name
             dispatch(setAllFilters({
                 id: name,
-                name: name,
+                name: `Name contains ${name}`,
                 type: FILTERTYPES.NAME,
                 key: `${FILTERTYPES.NAME}${name}`,
-                uniqueId:`${FILTERTYPES.NAME}${name}`
+                uniqueId:`${FILTERTYPES.NAME}${name}`,
+                order:ORDERTYPES.NAME
             }))
             setName("")
         }
@@ -36,7 +38,7 @@ const Searchbar = () => {
             <div className={styles.header}>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label>Search:</label>
+                        <label className={styles.label}>Search:</label>
                         {/* <div></div> */}
                         <input className={styles.input} name='search'
                             type='text'

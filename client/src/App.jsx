@@ -39,7 +39,7 @@ function App() {
             <Navbar />
 
             <Routes>
-              {/* <Route path={SITEROUTES.LANDING} element={<Landing />} /> */}
+              <Route path={SITEROUTES.LANDING} element={<Landing />} />
               <Route path={SITEROUTES.HOME} element={<Home />} />
               <Route path={SITEROUTES.FORM} element={<Form />} />
               <Route path={SITEROUTES.DETAILS} element={<Details />} />

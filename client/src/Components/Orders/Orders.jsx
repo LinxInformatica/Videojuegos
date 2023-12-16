@@ -14,7 +14,7 @@ const Orders = () => {
             {showOrders &&
                 <div className={styles.header}>
                     <div className={styles.filter}>
-                        <label>Orders:</label>
+                        <label className={styles.label}>Orders:</label>
                         {orders.map((order) => (
                             <Order key={order.id}
                                 id={order.id}

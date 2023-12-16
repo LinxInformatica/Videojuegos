@@ -31,6 +31,7 @@ const Filters = () => {
                                 name={filter.name}
                                 type={filter.type}
                                 uniqueId={`${filter.type}${filter.id}`}
+                                order={filter.order}
                             />))
                         }
                     </div>

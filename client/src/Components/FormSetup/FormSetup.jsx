@@ -7,6 +7,7 @@ import ICONS from '../../helpers/icons.helper'
 import { useDispatch, useSelector } from 'react-redux'
 import validation from './validation'
 import { getSetup, setPageSize } from '../../Redux/actions'
+import Orders from '../Orders/Orders'
 
 const FormSetup = () => {
   const { id } = useParams()
@@ -35,7 +36,8 @@ const FormSetup = () => {
     validation({ ...userData, [property]: value }, errors, setErrors);
   }
 
-  const handleOnClick = async () => {
+  const handleOnClick = async (event) => {
+    event.preventDefault();
     try {
       const formData = {
         page_size: userData.page_size,
@@ -45,13 +47,12 @@ const FormSetup = () => {
       }
       const { data, status } = await axios.post(`${SITEROUTES.SETUP}`, formData)
       if (status === 200) window.alert('Setup saved successfully')
-
-      //actualizo estado global
-      dispatch(setPageSize(userData.page_size))
-      navigate(SITEROUTES.HOME)
-
+      dispatch(setPageSize(userData.page_size));
+      navigate(SITEROUTES.HOME);
     } catch (error) {
-      window.alert(error);
+      console.log(error)
+      window.alert(error.response.data.error);
+
     }
   }
 
@@ -76,7 +77,7 @@ const FormSetup = () => {
                 <label htmlFor="page_size" className={styles.formError}>{errors.page_size}</label>
               </td>
             </tr>
-            {orders.length>0 && <tr>
+            {orders.length > 0 && <tr>
               <td className={styles.formLabel}>
                 <label htmlFor="orders" >Orders:</label>
               </td>
@@ -97,7 +98,7 @@ const FormSetup = () => {
               </td>
             </tr>
             }
-            {filters.length>0 &&
+            {filters.length > 0 &&
               <tr>
                 <td className={styles.formLabel}>
                   <label htmlFor="Filters" >Filters:</label>

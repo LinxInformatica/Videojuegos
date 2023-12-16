@@ -24,7 +24,6 @@ server.use((req, res, next) => {
 
 const pathImages=path.join(__dirname, '../..','images/')
 server.use('/images', express.static(pathImages));
-
 server.use('/', routes);
 
 // Error catching endware.

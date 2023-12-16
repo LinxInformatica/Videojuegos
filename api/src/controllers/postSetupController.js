@@ -7,8 +7,9 @@ async function postSetupController(req, res) {
     ) return res.status(400).json({ error: "Faltan Datos o datos incorrectos" })
 
     try {
-        const { setup } = await postSetup(page_size,filters,orders)
-        return res.status(201).json(setup)
+        const { setup,created} = await postSetup(page_size,filters,orders)
+        console.log(setup)
+        return res.status(200).json(setup)
 
     } catch (error) {
         res.status(500).json({ error: error.message })

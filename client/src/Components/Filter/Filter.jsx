@@ -5,7 +5,7 @@ import { delFilter } from '../../Redux/actions'
 import FILTERTYPES from '../../helpers/filterTypes.helper'
 
 const Filter = (props) => {
-  const { id, name, type, uniqueId } = props
+  const { id, name, type, uniqueId ,order} = props
 
   const dispatch = useDispatch()
 
@@ -13,11 +13,10 @@ const Filter = (props) => {
     dispatch(delFilter(uniqueId))
   }
 
-  const value = type === FILTERTYPES.NAME ? `${type} contains ${name}` : `${type} is ${name}`
   return (
     <div className={styles.filter}>
-      <button className={styles.filterButton} >
-        <span>{value}</span>
+      <button  className={styles.filterButton} >
+        <span>{name}</span>
         <span onClick={onDelete}>❌</span>
       </button>
     </div >

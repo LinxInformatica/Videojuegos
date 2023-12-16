@@ -1,5 +1,5 @@
 const ICONS = {
-    OK: '✅',
+    OK: '✔️',
     CANCEL:'❌',
     DELETE:'🗑️',
     FIRST:'<<',

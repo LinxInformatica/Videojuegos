@@ -6,7 +6,7 @@ import { setSelectedInForm } from '../../Redux/actions'
 import FILTERTYPES from '../../helpers/filterTypes.helper'
 
 const FormSelection = (props) => {
-  const { id, name, type, uniqueId } = props
+  const { id, name, type, uniqueId ,order} = props
   const dispatch = useDispatch()
 
   //tomo los generos seleccionados
@@ -25,7 +25,8 @@ const FormSelection = (props) => {
       id: id,
       name: name,
       type: type,
-      uniqueId: uniqueId
+      uniqueId: uniqueId,
+      order:order
     }))
   }
     , [isSelected]);

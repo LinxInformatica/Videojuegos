@@ -6,7 +6,7 @@ import { setSelectedFilters } from '../../Redux/actions'
 import FILTERTYPES from '../../helpers/filterTypes.helper'
 
 const SelectFilter = (props) => {
-  const { id, name, type, uniqueId } = props
+  const { id, name, type, uniqueId ,order} = props
   const dispatch = useDispatch()
   //tomo los generos seleccionados
   const selectedFilters = useSelector((state) => state.selectedFilters)
@@ -28,7 +28,8 @@ const SelectFilter = (props) => {
       id: id,
       name: name,
       type: type,
-      uniqueId: uniqueId
+      uniqueId: uniqueId,
+      order:order
     }))
   }
 

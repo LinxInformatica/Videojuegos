@@ -9,6 +9,7 @@ import ICONS from "../../helpers/icons.helper"
 import SITEROUTES from "../../helpers/siteroutes.helper"
 import { useEffect, useState } from "react"
 import { clearSelectedFilters } from "../../Redux/actions/clearSelectedFilters"
+import ORDERTYPES from "../../helpers/orderFilter.helper"
 
 const SelectFilters = () => {
   const dispatch = useDispatch()
@@ -77,6 +78,7 @@ const SelectFilters = () => {
               name={genre.name}
               type={FILTERTYPES.GENRE}
               uniqueId={`${FILTERTYPES.GENRE}${genre.id}`}
+              order={ORDERTYPES.GENRE}
             />))
           }
         </div>
@@ -98,6 +100,7 @@ const SelectFilters = () => {
               name={platform.name}
               type={FILTERTYPES.PLATFORM}
               uniqueId={`${FILTERTYPES.PLATFORM}${platform.id}`}
+              order={ORDERTYPES.PLATFORM}
             />))
           }
         </div>
@@ -117,6 +120,7 @@ const SelectFilters = () => {
               name={year.name}
               type={FILTERTYPES.YEAR}
               uniqueId={`${FILTERTYPES.YEAR}${year.id}`}
+              order={ORDERTYPES.YEAR}
 
             />))
           }
@@ -138,7 +142,7 @@ const SelectFilters = () => {
               name={source.name}
               type={FILTERTYPES.SOURCE}
               uniqueId={`${FILTERTYPES.SOURCE}${source.id}`}
-
+              order={ORDERTYPES.SOURCE}
             />))
           }
         </div>

@@ -53,13 +53,22 @@ export default (state = initialState, { type, payload }) => {
                 if (a.name < b.name) return -1;
                 return 1
             })
-            return { ...state, allPlatforms: orderedPlatforms };
+            return {
+                ...state,
+                allPlatforms: orderedPlatforms
+            };
 
         case LOADING:
-            return { ...state, loading: payload };
+            return {
+                ...state,
+                loading: payload
+            };
 
         case LANDING:
-            return { ...state, landing: payload };
+            return {
+                ...state,
+                landing: payload
+            };
 
         case DEL_FILTER:
             const newFilter = state.allFilters.filter((filter) => filter.uniqueId !== payload)
@@ -77,11 +86,11 @@ export default (state = initialState, { type, payload }) => {
 
         case CHANGE_ORDER:
             //busco por payload el order a cambiar
-            const orderActual= ORDERS.find((order)=>order.id===payload)
+            const orderActual = ORDERS.find((order) => order.id === payload)
             //busco el objeto next
-            const nextOrder=ORDERS.find((order)=>order.id===orderActual.nextId)
+            const nextOrder = ORDERS.find((order) => order.id === orderActual.nextId)
             //cambio el objeto viejo pro el nuevo
-            const newOrder = state.allOrders.map((order) => order.id === payload?nextOrder:order)
+            const newOrder = state.allOrders.map((order) => order.id === payload ? nextOrder : order)
             return {
                 ...state,
                 allOrders: [...newOrder]
@@ -109,7 +118,8 @@ export default (state = initialState, { type, payload }) => {
         case CLEAR_ALL_FILTERS:
             return {
                 ...state,
-                allFilters: []
+                allFilters: [],
+                currentPage: 1
             }
 
 
@@ -131,7 +141,8 @@ export default (state = initialState, { type, payload }) => {
                     id: filter.id,
                     name: filter.name,
                     type: payload,
-                    uniqueId: `${payload}${filter.id}`
+                    uniqueId: `${payload}${filter.id}`,
+                    order: filter.order
                 }
             }
             let newFilterType = []
@@ -161,7 +172,8 @@ export default (state = initialState, { type, payload }) => {
             if (state.selectedFilters.find((selected) => selected.uniqueId === payload.uniqueId)) {
                 newSelectedFilters = state.selectedFilters.filter((selected) => selected.uniqueId !== payload.uniqueId)
             } else {
-                state.selectedFilters.push({ id: payload.id, name: payload.name, uniqueId: payload.uniqueId, type: payload.type })
+                const name = payload.type === FILTERTYPES.NAME ? `${payload.type} contains ${payload.name}` : `${payload.type} is ${payload.name}`
+                state.selectedFilters.push({ id: payload.id, name: name, uniqueId: payload.uniqueId, type: payload.type, order: payload.order })
                 newSelectedFilters = state.selectedFilters
             }
             return {
@@ -170,7 +182,10 @@ export default (state = initialState, { type, payload }) => {
             }
 
         case PUT_SELECTED_FILTERS:
-
+            state.selectedFilters.sort((a, b) => {
+                if (a.order + a.name < b.order + b.name) return -1
+                return 1
+            })
             return {
                 ...state,
                 allFilters: [...state.selectedFilters],
@@ -178,9 +193,14 @@ export default (state = initialState, { type, payload }) => {
             }
 
         case SET_ALL_FILTERS:
-            return {
+            const orderedAllFilters=[...state.allFilters, payload]
+            orderedAllFilters.sort((a, b) => {
+                if (a.order + a.name < b.order + b.name) return -1
+                return 1
+            })
+             return {
                 ...state,
-                allFilters: [...state.allFilters, payload]
+                allFilters: [...orderedAllFilters]
             }
 
         case GET_VIDEOGAMES_FILTERED:
@@ -257,6 +277,7 @@ export default (state = initialState, { type, payload }) => {
             const totalOfPages = Math.ceil(payload / page_items)
             return {
                 ...state,
+                currentPage:1,
                 totalOfPages: totalOfPages,
             }
 
