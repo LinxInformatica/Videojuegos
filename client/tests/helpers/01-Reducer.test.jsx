@@ -73,7 +73,6 @@ describe("Reducer", () => {
       type: SET_CURRENT_PAGE,
       payload: -1,
     });
-    console.log(result)
     expect(result.currentPage).toEqual(1);
   });
   test(`con "SET_CURRENT_PAGE" calcular la current_page si es mayor la maxima devuelve la maxima`, () => {

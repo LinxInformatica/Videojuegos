@@ -99,12 +99,12 @@
   color:white
 }
 .loaderButton {
-  background-color: rgb(238, 220, 118);
+  background-color: rgb(207, 58, 20);
   border-style: solid;
   border-color: red;
   opacity: 70%;
   height: 150px;
-  width: 300px;
+  width: 250px;
   margin: 20%;
   color:black;
   font-size: 1.2rem;
@@ -192,7 +192,7 @@
 }
 
 .formImage {
-  width: 250px;
+  width: 300px;
   height: 250px;
   border-radius: 8px;
   border: 1px solid red;

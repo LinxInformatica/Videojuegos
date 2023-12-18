@@ -9,7 +9,7 @@ import orderFunction from '../utils/orderFunction';
 import {
     GET_ALL_GENRES, GET_ALL_PLATFORMS, ADD_VIDEOGAME, ADD_VIDEOGAMES,
     CLEAR_ALL, DEL_FILTER, LOADING,
-    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME, SET_CURRENT_PAGE, SET_TOTAL_OF_PAGES, GET_SETUP, SET_PAGE_SIZE, DEL_ORDER, LANDING, CHANGE_ORDER
+    GET_SELECTED_FILTERS, SET_SELECTED_FILTERS, PUT_SELECTED_FILTERS, GET_VIDEOGAMES_FILTERED, SET_ALL_FILTERS, CLEAR_SELECTED_FILTERS, CLEAR_ALL_FILTERS, SELECT_ALL_SELECTED_FILTERS, PUT_SELECTED_ORDERS, SET_SELECTED_ORDERS, GET_SELECTED_ORDERS, DEL_VIDEOGAME, SET_CURRENT_PAGE, SET_TOTAL_OF_PAGES, GET_SETUP, SET_PAGE_SIZE, DEL_ORDER, LANDING, CHANGE_ORDER, SET_VIDEOGAME
 
 } from "./actions-types";
 
@@ -114,6 +114,11 @@ export default (state = initialState, { type, payload }) => {
                 allVideogames: [...state.allVideogames.filter((videogame) => videogame.id !== payload)]
             }
 
+        case SET_VIDEOGAME:
+            return {
+                ...state,
+                allVideogames: [...state.allVideogames.filter((videogame) => videogame.id !== payload.id),payload]
+            }
 
         case CLEAR_ALL_FILTERS:
             return {
@@ -193,12 +198,12 @@ export default (state = initialState, { type, payload }) => {
             }
 
         case SET_ALL_FILTERS:
-            const orderedAllFilters=[...state.allFilters, payload]
+            const orderedAllFilters = [...state.allFilters, payload]
             orderedAllFilters.sort((a, b) => {
                 if (a.order + a.name < b.order + b.name) return -1
                 return 1
             })
-             return {
+            return {
                 ...state,
                 allFilters: [...orderedAllFilters]
             }
@@ -277,7 +282,7 @@ export default (state = initialState, { type, payload }) => {
             const totalOfPages = Math.ceil(payload / page_items)
             return {
                 ...state,
-                currentPage:1,
+                currentPage: 1,
                 totalOfPages: totalOfPages,
             }
 

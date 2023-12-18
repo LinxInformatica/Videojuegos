@@ -7,7 +7,8 @@ import SOURCES from '../../helpers/sources.helper'
 import formatDate from '../../utils/formatDate'
 import ICONS from '../../helpers/icons.helper'
 import { useDispatch } from 'react-redux'
-import { delVideogame } from '../../Redux/actions'
+import { delVideogame, setLoading } from '../../Redux/actions'
+import Spinner from '../../Components/Spinner/Spinner'
 
 const Details = () => {
   const { id } = useParams()
@@ -15,6 +16,7 @@ const Details = () => {
   const navigate = useNavigate()
 
   const [videogame, setVideogame] = useState({})
+  const [inDelete, setInDelete] = useState(false)
 
   const deleteVideogame = async (id) => {
     try {
@@ -30,11 +32,22 @@ const Details = () => {
       window.alert(error);
     }
   }
-  const handleOnClick = () => {
+  const handleOnDelete = (event) => {
+    event.preventDefault();
     deleteVideogame(id)
+  }
+  const handleSelectDelete = (event) => {
+    event.preventDefault()
+    setInDelete(!inDelete)
+  }
+
+  const handleOnEdit = (event) => {
+    event.preventDefault();
+    navigate(`/form/${id}`)
   }
 
   useEffect(() => {
+    dispatch(setLoading(true))
     const fetchVideogame = async () => {
       try {
         const response = await axios(`${SITEROUTES.VIDEOGAMES}/${id}`)
@@ -48,6 +61,8 @@ const Details = () => {
       } catch (error) {
         window.alert(error);
 
+      } finally {
+        dispatch(setLoading(false));
       }
     }
     fetchVideogame()
@@ -57,15 +72,26 @@ const Details = () => {
   const { name, description, image, released, genres, platforms, source, rating } = videogame
   const sourceName = SOURCES.find((s) => s.id === source)
   const releasedDate = formatDate(released)
-  const imageUrl= source===1 ? SITEROUTES.IMAGES+image : image
+  const imageUrl = source === 1 ? SITEROUTES.IMAGES + image : image
   return (
     <div>
 
       {name &&
         <div>
           <div className={styles.options}>
-            {source === 1
-              ? <button onClick={handleOnClick}> {ICONS.DELETE} Delete Videogame</button>
+            {source === 1 && !inDelete
+              ? (<>
+                <button onClick={handleOnEdit}> {ICONS.CHANGE} Edit Videogame</button>
+                <button onClick={handleSelectDelete}> {ICONS.DELETE} Delete Videogame</button>
+              </>)
+              : <></>
+            }
+            {source === 1 && inDelete
+              ? (<>
+                <label htmlFor="delete">Are you sure you want to delete the selected videogame?</label>
+                <button onClick={handleOnDelete}> {ICONS.OK} Yes</button>
+                <button onClick={handleSelectDelete}> {ICONS.CANCEL} No</button>
+              </>)
               : <></>
             }
             <Link to={SITEROUTES.HOME} >
@@ -179,7 +205,7 @@ const Details = () => {
           </div>
         </div>
       }
-
+      <Spinner />
     </div>
   )
 }

@@ -21,6 +21,8 @@ export const CLEAR_ALL = 'CLEAR_ALL';
 export const ADD_VIDEOGAME = 'ADD_VIDEOGAME';
 //BORRO EL VIDEOGAME despues de borrar
 export const DEL_VIDEOGAME = 'DEL_VIDEOGAME';
+//modifico EL VIDEOGAME 
+export const SET_VIDEOGAME = 'SET_VIDEOGAME';
 
 
 //limpia selectedfitlers cuando salgo sin selecionar nada en selectedfilters

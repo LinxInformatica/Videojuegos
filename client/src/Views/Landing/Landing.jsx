@@ -24,9 +24,9 @@ const Landing = () => {
         dispatch(getAllVideogames()),
       ]);
 
-
     } catch (error) {
       window.alert(error);
+
     } finally {
       dispatch(setLoading(false));
       navigate('/home');
@@ -37,7 +37,7 @@ const Landing = () => {
 
   return (
     <div >
-      <button className={styles.loaderButton} onClick={handleOnClick}>Click Here to Enjoy VIDEOGAMES!!</button>
+      {!loading && <button className={styles.loaderButton} onClick={handleOnClick}>Click Here to Enjoy VIDEOGAMES!!</button>}
       <Spinner />
 
     </div>

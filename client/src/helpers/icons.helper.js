@@ -2,6 +2,7 @@ const ICONS = {
     OK: '✔️',
     CANCEL:'❌',
     DELETE:'🗑️',
+    CHANGE:'✏️',
     FIRST:'<<',
     PREV:'<',
     NEXT:'>',

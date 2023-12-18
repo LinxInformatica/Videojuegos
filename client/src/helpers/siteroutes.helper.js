@@ -1,4 +1,4 @@
-const       SITEROUTES = {
+const SITEROUTES = {
     URL: 'http://localhost:3001',
     VIDEOGAMES:'http://localhost:3001/videogames',
     GENRES:'http://localhost:3001/genres',
@@ -8,10 +8,14 @@ const       SITEROUTES = {
     LANDING: '/',
     HOME: '/home',
     FORM: '/form',
+    FORM_EDIT: '/form/:id',
+    PATHFORM_EDIT: '/form/',
     SELECT_FILTERS:'/filters/select',
     SELECT_ORDERS:'/orders/select',
     DETAILS: '/details/:id',
-    FORMSETUP: '/setup'
+    DETAIL:'/details/',
+    FORMSETUP: '/setup',
+    
     
 };
 export default SITEROUTES

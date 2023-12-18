@@ -42,6 +42,7 @@ function App() {
               <Route path={SITEROUTES.LANDING} element={<Landing />} />
               <Route path={SITEROUTES.HOME} element={<Home />} />
               <Route path={SITEROUTES.FORM} element={<Form />} />
+              <Route path={SITEROUTES.FORM_EDIT} element={<Form />} />
               <Route path={SITEROUTES.DETAILS} element={<Details />} />
               <Route path={SITEROUTES.SELECT_FILTERS} element={<SelectFilters />} />
               <Route path={SITEROUTES.SELECT_ORDERS} element={<SelectOrders />} />

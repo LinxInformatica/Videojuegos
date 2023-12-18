@@ -50,7 +50,6 @@ const FormSetup = () => {
       dispatch(setPageSize(userData.page_size));
       navigate(SITEROUTES.HOME);
     } catch (error) {
-      console.log(error)
       window.alert(error.response.data.error);
 
     }

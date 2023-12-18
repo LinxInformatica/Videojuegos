@@ -7,8 +7,11 @@ export { setLanding } from "./actions/setLanding"
 
 export { delFilter } from "./actions/delFilter"
 export { clearAll } from "./actions/clearAll"
+
 export { addVideogame } from "./actions/addVideogame"
 export { delVideogame } from "./actions/delVideogame"
+export { setVideogame } from "./actions/setVideogame"
+
 
 export { getSelectedFilters } from "./actions/getSelectedFilters"
 export { setSelectedFilters } from "./actions/setSelectedFilters"

@@ -17,10 +17,13 @@ async function postVideogameController(req, res) {
         !genres) return res.status(400).json({ error: "Faltan Datos" })
 
     try {
-        const { videogame, created } = await postVideogame(id, name, description, platforms, image, imageBase64, released, rating, genres)
-        if (!created) return res.status(409).json({ error: 'Dato ya existente' })
+        const { videogame, created ,edited} = await postVideogame(id, name, description, platforms, image, imageBase64, released, rating, genres)
+        
+        if (edited) return res.status(201).json({...videogame,edited:true})
+        
+        if (created) return res.status(200).json({...videogame,created:true})
 
-        return res.status(200).json(videogame)
+        //return res.status(200).json(videogame)
 
     } catch (error) {
         console.log('error',error)

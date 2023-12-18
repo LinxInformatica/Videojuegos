@@ -8,7 +8,6 @@ async function postSetupController(req, res) {
 
     try {
         const { setup,created} = await postSetup(page_size,filters,orders)
-        console.log(setup)
         return res.status(200).json(setup)
 
     } catch (error) {

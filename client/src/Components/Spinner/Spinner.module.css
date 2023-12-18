@@ -1,10 +1,10 @@
 .loader {
   margin: 0 auto;
   position: absolute;
-  top:20%;
-  left:50%;
-  width: 15%; 
-  height: 15%;
+  top:38%;
+  left:40%;
+  width: 18%; 
+  height: 18%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

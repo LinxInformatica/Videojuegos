@@ -1,7 +1,7 @@
 import React from 'react'
 
-const validation = (userData, errors, setErrors) => {
-    
+const validation = (userData, errors, setErrors,allVideogames) => {
+
     const newErrors = errors
     newErrors.errors = false
     // validar name    
@@ -9,7 +9,13 @@ const validation = (userData, errors, setErrors) => {
         newErrors.name = 'Enter the name of the Videogame'
         newErrors.errors = true
     } else {
-        newErrors.name = ''
+        const nameExists=allVideogames.find((videogame)=>videogame.name.toUpperCase()===userData.name.toUpperCase() && videogame.id!==userData.id)
+        if(nameExists){
+            newErrors.name = 'The name exists!!'
+            newErrors.errors = true
+        } else{
+            newErrors.name=''
+        }
     }
 
     if (!userData.description) {
