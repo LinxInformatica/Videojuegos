@@ -26,7 +26,6 @@ async function postVideogameController(req, res) {
         //return res.status(200).json(videogame)
 
     } catch (error) {
-        console.log('error',error)
         res.status(500).json({ error: error.message })
     }
 }

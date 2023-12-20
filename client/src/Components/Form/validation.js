@@ -39,8 +39,8 @@ const validation = (userData, errors, setErrors,allVideogames) => {
         newErrors.released = ''
     }
 
-    if (userData.rating < 0 || userData.rating > 10) {
-        newErrors.rating = 'The rating should be between 0 and 10'
+    if (userData.rating < 0 || userData.rating > 5) {
+        newErrors.rating = 'The rating should be between 0 and 5'
         newErrors.errors = true
     } else {
         newErrors.rating = ''

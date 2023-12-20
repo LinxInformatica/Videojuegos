@@ -23,7 +23,7 @@ function sequelizeToVideogame(videogames) {
                 existingVideogame.platforms.push({ id: platformId, name: platformName });
             }
         } else {
-            // Si no existe, agregar un nuevo juego con género y plataforma inicial
+            // Si no existe, agregar un nuevo videojuegojuego con género y plataforma inicial
             const newVideogame = {
                 id: videogameId,
                 name: videogame.name,

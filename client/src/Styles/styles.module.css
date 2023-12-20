@@ -99,14 +99,14 @@
   color:white
 }
 .loaderButton {
-  background-color: rgb(207, 58, 20);
+  background-color: rgb(236, 238, 100);
   border-style: solid;
   border-color: red;
-  opacity: 70%;
-  height: 150px;
+  opacity: 60%;
+  height: 180px;
   width: 250px;
   margin: 20%;
-  color:black;
+  color:red;
   font-size: 1.2rem;
   cursor:pointer;
   animation: resizeLoaderButton 2s infinite; 

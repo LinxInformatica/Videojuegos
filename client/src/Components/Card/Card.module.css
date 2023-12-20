@@ -153,5 +153,32 @@
   background-color: black;
   color:white;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.22);
-  font-size: .7rem;
+  font-size: .6rem;
 }
+
+.starsRating {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.stars {
+  height: 5px;
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.starsBg {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.stars::after {
+  content: '⭐⭐⭐⭐⭐';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% * var(--rating)); 
+  overflow: hidden;
+  font-size: 14px;
+ }

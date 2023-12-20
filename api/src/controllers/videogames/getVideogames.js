@@ -12,7 +12,7 @@ const getVideogames = async () => {
     //datos de la BD
     try {
         const videogamesLocal = await getVideogamesLocal()
-        return [...videogamesLocal]
+        //return [...videogamesLocal]
         
         const videogamesApi1 = await getVideogamesApi(1,25)
         const videogamesApi2 = await getVideogamesApi(2,25)
@@ -42,6 +42,7 @@ const getVideogamesLocal = async () => {
             const videogamesFormat = sequelizeToVideogame(videogames)
             const videogamesSource = videogamesFormat.map((video) => ({ ...video, source: 1 }))
             return videogamesSource
+            
         }
         return []
 

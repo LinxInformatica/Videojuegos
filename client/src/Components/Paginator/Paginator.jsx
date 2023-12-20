@@ -19,15 +19,16 @@ const Paginator = () => {
     const totalOfPages = useSelector((state) => state.totalOfPages)
     const pagesToShow = []
     for (let i = 1; i <= totalOfPages; i++) {
-        pagesToShow.push({id:i,enable:true})
+        pagesToShow.push({ id: i, enable: true })
     }
 
     const handleChangePage = (event) => {
+        event.preventDefault()
         dispatch(setCurrentPage(event.target.id))
     }
     return (
         <div className={styles.cards}>
-            {totalItems>0 && (
+            {totalItems > 0 && (
                 <div>
                     <button onClick={handleChangePage}
                         key={PAGINATOR.FIRST}

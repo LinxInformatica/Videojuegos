@@ -10,15 +10,20 @@ const Card = (props) => {
   //para saber si vino de la api o no 
   const api = source === 1 ? false : true
   const date = formatDate(released)
-  
+  const ratingPorcentual=(rating/5).toFixed(2)
   const imageURL = api ? image : `${SITEROUTES.IMAGES}${image}`
   return (
     <div >
       <Link to={`/details/${id}`} className={styles.card}>
         <div>
-          <label className={styles.rating}>Rating:{rating}</label>
-          <label className={styles.released}>{date}</label>
+          <label className={styles.released}>Rel.:{date}</label>
           <label className={styles.source}>{api ? 'API' : 'LOCAL'}</label>
+          <div className={styles.cardsRating}>
+            <div className={styles.stars} style={{ "--rating": ratingPorcentual }}>
+              <div className={styles.starsBg}>⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+
           <img
             src={imageURL}
             alt={imageURL}

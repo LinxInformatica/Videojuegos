@@ -10,7 +10,8 @@ const Navbar = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const handleOnClick = () => {
+  const handleOnClick = (event) => {
+    event.preventDefault()
     dispatch(clearAll())
     navigate('/')
   }
@@ -27,15 +28,16 @@ const Navbar = () => {
         </Link>
         {(!isNew && !isDetail && !isEditing) && (
           <>
-            <Link to={SITEROUTES.FORM}>
-              <button className={pathname === SITEROUTES.FORM ? styles.selected : styles.unselected}>New Videogame</button>
-            </Link>
             <Link to={SITEROUTES.SELECT_ORDERS}>
               <button className={pathname === SITEROUTES.SELECT_ORDERS ? styles.selected : styles.unselected}>Select Orders</button>
             </Link>
             <Link to={SITEROUTES.SELECT_FILTERS}>
               <button className={pathname === SITEROUTES.SELECT_FILTERS ? styles.selected : styles.unselected}>Select Filters</button>
             </Link>
+            <Link to={SITEROUTES.FORM}>
+              <button className={pathname === SITEROUTES.FORM ? styles.selected : styles.unselected}>New Videogame</button>
+            </Link>
+           
             <Link to={SITEROUTES.FORMSETUP}>
               <button className={pathname === SITEROUTES.FORMSETUP ? styles.selected : styles.unselected}>Setup</button>
             </Link>
