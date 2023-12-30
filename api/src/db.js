@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`,
   {
     logging: false,
     native: false,
@@ -24,15 +24,8 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
       raw: true, // Establece raw: true globalmente
     },
   }
-  //   logging: false, // set to console.log to see the raw SQL queries
-  //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  //   define: {
-  //     timestamps: false,
-  //   },
-  //   // query: {
-  //   //   raw: true, // Establece raw: true globalmente
-  //   // },
 );
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
