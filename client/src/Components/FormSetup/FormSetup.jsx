@@ -65,64 +65,48 @@ const FormSetup = () => {
       </div>
 
       <div className={styles.formBody}>
-        <table>
-          <tbody>
-            <tr>
-              <td className={styles.formLabel}>
-                <label htmlFor="page_size" >Page Size:</label>
-              </td>
-              <td>
-                <input type="number" name="page_size" className={styles.inputRating} value={userData.page_size} placeholder={errors.page_size} onChange={handleChange} />
-                <label htmlFor="page_size" className={styles.formError}>{errors.page_size}</label>
-              </td>
-            </tr>
-            {orders.length > 0 && <tr>
-              <td className={styles.formLabel}>
-                <label htmlFor="orders" >Orders:</label>
-              </td>
-              <td>
-                <div className={styles.formContainer}>
-                  <div className={styles.formContainer}>
-                    {/* Lista de géneros para seleccionar */}
-                    {orders.map((order) => (
-                      <div className={styles.formContainer} key={order.id}>
-                        <button
-                          className={styles.selected}>
-                          {order.name}
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </td>
-            </tr>
-            }
-            {filters.length > 0 &&
-              <tr>
-                <td className={styles.formLabel}>
-                  <label htmlFor="Filters" >Filters:</label>
-                </td>
-                <td>
-                  <div className={styles.formContainer}>
-                    <div className={styles.formContainer}>
-                      {/* Lista de géneros para seleccionar */}
-                      {filters.map((filter) => (
-                        <div className={styles.formContainer} key={filter.id}>
-                          <button
-                            className={styles.selected}>
-                            {filter.name}
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            }
-
-          </tbody>
-        </table>
+        <label className={styles.formLabel} htmlFor="page_size" >Page Size:</label>
+        <input type="number" name="page_size" className={styles.inputRating} value={userData.page_size} placeholder={errors.page_size} onChange={handleChange} />
+        <label htmlFor="page_size" className={styles.formError}>{errors.page_size}</label>
       </div>
+
+      {orders.length > 0 &&
+        <div>
+          <label className={styles.formLabel} htmlFor="orders" >Orders:</label>
+          <div className={styles.formContainer}>
+            <div className={styles.formContainer}>
+              {/* Lista de géneros para seleccionar */}
+              {orders.map((order) => (
+                <div className={styles.formContainer} key={order.id}>
+                  <button
+                    className={styles.selected}>
+                    {order.name}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      }
+
+      {filters.length > 0 &&
+        <div>
+          <label className={styles.formLabel} htmlFor="Filters" >Filters:</label>
+          <div className={styles.formContainer}>
+            <div className={styles.formContainer}>
+              {/* Lista de géneros para seleccionar */}
+              {filters.map((filter) => (
+                <div className={styles.formContainer} key={filter.id}>
+                  <button
+                    className={styles.selected}>
+                    {filter.name}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      }
     </form>
   )
 }

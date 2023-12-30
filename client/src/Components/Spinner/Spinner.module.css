@@ -1,48 +1,76 @@
-.loader {
-  margin: 0 auto;
-  position: absolute;
-  top:38%;
-  left:40%;
-  width: 18%; 
-  height: 18%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+.spinnerContainer {
+  position: relative;
+  height: 100vh; /* Ajusta la altura según tus necesidades */
 }
 
-.loader span {
-  position: absolute; 
-  /* top: 0; */
-  /* left: 0; */
-  width: 100%;
-  height: 100%;
-  transform: rotate(calc(18deg * var(--i)));
-}
-
-.loader span::before {
-  content: "";
+.spinnerRing {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 15px;
-  height: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: transparent;
+  border: 3px solid #3c3c3c;
   border-radius: 50%;
-  background:  rgb(94, 255, 45);
-  box-shadow: 0 0 10px #00ff0a, 0 0 20px #00ff0a, 0 0 40px #00ff0a,
-    0 0 60px #00ff0a, 0 0 80px #00ff0a, 0 0 100px #00ff0a;
-  animation: animate34 2s linear infinite;
-  animation-delay: calc(0.1s * var(--i));
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 20px;
+  color: #fff000;
+  letter-spacing: 2px;
+  /* text-transform: uppercase; */
+  text-shadow: 1px 2px 10px #fff000;
+  box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.5);
+  /* background: linear-gradient(0deg, #333, #000); */
+  box-shadow: 0 0 0 4px #353535, 0 0 0 5px #3e3e3e, inset 0 0 10px rgba(0, 0, 0, 1), 0 5px 20px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes animate34 {
-  0% {
-    transform: scale(1);
-  }
+.spinnerRing:before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  height: 100%;
+  width: 100%;
+  border: 3px solid transparent;
+  border-top: 3px solid #fff000;
+  border-right: 3px solid #fff000;
+  border-radius: 50%;
+  animation: animateCircle 2s linear infinite;
+}
 
-  80%,
+.spinnerSpan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.spinnerSpan:before {
+  display: inline-block;
+  font-size: 14px;
+  margin-top: -7px;
+  color: #fff000;
+  animation: animateText 2s linear infinite;
+}
+
+@keyframes animateCircle {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
-    transform: scale(0);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animateText {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

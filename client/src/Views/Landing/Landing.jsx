@@ -23,14 +23,18 @@ const Landing = () => {
         dispatch(getAllPlatforms()),
         dispatch(getAllVideogames()),
       ]);
+      dispatch(setLoading(false));
+      dispatch(setLanding(false));
+      navigate('/home');
 
     } catch (error) {
-      window.alert(error);
-
-    } finally {
+      if(error.code==='ERR_NETWORK'){
+        window.alert('Please check the internet conecction or the state of the HTTP server');
+      }else{
+        window.alert(error);
+      }  
       dispatch(setLoading(false));
-      navigate('/home');
-      dispatch(setLanding(false));
+      dispatch(setLanding(true));
     }
 
   };

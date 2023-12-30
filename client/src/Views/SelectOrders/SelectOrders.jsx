@@ -64,7 +64,7 @@ const SelectOrders = () => {
               {selectedOrders.map((order) => (
                 <button
                   className={styles.unselected}
-                  key={`${order.field}${order.key}`}>
+                  key={`${order.field}${order.id}`}>
                   {order.name}
                 </button>
               ))}

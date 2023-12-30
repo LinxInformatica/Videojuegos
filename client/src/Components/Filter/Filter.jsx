@@ -9,7 +9,8 @@ const Filter = (props) => {
 
   const dispatch = useDispatch()
 
-  const onDelete = () => {
+  const onDelete = (event) => {
+    event.preventDefault()
     dispatch(delFilter(uniqueId))
   }
 
