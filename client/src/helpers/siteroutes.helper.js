@@ -4,7 +4,7 @@ const SITEROUTES = {
     // GENRES:'http://localhost:3001/genres',
     // PLATFORMS:'http://localhost:3001/platforms',
     // SETUP:'http://localhost:3001/setup',
-    IMAGES:'http://localhost:3001/images/',
+    //IMAGES:'http://localhost:3001/images/',
 
 
     URL: 'https://videogames-diegolepore.onrender.com',
@@ -12,8 +12,8 @@ const SITEROUTES = {
     GENRES: `https://videogames-diegolepore.onrender.com/genres`,
     PLATFORMS: `https://videogames-diegolepore.onrender.com/platforms`,
     SETUP: `https://videogames-diegolepore.onrender.com/setup`,
-    
-    //IMAGES: 'diego-lepores-projects/videojuegos/images/',
+
+    IMAGES: 'https://vercel.com/diego-lepores-projects/videojuegos/images/',
 
     LANDING: '/',
     HOME: '/home',
