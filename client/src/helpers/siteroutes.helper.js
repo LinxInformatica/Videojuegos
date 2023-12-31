@@ -13,7 +13,7 @@ const SITEROUTES = {
     PLATFORMS: `https://videogames-diegolepore.onrender.com/platforms`,
     SETUP: `https://videogames-diegolepore.onrender.com/setup`,
 
-    IMAGES: 'https://vercel.com/diego-lepores-projects/videojuegos/images/',
+    IMAGES: 'https://videogames-diegolepore.onrender.com/images/',
 
     LANDING: '/',
     HOME: '/home',
