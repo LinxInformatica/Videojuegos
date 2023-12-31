@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import SITEROUTES from '../../helpers/siteroutes.helper'
 import { useDispatch } from 'react-redux'
 import { clearAll } from '../../Redux/actions'
-import styles from '../../Styles/Styles.module.css'
+import styles from '../../Styles/styles.module.css'
 
 const Navbar = () => {
   const dispatch = useDispatch()
