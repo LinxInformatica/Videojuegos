@@ -5,6 +5,8 @@ const SITEROUTES = {
     // PLATFORMS:'http://localhost:3001/platforms',
     // SETUP:'http://localhost:3001/setup',
     // IMAGES:'http://localhost:3001/images/',
+
+    
     URL: 'https://videogames-diegolepore.onrender.com',
     VIDEOGAMES: `${URL}/videogames`,
     GENRES: `${URL}/genres`,

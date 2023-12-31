@@ -7,12 +7,14 @@ export const getSetup = () => {
    try {
       return async (dispatch) => {
          const { data } = await axios.get(endpoint)
+         console.log('data',data)
          return dispatch({
             type: GET_SETUP,
             payload: data,
          });
       }
    } catch (error) {
+      console.log(error)
       window.alert(error)
    }
 };
