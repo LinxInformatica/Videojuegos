@@ -26,6 +26,7 @@ const Navbar = () => {
         <Link to={SITEROUTES.HOME}>
           <button className={pathname === SITEROUTES.HOME ? styles.selected : styles.unselected}>Videogames</button>
         </Link>
+        
         {(!isNew && !isDetail && !isEditing) && (
           <>
             <Link to={SITEROUTES.SELECT_ORDERS}>

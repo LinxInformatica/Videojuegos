@@ -64,15 +64,15 @@ const FormSetup = () => {
         </Link>
       </div>
 
-      <div className={styles.formBody}>
-        <label className={styles.formLabel} htmlFor="page_size" >Page Size:</label>
+      <div className={styles.header}>
+        <label className={styles.label} htmlFor="page_size" >Page Size:</label>
         <input type="number" name="page_size" className={styles.inputRating} value={userData.page_size} placeholder={errors.page_size} onChange={handleChange} />
         <label htmlFor="page_size" className={styles.formError}>{errors.page_size}</label>
       </div>
 
       {orders.length > 0 &&
-        <div>
-          <label className={styles.formLabel} htmlFor="orders" >Orders:</label>
+        <div className={styles.header}>
+          <label className={styles.label} htmlFor="orders" >Orders:</label>
           <div className={styles.formContainer}>
             <div className={styles.formContainer}>
               {/* Lista de géneros para seleccionar */}
@@ -90,8 +90,8 @@ const FormSetup = () => {
       }
 
       {filters.length > 0 &&
-        <div>
-          <label className={styles.formLabel} htmlFor="Filters" >Filters:</label>
+        <div className={styles.header}>
+          <label className={styles.label} htmlFor="Filters" >Filters:</label>
           <div className={styles.formContainer}>
             <div className={styles.formContainer}>
               {/* Lista de géneros para seleccionar */}
