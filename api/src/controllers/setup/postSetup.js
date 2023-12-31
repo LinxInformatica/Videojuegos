@@ -1,25 +1,25 @@
 const { Setup } = require("../../db");
 
-const postSetup = async (page_size, filters,orders) => {
-    const filtersToText=JSON.stringify(filters)
-    const ordersToText=JSON.stringify(orders)
-
+const postSetup = async (page_size, filters, orders) => {
+    const filtersToText = JSON.stringify(filters)
+    const ordersToText = JSON.stringify(orders)
+    const newSetup = {
+        pk: 1,
+        page_size: page_size,
+        filters: filtersToText,
+        orders: ordersToText
+    }
     try {
-        let [setup, created] = await Setup.findOrCreate({
+        const [setup, created] = await Setup.findOrCreate({
             where: { pk: 1 },
-            defaults: {
-                page_size,
-                filters:filtersToText,
-                orders:ordersToText
-            }
+            defaults: newSetup
         })
         if (!created) {
-            setup.page_size = page_size
-            setup.filters=filtersToText
-            setup.orders=ordersToText
-            await setup.save()
+            await Setup.update(newSetup, {
+                where: { pk: 1 },
+            })
         }
-        return { setup}
+        return { newSetup }
 
     } catch (error) {
         return ({ error: error.message })
