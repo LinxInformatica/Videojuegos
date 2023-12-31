@@ -5,7 +5,7 @@ const postSetup = async (page_size, filters,orders) => {
     const ordersToText=JSON.stringify(orders)
 
     try {
-        const [setup, created] = await Setup.findOrCreate({
+        let [setup, created] = await Setup.findOrCreate({
             where: { pk: 1 },
             defaults: {
                 page_size,
