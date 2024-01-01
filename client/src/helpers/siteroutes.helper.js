@@ -1,18 +1,18 @@
 const SITEROUTES = {
+    // local
     // URL: 'http://localhost:3001',
     // VIDEOGAMES:'http://localhost:3001/videogames',
     // GENRES:'http://localhost:3001/genres',
     // PLATFORMS:'http://localhost:3001/platforms',
     // SETUP:'http://localhost:3001/setup',
-    //IMAGES:'http://localhost:3001/images/',
+    // IMAGES:'http://localhost:3001/images/',
 
-
+    //deploy
     URL: 'https://videogames-diegolepore.onrender.com',
     VIDEOGAMES: `https://videogames-diegolepore.onrender.com/videogames`,
     GENRES: `https://videogames-diegolepore.onrender.com/genres`,
     PLATFORMS: `https://videogames-diegolepore.onrender.com/platforms`,
     SETUP: `https://videogames-diegolepore.onrender.com/setup`,
-
     IMAGES: 'https://videogames-diegolepore.onrender.com/images/',
 
     LANDING: '/',

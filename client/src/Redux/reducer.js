@@ -115,9 +115,11 @@ export default (state = initialState, { type, payload }) => {
             }
 
         case SET_VIDEOGAME:
+            const index=state.allVideogames.findIndex((videogame) => videogame.id === payload.id)
+            state.allVideogames[index]=payload
             return {
                 ...state,
-                allVideogames: [...state.allVideogames.filter((videogame) => videogame.id !== payload.id),payload]
+                allVideogames: [...state.allVideogames]
             }
 
         case CLEAR_ALL_FILTERS:

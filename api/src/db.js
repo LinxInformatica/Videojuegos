@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST, DIALECT_OPTIONS, SSL
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`,
@@ -11,15 +11,11 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
     logging: false,
     native: false,
     dialect: 'postgres',
-    ssl: true,
+    ssl: SSL,
     define: {
       timestamps: false,
     },
-    dialectOptions: {
-      ssl: {
-        rejectUnauthorized: false,
-      },
-    },
+    dialectOptions: JSON.parse(DIALECT_OPTIONS),
     query: {
       raw: true, // Establece raw: true globalmente
     },

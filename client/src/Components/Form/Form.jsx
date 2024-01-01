@@ -84,7 +84,6 @@ const Form = () => {
         released: userData.released
       }
       const { data, status } = await axios.post(`${SITEROUTES.VIDEOGAMES}`, formData)
-      //swal("Good job!", "You clicked the button!", "success");
       if (status === 200) window.alert('The Videogame was added successfully')
       if (status === 201) window.alert('The Videogame was changed successfully')
       //agrego el videogame al estdo global
