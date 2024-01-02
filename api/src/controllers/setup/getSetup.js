@@ -13,7 +13,7 @@ const getSetup = async () => {
                 orders:'[]'
             }
         })
-        console.log(setup)
+
         return setup
         
     } catch (error) {
