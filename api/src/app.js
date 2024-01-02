@@ -25,9 +25,10 @@ server.use((req, res, next) => {
   next();
 });
 
-const pathImages=path.join(__dirname, '../..','images/')
+const pathImages=path.join(__dirname, '../images/')
 server.use('/images', express.static(pathImages));
 server.use('/', routes);
+console.log(pathImages)
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
