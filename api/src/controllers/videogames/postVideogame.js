@@ -13,7 +13,7 @@ const postVideogame = async (id, name, description, platforms, image, imageBase6
     // Ruta donde se guardará el archivo
     const images = '../../../../images/'
     const filePath = path.join(__dirname, images, fileName);
-
+    console.log(filePath)
     let edited = false
     try {
         if (!fs.existsSync(filePath)){
