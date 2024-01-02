@@ -13,7 +13,7 @@ const SITEROUTES = {
     GENRES: `https://videogames-diegolepore.onrender.com/genres`,
     PLATFORMS: `https://videogames-diegolepore.onrender.com/platforms`,
     SETUP: `https://videogames-diegolepore.onrender.com/setup`,
-    IMAGES: 'https://videogames-diegolepore.onrender.com/api/images/',
+    IMAGES: 'https://videogames-diegolepore.onrender.com/images/',
 
     LANDING: '/',
     HOME: '/home',
