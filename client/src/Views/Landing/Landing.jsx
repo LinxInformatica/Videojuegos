@@ -29,6 +29,7 @@ const Landing = () => {
 
     } catch (error) {
       if(error.code==='ERR_NETWORK'){
+        console.log(error)
         window.alert('Please check the internet conecction or the state of the HTTP server');
       }else{
 

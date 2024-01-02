@@ -16,7 +16,6 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
       timestamps: false,
     },
     dialectOptions: JSON.parse(DIALECT_OPTIONS),
-    // dialectOptions:{ssl:{rejectUnauthorized:false}},
     query: {
       raw: true, // Establece raw: true globalmente
     },
