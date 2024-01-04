@@ -1,3 +1,10 @@
+require('dotenv').config();
+
+const {
+  DB_USER, DB_PASSWORD, DB_HOST, DIALECT_OPTIONS, SSL
+} = process.env;
+
+
 const { Sequelize, DataTypes } = require("sequelize");
 
 const {Platform,Videogame}= require('../src/db')

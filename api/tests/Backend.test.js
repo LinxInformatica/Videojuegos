@@ -1,9 +1,18 @@
+require('dotenv').config();
+
+const {
+    DB_USER, DB_PASSWORD, DB_HOST, DIALECT_OPTIONS, SSL
+  } = process.env;
+  
+  
 const { Sequelize, DataTypes } = require("sequelize");
 
 const { Videogame } = require('../src/db')
 
 const { postVideogameController } = require("../src/controllers/postVideogameController")
 
+
+  
 const response = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn()
@@ -52,18 +61,10 @@ describe("Videogame", () => {
 
     });
 
-    xit("Deben haberse creado todos los registros/instancias correspondientes", async () => {
+    it("Deben haberse creado todos los registros/instancias correspondientes", async () => {
         const response3 = response
         await postVideogameController(Videogame3, response3);
         expect(response3.status).toHaveBeenCalledWith(200);
-        //const results = await Videogame.findAll();
-        // expect(results).toHaveLength(3);
-        // expect(results.every((r) => r.name)).toBe(true);
-        // expect(results.every((r) => r.id)).toBe(true);
-        // expect(results.every((r) => r.area)).toBe(true);
-        // expect(results.some((r) => r.name === "Dr.Chapatín"));
-        // expect(results.some((r) => r.name === "Dr.Strange"));
-        // expect(results.some((r) => r.area === "Time Traveler"));
-        // expect(results.some((r) => r.area === "Queles"));
+        
     });
 });
