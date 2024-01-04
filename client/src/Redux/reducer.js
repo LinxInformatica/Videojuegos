@@ -35,6 +35,7 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {
+        //cargar viodeogames
         case ADD_VIDEOGAMES:
             return {
                 ...state,
@@ -42,6 +43,7 @@ export default (state = initialState, { type, payload }) => {
                 filteredVideogames: payload
             };
 
+        // cargar generos
         case GET_ALL_GENRES:
             const orderedGenres = payload.sort((a, b) => {
                 if (a.name < b.name) return -1;
@@ -49,6 +51,7 @@ export default (state = initialState, { type, payload }) => {
             })
             return { ...state, allGenres: orderedGenres };
 
+        //cargar plataformas
         case GET_ALL_PLATFORMS:
             const orderedPlatforms = payload.sort((a, b) => {
                 if (a.name < b.name) return -1;
@@ -71,6 +74,7 @@ export default (state = initialState, { type, payload }) => {
                 landing: payload
             };
 
+        //borro un filtro
         case DEL_FILTER:
             const newFilter = state.allFilters.filter((filter) => filter.uniqueId !== payload)
             return {
@@ -78,6 +82,7 @@ export default (state = initialState, { type, payload }) => {
                 allFilters: [...newFilter]
             };
 
+        //borro un orden
         case DEL_ORDER:
             const delOrder = state.allOrders.filter((order) => order.id !== payload)
             return {
@@ -85,6 +90,7 @@ export default (state = initialState, { type, payload }) => {
                 allOrders: [...delOrder]
             };
 
+        //cambio estado del orden busco por nextId
         case CHANGE_ORDER:
             //busco por payload el order a cambiar
             const orderActual = ORDERS.find((order) => order.id === payload)
@@ -97,24 +103,29 @@ export default (state = initialState, { type, payload }) => {
                 allOrders: [...newOrder]
             };
 
+        //logout
         case CLEAR_ALL:
             return {
                 ...state,
                 landing: true,
                 loading: false,
             }
+
+        //agrego videogame por new videogame
         case ADD_VIDEOGAME:
             return {
                 ...state,
                 allVideogames: [...state.allVideogames, payload]
             }
 
+        //borro videogame por delete
         case DEL_VIDEOGAME:
             return {
                 ...state,
                 allVideogames: [...state.allVideogames.filter((videogame) => videogame.id !== payload)]
             }
 
+        //mofidico videogames desde edit
         case SET_VIDEOGAME:
             const index = state.allVideogames.findIndex((videogame) => videogame.id === payload.id)
             state.allVideogames[index] = payload
@@ -123,6 +134,7 @@ export default (state = initialState, { type, payload }) => {
                 allVideogames: [...state.allVideogames]
             }
 
+        //borro todos los filtros de filterbar
         case CLEAR_ALL_FILTERS:
             return {
                 ...state,
@@ -130,7 +142,7 @@ export default (state = initialState, { type, payload }) => {
                 currentPage: 1
             }
 
-
+        //limpoio todos los filtros de selecterdfiltes
         case CLEAR_SELECTED_FILTERS:
             let newClearSelectedFilters = []
             if (payload) {
@@ -140,20 +152,23 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 selectedFilters: [...newClearSelectedFilters]
             }
+
+        //sleeciono todos los filtros de selected filters
         case SELECT_ALL_SELECTED_FILTERS:
-            // filtro los selecterdfiltered con ese type
+            // filtro los selecterdfiltered distintos al tupe
             const seletedFiltered = state.selectedFilters.filter((sel) => sel.type !== payload);
 
             //funcion para devolver formateado el objeto
             const formatFilter = (filter) => {
                 return {
                     id: filter.id,
-                    name: formatName(filter.name,payload),
+                    name: formatName(filter.name, payload),
                     type: payload,
                     uniqueId: `${payload}${filter.id}`,
                     order: filter.order
                 }
             }
+            //agrego todos los valores del type 
             let newFilterType = []
             if (payload === FILTERTYPES.GENRE) {
                 newFilterType = state.allGenres.map((filter) => formatFilter(filter))
@@ -169,6 +184,7 @@ export default (state = initialState, { type, payload }) => {
                 selectedFilters: [...seletedFiltered, ...newFilterType]
             }
 
+        //paso los filtros a selected  para sabeer cuales estan elegidos 
         case GET_SELECTED_FILTERS:
 
             return {
@@ -176,6 +192,7 @@ export default (state = initialState, { type, payload }) => {
                 selectedFilters: [...state.allFilters]
             }
 
+        //paso 
         case SET_SELECTED_FILTERS:
             let newSelectedFilters = []
             if (state.selectedFilters.find((selected) => selected.uniqueId === payload.uniqueId)) {
@@ -183,7 +200,7 @@ export default (state = initialState, { type, payload }) => {
             } else {
                 state.selectedFilters.push({
                     id: payload.id,
-                    name: formatName(payload.name,payload.type),
+                    name: formatName(payload.name, payload.type),
                     uniqueId: payload.uniqueId,
                     type: payload.type,
                     order: payload.order
@@ -288,7 +305,7 @@ export default (state = initialState, { type, payload }) => {
             //por si viene =0 uso helper de paginator
             const page_items = state.page_size <= 0 ? PAGINATOR.PAGE_SIZE : state.page_size
             const totalOfPages = Math.ceil(payload / page_items)
-            const current= (state.currentPage==0 || state.currentPage>totalOfPages)? 1 : state.currentPage
+            const current = (state.currentPage == 0 || state.currentPage > totalOfPages) ? 1 : state.currentPage
             return {
                 ...state,
                 currentPage: current,
@@ -322,7 +339,11 @@ export default (state = initialState, { type, payload }) => {
                 ...state,
                 currentPage: parseInt(page)
             }
-
+        case SET_PAGE_SIZE:
+            return {
+                ...state,
+                page_size: payload
+            }
         case GET_SETUP:
             const { page_size, filters, orders } = payload
             //convierte de texto a array de obj
@@ -334,11 +355,7 @@ export default (state = initialState, { type, payload }) => {
                 allFilters: allFilters,
                 allOrders: allOrders
             }
-        case SET_PAGE_SIZE:
-            return {
-                ...state,
-                page_size: payload
-            }
+
 
         default:
             return { ...state }

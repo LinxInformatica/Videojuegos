@@ -70,7 +70,7 @@ const FormSetup = () => {
         <label htmlFor="page_size" className={styles.formError}>{errors.page_size}</label>
       </div>
 
-      {orders.length > 0 &&
+      {orders.length > 0 ?
         <div className={styles.header}>
           <label className={styles.label} htmlFor="orders" >Orders:</label>
           <div className={styles.formContainer}>
@@ -87,9 +87,14 @@ const FormSetup = () => {
             </div>
           </div>
         </div>
+        : (
+          <div className={styles.header}>
+            <label className={styles.label} htmlFor="orders" >Orders: No orders selected ! You can select genres for your next login</label>
+          </div>
+        )
       }
 
-      {filters.length > 0 &&
+      {filters.length > 0 ?
         <div className={styles.header}>
           <label className={styles.label} htmlFor="Filters" >Filters:</label>
           <div className={styles.formContainer}>
@@ -106,6 +111,11 @@ const FormSetup = () => {
             </div>
           </div>
         </div>
+        : (
+          <div className={styles.header}>
+              <label className={styles.label} htmlFor="orders" >Filters: No filters selected ! You can select filters for your next login</label>
+          </div>
+        )
       }
     </form>
   )
