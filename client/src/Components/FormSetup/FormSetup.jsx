@@ -79,7 +79,7 @@ const FormSetup = () => {
               {orders.map((order) => (
                 <div className={styles.formContainer} key={order.id}>
                   <button
-                    className={styles.selected}>
+                    className={styles.filterButton}>
                     {order.name}
                   </button>
                 </div>
@@ -98,7 +98,7 @@ const FormSetup = () => {
               {filters.map((filter) => (
                 <div className={styles.formContainer} key={filter.id}>
                   <button
-                    className={styles.selected}>
+                    className={styles.filterButton}>
                     {filter.name}
                   </button>
                 </div>

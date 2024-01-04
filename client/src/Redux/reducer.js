@@ -4,6 +4,7 @@ import PAGINATOR from '../helpers/paginator.helper';
 import SOURCES from '../helpers/sources.helper';
 import YEARS from '../helpers/years.helper';
 import filterFunction from '../utils/filterFunction';
+import formatName from '../utils/formatName';
 import orderFunction from '../utils/orderFunction';
 
 import {
@@ -115,8 +116,8 @@ export default (state = initialState, { type, payload }) => {
             }
 
         case SET_VIDEOGAME:
-            const index=state.allVideogames.findIndex((videogame) => videogame.id === payload.id)
-            state.allVideogames[index]=payload
+            const index = state.allVideogames.findIndex((videogame) => videogame.id === payload.id)
+            state.allVideogames[index] = payload
             return {
                 ...state,
                 allVideogames: [...state.allVideogames]
@@ -142,11 +143,12 @@ export default (state = initialState, { type, payload }) => {
         case SELECT_ALL_SELECTED_FILTERS:
             // filtro los selecterdfiltered con ese type
             const seletedFiltered = state.selectedFilters.filter((sel) => sel.type !== payload);
+
             //funcion para devolver formateado el objeto
             const formatFilter = (filter) => {
                 return {
                     id: filter.id,
-                    name: filter.name,
+                    name: formatName(filter.name,payload),
                     type: payload,
                     uniqueId: `${payload}${filter.id}`,
                     order: filter.order
@@ -179,8 +181,13 @@ export default (state = initialState, { type, payload }) => {
             if (state.selectedFilters.find((selected) => selected.uniqueId === payload.uniqueId)) {
                 newSelectedFilters = state.selectedFilters.filter((selected) => selected.uniqueId !== payload.uniqueId)
             } else {
-                const name = payload.type === FILTERTYPES.NAME ? `${payload.type} contains ${payload.name}` : `${payload.type} is ${payload.name}`
-                state.selectedFilters.push({ id: payload.id, name: name, uniqueId: payload.uniqueId, type: payload.type, order: payload.order })
+                state.selectedFilters.push({
+                    id: payload.id,
+                    name: formatName(payload.name,payload.type),
+                    uniqueId: payload.uniqueId,
+                    type: payload.type,
+                    order: payload.order
+                })
                 newSelectedFilters = state.selectedFilters
             }
             return {
@@ -229,7 +236,6 @@ export default (state = initialState, { type, payload }) => {
                 //filtro por source
                 newVideogamesFiltered = filterFunction(newVideogamesFiltered, state.allFilters, FILTERTYPES.SOURCE)
             }
-
             //ordeno 
             const newVideogamesOrdered = orderFunction(newVideogamesFiltered, state.allOrders)
 
@@ -282,9 +288,10 @@ export default (state = initialState, { type, payload }) => {
             //por si viene =0 uso helper de paginator
             const page_items = state.page_size <= 0 ? PAGINATOR.PAGE_SIZE : state.page_size
             const totalOfPages = Math.ceil(payload / page_items)
+            const current= (state.currentPage==0 || state.currentPage>totalOfPages)? 1 : state.currentPage
             return {
                 ...state,
-                currentPage: 1,
+                currentPage: current,
                 totalOfPages: totalOfPages,
             }
 

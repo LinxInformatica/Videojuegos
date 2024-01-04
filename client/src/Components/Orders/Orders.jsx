@@ -12,7 +12,7 @@ const Orders = () => {
     return (
         <div>
             {showOrders &&
-                <div className={styles.header}>
+                <div className={styles.cards}>
                     <div className={styles.filter}>
                         <label className={styles.label}>Orders:</label>
                         {orders.map((order) => (

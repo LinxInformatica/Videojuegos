@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
 import FILTERTYPES from "../helpers/filterTypes.helper";
 import yearDate from "./yearDate";
 
 const filterFunction = (videogames, allFilters, type) => {
     //armo un array con el criterio de busqueda (genre, name etc)
     const filters = allFilters.filter((filter) => filter.type === type)
+    //si no hay nada que filtrar return videogames
+    if (filters.length===0) return videogames;
 
     switch (type) {
         case FILTERTYPES.NAME:
@@ -37,16 +38,16 @@ const filterFunction = (videogames, allFilters, type) => {
         case FILTERTYPES.YEAR:
             // busqueda de years 
             return videogames.filter(videogame => {
-                return filters.every(filter => {
+                return filters.some(filter => {
                     const releasedId = filter.id;
                     return yearDate(videogame.released) === releasedId;
-                })
+               })
             });
             break;
         case FILTERTYPES.SOURCE:
             // busqueda de origenes
             return videogames.filter(videogame => {
-                return filters.every(filter => {
+                return filters.some(filter => {
                     const sourceId = filter.id;
                     return videogame.source === sourceId;
                 })

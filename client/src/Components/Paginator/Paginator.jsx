@@ -8,15 +8,17 @@ import ICONS from '../../helpers/icons.helper'
 const Paginator = () => {
     const totalItems = useSelector((state) => state.filteredVideogames.length)
     const currentPage = useSelector((state) => state.currentPage)
+    const totalOfPages = useSelector((state) => state.totalOfPages)
 
     const dispatch = useDispatch()
-
+   
     useEffect(() => {
-        dispatch(setCurrentPage(1))
         dispatch(setTotalOfPages(totalItems));
-    }, [totalItems])
+        //if (currentPage>totalOfPages) dispatch(setCurrentPage(1))
 
-    const totalOfPages = useSelector((state) => state.totalOfPages)
+    }, [totalItems]) //totalofitmes
+
+    
     const pagesToShow = []
     for (let i = 1; i <= totalOfPages; i++) {
         pagesToShow.push({ id: i, enable: true })
