@@ -7,7 +7,7 @@ const {
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`,
-  {
+  { 
     logging: false,
     native: false,
     dialect: 'postgres',

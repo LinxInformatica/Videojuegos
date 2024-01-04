@@ -29,12 +29,13 @@ const Navbar = () => {
         
         {(!isNew && !isDetail && !isEditing) && (
           <>
-            <Link to={SITEROUTES.SELECT_ORDERS}>
-              <button className={pathname === SITEROUTES.SELECT_ORDERS ? styles.selected : styles.unselected}>Select Orders</button>
-            </Link>
             <Link to={SITEROUTES.SELECT_FILTERS}>
               <button className={pathname === SITEROUTES.SELECT_FILTERS ? styles.selected : styles.unselected}>Select Filters</button>
             </Link>
+            <Link to={SITEROUTES.SELECT_ORDERS}>
+              <button className={pathname === SITEROUTES.SELECT_ORDERS ? styles.selected : styles.unselected}>Select Orders</button>
+            </Link>
+            
             <Link to={SITEROUTES.FORM}>
               <button className={pathname === SITEROUTES.FORM ? styles.selected : styles.unselected}>New Videogame</button>
             </Link>
